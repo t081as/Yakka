@@ -1,7 +1,7 @@
 ﻿#region GNU General Public License 3
 //  Yakka - A system tray application calculating and displaying your working hours
 //  Copyright (C) 2017  Tobias Koch
-//	
+//
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
 //  the Free Software Foundation, either version 3 of the License, or
