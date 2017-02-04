@@ -95,7 +95,7 @@ namespace Yakka.Forms
             this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelHorizontal.Size = new System.Drawing.Size(100, 80);
+            this.tableLayoutPanelHorizontal.Size = new System.Drawing.Size(105, 80);
             this.tableLayoutPanelHorizontal.TabIndex = 1;
             // 
             // labelApplicationName
@@ -105,7 +105,7 @@ namespace Yakka.Forms
             this.labelApplicationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelApplicationName.Location = new System.Drawing.Point(3, 0);
             this.labelApplicationName.Name = "labelApplicationName";
-            this.labelApplicationName.Size = new System.Drawing.Size(94, 30);
+            this.labelApplicationName.Size = new System.Drawing.Size(99, 30);
             this.labelApplicationName.TabIndex = 0;
             this.labelApplicationName.Text = "NAME";
             this.labelApplicationName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -117,7 +117,7 @@ namespace Yakka.Forms
             this.labelWorkingHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWorkingHours.Location = new System.Drawing.Point(3, 30);
             this.labelWorkingHours.Name = "labelWorkingHours";
-            this.labelWorkingHours.Size = new System.Drawing.Size(94, 25);
+            this.labelWorkingHours.Size = new System.Drawing.Size(99, 25);
             this.labelWorkingHours.TabIndex = 1;
             this.labelWorkingHours.Text = "XX:XX";
             this.labelWorkingHours.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -128,7 +128,7 @@ namespace Yakka.Forms
             this.labelBreak.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelBreak.Location = new System.Drawing.Point(3, 55);
             this.labelBreak.Name = "labelBreak";
-            this.labelBreak.Size = new System.Drawing.Size(94, 20);
+            this.labelBreak.Size = new System.Drawing.Size(99, 20);
             this.labelBreak.TabIndex = 2;
             this.labelBreak.Text = "YY:YY";
             this.labelBreak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -141,7 +141,7 @@ namespace Yakka.Forms
             this.Controls.Add(this.tableLayoutPanelHorizontal);
             this.Controls.Add(this.panelIcon);
             this.Name = "ContextMenuDisplayControl";
-            this.Size = new System.Drawing.Size(170, 80);
+            this.Size = new System.Drawing.Size(175, 80);
             this.panelIcon.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.tableLayoutPanelHorizontal.ResumeLayout(false);
