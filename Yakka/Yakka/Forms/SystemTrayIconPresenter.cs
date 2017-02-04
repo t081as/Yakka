@@ -20,9 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 #endregion
 
 namespace Yakka.Forms
@@ -161,8 +158,16 @@ namespace Yakka.Forms
             if (this.configuration != null)
             {
                 DateTime currentDateTime = DateTime.Now;
+
                 TimeSpan currentWorkingHours = this.configuration.Calculator.CalculateWorkingHours(this.configuration.Start, currentDateTime);
                 TimeSpan currentBreak = this.configuration.Calculator.CalculateBreak(this.configuration.Start, currentDateTime);
+
+                Dictionary<byte, DateTime> endOfWorkDayEstimations = new Dictionary<byte, DateTime>();
+
+                for (byte hoursWorked = 0; hoursWorked < 12; hoursWorked++)
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
 
