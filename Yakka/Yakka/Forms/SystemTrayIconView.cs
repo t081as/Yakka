@@ -63,6 +63,11 @@ namespace Yakka.Forms
         private ToolStripMenuItem quitMenuItem;
 
         /// <summary>
+        /// Represents the control shown in the context menu.
+        /// </summary>
+        private ContextMenuDisplayControl contextMenuControl = null;
+
+        /// <summary>
         /// Represents the configuration containing the start of the working day and the calculator that shall be used.
         /// </summary>
         private UserConfiguration configuration;
@@ -76,6 +81,8 @@ namespace Yakka.Forms
         /// </summary>
         public SystemTrayIconView()
         {
+            this.contextMenuControl = new ContextMenuDisplayControl();
+
             this.systemTrayIcon = new NotifyIcon();
             this.systemTrayIcon.Text = Application.ProductName;
             this.systemTrayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
@@ -89,7 +96,12 @@ namespace Yakka.Forms
             this.quitMenuItem = new ToolStripMenuItem("Quit");
             this.quitMenuItem.Click += this.QuitMenuItem_Click;
 
+            ToolStripControlHost controlHost = new ToolStripControlHost(this.contextMenuControl);
+            controlHost.Width = this.contextMenuControl.Width;
+            controlHost.Height = this.contextMenuControl.Height;
+
             this.systemTrayIcon.ContextMenuStrip = new ContextMenuStrip();
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(controlHost);
             this.systemTrayIcon.ContextMenuStrip.Items.Add(this.configurationMenuItem);
             this.systemTrayIcon.ContextMenuStrip.Items.Add(this.aboutMenuItem);
             this.systemTrayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
@@ -130,7 +142,7 @@ namespace Yakka.Forms
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether the system ray icon is visible.
+        /// Gets or sets a value indicating whether the system tray icon is visible.
         /// </summary>
         public bool Visible
         {
@@ -162,11 +174,21 @@ namespace Yakka.Forms
         {
             get
             {
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(GetType().Name);
+                }
+
                 return this.configuration;
             }
 
             set
             {
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(GetType().Name);
+                }
+
                 if (this.configuration != null)
                 {
                     this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
@@ -177,6 +199,7 @@ namespace Yakka.Forms
                 if (this.configuration != null)
                 {
                     this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
+                    this.Update();
                 }
             }
         }
@@ -227,6 +250,12 @@ namespace Yakka.Forms
                             this.quitMenuItem = null;
                         }
 
+                        if (this.contextMenuControl != null)
+                        {
+                            this.contextMenuControl.Dispose();
+                            this.contextMenuControl = null;
+                        }
+
                         if (this.systemTrayIcon != null)
                         {
                             if (this.systemTrayIcon.ContextMenuStrip != null)
@@ -242,11 +271,27 @@ namespace Yakka.Forms
                     }
                     catch
                     {
-                        // The Dispose method must never throw an exception
+                        // The Dispose method must never throw exceptions
                     }
                 }
 
                 this.disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Updates all view-related elements by recalculating all shown values.
+        /// </summary>
+        protected virtual void Update()
+        {
+            if (this.configuration != null)
+            {
+                DateTime currentDateTime = DateTime.Now;
+                TimeSpan currentWorkingHours = this.configuration.Calculator.CalculateWorkingHours(this.configuration.Start, currentDateTime);
+                TimeSpan currentBreak = this.configuration.Calculator.CalculateBreak(this.configuration.Start, currentDateTime);
+
+                this.contextMenuControl.CalculatedWorkingHours = currentWorkingHours;
+                this.contextMenuControl.CalculatedBreak = currentBreak;
             }
         }
 
@@ -287,7 +332,7 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments containing information about the changed property.</param>
         protected virtual void Configuration_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.Update();
         }
 
         /// <summary>

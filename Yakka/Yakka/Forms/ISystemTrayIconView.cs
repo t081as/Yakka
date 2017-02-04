@@ -52,7 +52,7 @@ namespace Yakka.Forms
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether the system ray icon is visible.
+        /// Gets or sets a value indicating whether the system tray icon is visible.
         /// </summary>
         bool Visible
         {
