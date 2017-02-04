@@ -18,37 +18,36 @@
 
 #region Namespaces
 using System;
-using System.Windows.Forms;
-using Yakka.Forms;
 #endregion
 
-namespace Yakka
+namespace Yakka.Forms
 {
     /// <summary>
-    /// Contains the main entry point for the application.
+    /// Provides the interface to a view managed by the <see cref="SystemTrayIconPresenter"/>.
     /// </summary>
-    public static class Program
+    /// <remarks>
+    /// see https://en.wikipedia.org/wiki/Model-view-presenter for additional information about the pattern
+    /// </remarks>
+    public interface ISystemTrayIconView : IDisposable
     {
-        #region Methods
+        #region Events
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
-        /// The main entry point for the application.
+        /// Gets or sets a value indicating whether the system ray icon is visible.
         /// </summary>
-        [STAThread]
-        public static void Main()
+        bool Visible
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            using (ISystemTrayIconView systemTrayIconView = new SystemTrayIconView())
-            {
-                SystemTrayIconPresenter systemTrayIconPresenter = new SystemTrayIconPresenter(systemTrayIconView);
-
-                systemTrayIconPresenter.Show();
-                Application.Run();
-                systemTrayIconPresenter.Hide();
-            }
+            get;
+            set;
         }
+
+        #endregion
+
+        #region Methods
 
         #endregion
     }
