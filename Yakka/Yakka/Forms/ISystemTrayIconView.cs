@@ -60,6 +60,15 @@ namespace Yakka.Forms
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the configuration containing the start of the working day and the calculator that shall be used.
+        /// </summary>
+        UserConfiguration Configuration
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 }

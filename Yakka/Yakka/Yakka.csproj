@@ -45,11 +45,14 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\IWorkingHoursCalculator.cs" />
+    <Compile Include="Calculator\WorkingHoursCalculator.cs" />
     <Compile Include="Forms\ISystemTrayIconView.cs" />
     <Compile Include="Forms\SystemTrayIconPresenter.cs" />
     <Compile Include="Forms\SystemTrayIconView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserConfiguration.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -73,7 +76,6 @@
     <Content Include="Yakka.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Calculator\" />
     <Folder Include="Language\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

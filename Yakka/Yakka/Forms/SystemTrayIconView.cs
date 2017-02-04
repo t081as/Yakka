@@ -18,6 +18,7 @@
 
 #region Namespaces
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
@@ -61,6 +62,11 @@ namespace Yakka.Forms
         /// </summary>
         private ToolStripMenuItem quitMenuItem;
 
+        /// <summary>
+        /// Represents the configuration containing the start of the working day and the calculator that shall be used.
+        /// </summary>
+        private UserConfiguration configuration;
+
         #endregion
 
         #region Constructors and Destructors
@@ -88,6 +94,8 @@ namespace Yakka.Forms
             this.systemTrayIcon.ContextMenuStrip.Items.Add(this.aboutMenuItem);
             this.systemTrayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
             this.systemTrayIcon.ContextMenuStrip.Items.Add(this.quitMenuItem);
+
+            this.configuration = null;
         }
 
         /// <summary>
@@ -144,6 +152,32 @@ namespace Yakka.Forms
                 }
 
                 this.systemTrayIcon.Visible = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the configuration containing the start of the working day and the calculator that shall be used.
+        /// </summary>
+        public UserConfiguration Configuration
+        {
+            get
+            {
+                return this.configuration;
+            }
+
+            set
+            {
+                if (this.configuration != null)
+                {
+                    this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
+                }
+
+                this.configuration = value;
+
+                if (this.configuration != null)
+                {
+                    this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
+                }
             }
         }
 
@@ -244,6 +278,16 @@ namespace Yakka.Forms
         protected virtual void ConfigurationMenuItem_Click(object sender, EventArgs e)
         {
             this.OnConfigure(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles changes of the user configuration.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments containing information about the changed property.</param>
+        protected virtual void Configuration_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
