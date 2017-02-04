@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tobias Koch")]
 [assembly: AssemblyProduct("Yakka")]
-[assembly: AssemblyCopyright("Copyright © Tobias Koch,2017")]
+[assembly: AssemblyCopyright("Copyright © Tobias Koch, 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
