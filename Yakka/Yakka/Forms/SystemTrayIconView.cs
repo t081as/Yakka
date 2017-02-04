@@ -43,6 +43,11 @@ namespace Yakka.Forms
         private bool disposed = false;
 
         /// <summary>
+        /// Represents the working hours information.
+        /// </summary>
+        private WorkingHours workingHours;
+
+        /// <summary>
         /// Represents the component creating the icon in the system tray.
         /// </summary>
         private NotifyIcon systemTrayIcon = null;
@@ -67,11 +72,6 @@ namespace Yakka.Forms
         /// </summary>
         private ContextMenuDisplayControl contextMenuControl = null;
 
-        /// <summary>
-        /// Represents the configuration containing the start of the working day and the calculator that shall be used.
-        /// </summary>
-        private UserConfiguration configuration;
-
         #endregion
 
         #region Constructors and Destructors
@@ -81,6 +81,7 @@ namespace Yakka.Forms
         /// </summary>
         public SystemTrayIconView()
         {
+            this.workingHours = null;
             this.contextMenuControl = new ContextMenuDisplayControl();
 
             this.systemTrayIcon = new NotifyIcon();
@@ -106,8 +107,6 @@ namespace Yakka.Forms
             this.systemTrayIcon.ContextMenuStrip.Items.Add(this.aboutMenuItem);
             this.systemTrayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
             this.systemTrayIcon.ContextMenuStrip.Items.Add(this.quitMenuItem);
-
-            this.configuration = null;
         }
 
         /// <summary>
@@ -168,37 +167,21 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Gets or sets the configuration containing the start of the working day and the calculator that shall be used.
+        /// Gets or sets the working hours information.
         /// </summary>
-        public UserConfiguration Configuration
+        public WorkingHours WorkingHours
         {
             get
             {
-                if (this.disposed)
-                {
-                    throw new ObjectDisposedException(GetType().Name);
-                }
-
-                return this.configuration;
+                return this.workingHours;
             }
 
             set
             {
-                if (this.disposed)
-                {
-                    throw new ObjectDisposedException(GetType().Name);
-                }
+                this.workingHours = value;
 
-                if (this.configuration != null)
+                if (this.workingHours != null)
                 {
-                    this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
-                }
-
-                this.configuration = value;
-
-                if (this.configuration != null)
-                {
-                    this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
                     this.Update();
                 }
             }
@@ -280,19 +263,12 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Updates all view-related elements by recalculating all shown values.
+        /// Updates all view-related elements.
         /// </summary>
         protected virtual void Update()
         {
-            if (this.configuration != null)
-            {
-                DateTime currentDateTime = DateTime.Now;
-                TimeSpan currentWorkingHours = this.configuration.Calculator.CalculateWorkingHours(this.configuration.Start, currentDateTime);
-                TimeSpan currentBreak = this.configuration.Calculator.CalculateBreak(this.configuration.Start, currentDateTime);
-
-                this.contextMenuControl.CalculatedWorkingHours = currentWorkingHours;
-                this.contextMenuControl.CalculatedBreak = currentBreak;
-            }
+            this.contextMenuControl.CalculatedWorkingHours = this.workingHours.CalculatedWorkingHours;
+            this.contextMenuControl.CalculatedBreak = this.workingHours.CalculatedBreak;
         }
 
         /// <summary>
@@ -323,16 +299,6 @@ namespace Yakka.Forms
         protected virtual void ConfigurationMenuItem_Click(object sender, EventArgs e)
         {
             this.OnConfigure(EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Handles changes of the user configuration.
-        /// </summary>
-        /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The event arguments containing information about the changed property.</param>
-        protected virtual void Configuration_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            this.Update();
         }
 
         /// <summary>

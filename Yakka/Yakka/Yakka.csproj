@@ -61,6 +61,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserConfiguration.cs" />
+    <Compile Include="WorkingHours.cs" />
     <EmbeddedResource Include="Forms\ContextMenuDisplayControl.resx">
       <DependentUpon>ContextMenuDisplayControl.cs</DependentUpon>
     </EmbeddedResource>

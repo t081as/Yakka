@@ -61,9 +61,9 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Gets or sets the configuration containing the start of the working day and the calculator that shall be used.
+        /// Gets or sets the working hours information.
         /// </summary>
-        UserConfiguration Configuration
+        WorkingHours WorkingHours
         {
             get;
             set;

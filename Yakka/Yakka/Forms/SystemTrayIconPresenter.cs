@@ -19,6 +19,7 @@
 #region Namespaces
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,11 @@ namespace Yakka.Forms
         /// Represents the view that shall be used by this presenter.
         /// </summary>
         private ISystemTrayIconView view;
+
+        /// <summary>
+        /// Represents the configuration containing the start of the working day and the calculator that shall be used.
+        /// </summary>
+        private UserConfiguration configuration;
 
         #endregion
 
@@ -77,6 +83,33 @@ namespace Yakka.Forms
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the configuration containing the start of the working day and the calculator that shall be used.
+        /// </summary>
+        public UserConfiguration Configuration
+        {
+            get
+            {
+                return this.configuration;
+            }
+
+            set
+            {
+                if (this.configuration != null)
+                {
+                    this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
+                }
+
+                this.configuration = value;
+
+                if (this.configuration != null)
+                {
+                    this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
+                    this.Update();
+                }
+            }
+        }
 
         #endregion
 
@@ -118,6 +151,29 @@ namespace Yakka.Forms
             this.view.Quit -= this.View_Quit;
 
             this.isVisible = false;
+        }
+
+        /// <summary>
+        /// Updates all view-related elements by recalculating all shown values.
+        /// </summary>
+        protected virtual void Update()
+        {
+            if (this.configuration != null)
+            {
+                DateTime currentDateTime = DateTime.Now;
+                TimeSpan currentWorkingHours = this.configuration.Calculator.CalculateWorkingHours(this.configuration.Start, currentDateTime);
+                TimeSpan currentBreak = this.configuration.Calculator.CalculateBreak(this.configuration.Start, currentDateTime);
+            }
+        }
+
+        /// <summary>
+        /// Handles changes of the user configuration.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments containing information about the changed property.</param>
+        protected virtual void Configuration_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.Update();
         }
 
         /// <summary>
