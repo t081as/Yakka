@@ -48,6 +48,15 @@ namespace Yakka.Forms
 
         #endregion
 
+        #region Events
+
+        /// <summary>
+        /// Occurs when the user wants to quit the application.
+        /// </summary>
+        public event EventHandler Quit;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -84,6 +93,9 @@ namespace Yakka.Forms
                 throw new InvalidOperationException();
             }
 
+            this.view.Configure += View_Configure;
+            this.view.Info += View_Info;
+            this.view.Quit += View_Quit;
             this.view.Visible = true;
 
             this.isVisible = true;
@@ -101,8 +113,53 @@ namespace Yakka.Forms
             }
 
             this.view.Visible = false;
+            this.view.Configure -= View_Configure;
+            this.view.Info -= View_Info;
+            this.view.Quit -= View_Quit;
 
             this.isVisible = false;
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ISystemTrayIconView.Quit">quit event of the view</see>.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void View_Quit(object sender, EventArgs e)
+        {
+            OnQuit(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ISystemTrayIconView.Info">info event of the view</see>.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void View_Info(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ISystemTrayIconView.Configure">configure event of the view</see>.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void View_Configure(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Quit"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnQuit(EventArgs e)
+        {
+            if (Quit != null)
+            {
+                Quit.Invoke(this, e);
+            }
         }
 
         #endregion

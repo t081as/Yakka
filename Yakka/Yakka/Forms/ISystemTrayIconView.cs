@@ -32,6 +32,21 @@ namespace Yakka.Forms
     {
         #region Events
 
+        /// <summary>
+        /// Occurs when the user wants to edit the configuration.
+        /// </summary>
+        event EventHandler Configure;
+
+        /// <summary>
+        /// Occurs when the user wants to display software information.
+        /// </summary>
+        event EventHandler Info;
+
+        /// <summary>
+        /// Occurs when the user wants to quit the application.
+        /// </summary>
+        event EventHandler Quit;
+
         #endregion
 
         #region Properties
@@ -44,10 +59,6 @@ namespace Yakka.Forms
             get;
             set;
         }
-
-        #endregion
-
-        #region Methods
 
         #endregion
     }

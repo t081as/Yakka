@@ -44,10 +44,24 @@ namespace Yakka
             {
                 SystemTrayIconPresenter systemTrayIconPresenter = new SystemTrayIconPresenter(systemTrayIconView);
 
+                systemTrayIconPresenter.Quit += Quit;
                 systemTrayIconPresenter.Show();
+
                 Application.Run();
+
                 systemTrayIconPresenter.Hide();
+                systemTrayIconPresenter.Quit -= Quit;
             }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Quit">quit event of the presenter</see>.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Quit(object sender, EventArgs e)
+        {
+            Application.ExitThread();
         }
 
         #endregion

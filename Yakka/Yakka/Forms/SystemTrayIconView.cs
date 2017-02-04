@@ -46,9 +46,39 @@ namespace Yakka.Forms
         /// </summary>
         private NotifyIcon systemTrayIcon = null;
 
+        /// <summary>
+        /// Represents the context menu item "Configuration".
+        /// </summary>
+        private ToolStripMenuItem configurationMenuItem;
+
+        /// <summary>
+        /// Represents the context menu item "About".
+        /// </summary>
+        private ToolStripMenuItem aboutMenuItem;
+
+        /// <summary>
+        /// Represents the context menu item "Quit".
+        /// </summary>
+        private ToolStripMenuItem quitMenuItem;
+
         #endregion
 
         #region Events
+
+        /// <summary>
+        /// Occurs when the user wants to edit the configuration.
+        /// </summary>
+        public event EventHandler Configure;
+
+        /// <summary>
+        /// Occurs when the user wants to display software information.
+        /// </summary>
+        public event EventHandler Info;
+
+        /// <summary>
+        /// Occurs when the user wants to quit the application.
+        /// </summary>
+        public event EventHandler Quit;
 
         #endregion
 
@@ -62,6 +92,21 @@ namespace Yakka.Forms
             this.systemTrayIcon = new NotifyIcon();
             this.systemTrayIcon.Text = Application.ProductName;
             this.systemTrayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+
+            this.configurationMenuItem = new ToolStripMenuItem("Configuration");
+            this.configurationMenuItem.Click += ConfigurationMenuItem_Click;
+
+            this.aboutMenuItem = new ToolStripMenuItem("About");
+            this.aboutMenuItem.Click += AboutMenuItem_Click;
+
+            this.quitMenuItem = new ToolStripMenuItem("Quit");
+            this.quitMenuItem.Click += QuitMenuItem_Click;
+
+            this.systemTrayIcon.ContextMenuStrip = new ContextMenuStrip();
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.configurationMenuItem);
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.aboutMenuItem);
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.quitMenuItem);
         }
 
         /// <summary>
@@ -118,7 +163,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <param name="disposing">Indicates if managed resources shall also be disposed.</param>
+        /// <param name="disposing">Indicates whether managed resources shall also be disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -127,8 +172,35 @@ namespace Yakka.Forms
                 {
                     try
                     {
+                        if (this.configurationMenuItem != null)
+                        {
+                            this.configurationMenuItem.Click -= ConfigurationMenuItem_Click;
+                            this.configurationMenuItem.Dispose();
+                            this.configurationMenuItem = null;
+                        }
+
+                        if (this.aboutMenuItem != null)
+                        {
+                            this.aboutMenuItem.Click -= AboutMenuItem_Click;
+                            this.aboutMenuItem.Dispose();
+                            this.aboutMenuItem = null;
+                        }
+
+                        if (this.quitMenuItem != null)
+                        {
+                            this.quitMenuItem.Click -= QuitMenuItem_Click;
+                            this.quitMenuItem.Dispose();
+                            this.quitMenuItem = null;
+                        }
+
                         if (this.systemTrayIcon != null)
                         {
+                            if (this.systemTrayIcon.ContextMenuStrip != null)
+                            {
+                                this.systemTrayIcon.ContextMenuStrip.Dispose();
+                                this.systemTrayIcon.ContextMenuStrip = null;
+                            }
+
                             this.systemTrayIcon.Visible = false;
                             this.systemTrayIcon.Dispose();
                             this.systemTrayIcon = null;
@@ -141,6 +213,72 @@ namespace Yakka.Forms
                 }
 
                 this.disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Handles the click event of the specific menu item.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void QuitMenuItem_Click(object sender, EventArgs e)
+        {
+            OnQuit(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the click event of the specific menu item.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void AboutMenuItem_Click(object sender, EventArgs e)
+        {
+            OnInfo(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the click event of the specific menu item.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void ConfigurationMenuItem_Click(object sender, EventArgs e)
+        {
+            OnConfigure(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Configure"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnConfigure(EventArgs e)
+        {
+            if (Configure != null)
+            {
+                Configure.Invoke(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Info"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnInfo(EventArgs e)
+        {
+            if (Info != null)
+            {
+                Info.Invoke(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Quit"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnQuit(EventArgs e)
+        {
+            if (Quit != null)
+            {
+                Quit.Invoke(this, e);
             }
         }
 
