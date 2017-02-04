@@ -1,0 +1,1 @@
+Since the project is under *heavy* development I won't accept any merge requests at the moment.
