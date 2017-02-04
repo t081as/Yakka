@@ -57,8 +57,8 @@ namespace Yakka
         /// <summary>
         /// Handles the <see cref="SystemTrayIconPresenter.Quit">quit event of the presenter</see>.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
         private static void Quit(object sender, EventArgs e)
         {
             Application.ExitThread();

@@ -48,15 +48,6 @@ namespace Yakka.Forms
 
         #endregion
 
-        #region Events
-
-        /// <summary>
-        /// Occurs when the user wants to quit the application.
-        /// </summary>
-        public event EventHandler Quit;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
@@ -73,6 +64,15 @@ namespace Yakka.Forms
 
             this.view = view;
         }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Occurs when the user wants to quit the application.
+        /// </summary>
+        public event EventHandler Quit;
 
         #endregion
 
@@ -93,9 +93,9 @@ namespace Yakka.Forms
                 throw new InvalidOperationException();
             }
 
-            this.view.Configure += View_Configure;
-            this.view.Info += View_Info;
-            this.view.Quit += View_Quit;
+            this.view.Configure += this.View_Configure;
+            this.view.Info += this.View_Info;
+            this.view.Quit += this.View_Quit;
             this.view.Visible = true;
 
             this.isVisible = true;
@@ -113,9 +113,9 @@ namespace Yakka.Forms
             }
 
             this.view.Visible = false;
-            this.view.Configure -= View_Configure;
-            this.view.Info -= View_Info;
-            this.view.Quit -= View_Quit;
+            this.view.Configure -= this.View_Configure;
+            this.view.Info -= this.View_Info;
+            this.view.Quit -= this.View_Quit;
 
             this.isVisible = false;
         }
@@ -127,7 +127,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event arguments.</param>
         protected virtual void View_Quit(object sender, EventArgs e)
         {
-            OnQuit(EventArgs.Empty);
+            this.OnQuit(EventArgs.Empty);
         }
 
         /// <summary>
@@ -156,9 +156,9 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnQuit(EventArgs e)
         {
-            if (Quit != null)
+            if (this.Quit != null)
             {
-                Quit.Invoke(this, e);
+                this.Quit.Invoke(this, e);
             }
         }
 

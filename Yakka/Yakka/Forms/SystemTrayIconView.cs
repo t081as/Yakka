@@ -63,6 +63,43 @@ namespace Yakka.Forms
 
         #endregion
 
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemTrayIconView"/> class.
+        /// </summary>
+        public SystemTrayIconView()
+        {
+            this.systemTrayIcon = new NotifyIcon();
+            this.systemTrayIcon.Text = Application.ProductName;
+            this.systemTrayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+
+            this.configurationMenuItem = new ToolStripMenuItem("Configuration");
+            this.configurationMenuItem.Click += this.ConfigurationMenuItem_Click;
+
+            this.aboutMenuItem = new ToolStripMenuItem("About");
+            this.aboutMenuItem.Click += this.AboutMenuItem_Click;
+
+            this.quitMenuItem = new ToolStripMenuItem("Quit");
+            this.quitMenuItem.Click += this.QuitMenuItem_Click;
+
+            this.systemTrayIcon.ContextMenuStrip = new ContextMenuStrip();
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.configurationMenuItem);
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.aboutMenuItem);
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
+            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.quitMenuItem);
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="SystemTrayIconView"/> class.
+        /// </summary>
+        ~SystemTrayIconView()
+        {
+            this.Dispose(false);
+        }
+
+        #endregion
+
         #region Events
 
         /// <summary>
@@ -79,43 +116,6 @@ namespace Yakka.Forms
         /// Occurs when the user wants to quit the application.
         /// </summary>
         public event EventHandler Quit;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SystemTrayIconView"/> class.
-        /// </summary>
-        public SystemTrayIconView()
-        {
-            this.systemTrayIcon = new NotifyIcon();
-            this.systemTrayIcon.Text = Application.ProductName;
-            this.systemTrayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-
-            this.configurationMenuItem = new ToolStripMenuItem("Configuration");
-            this.configurationMenuItem.Click += ConfigurationMenuItem_Click;
-
-            this.aboutMenuItem = new ToolStripMenuItem("About");
-            this.aboutMenuItem.Click += AboutMenuItem_Click;
-
-            this.quitMenuItem = new ToolStripMenuItem("Quit");
-            this.quitMenuItem.Click += QuitMenuItem_Click;
-
-            this.systemTrayIcon.ContextMenuStrip = new ContextMenuStrip();
-            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.configurationMenuItem);
-            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.aboutMenuItem);
-            this.systemTrayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
-            this.systemTrayIcon.ContextMenuStrip.Items.Add(this.quitMenuItem);
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="SystemTrayIconView"/> class.
-        /// </summary>
-        ~SystemTrayIconView()
-        {
-            this.Dispose(false);
-        }
 
         #endregion
 
@@ -174,21 +174,21 @@ namespace Yakka.Forms
                     {
                         if (this.configurationMenuItem != null)
                         {
-                            this.configurationMenuItem.Click -= ConfigurationMenuItem_Click;
+                            this.configurationMenuItem.Click -= this.ConfigurationMenuItem_Click;
                             this.configurationMenuItem.Dispose();
                             this.configurationMenuItem = null;
                         }
 
                         if (this.aboutMenuItem != null)
                         {
-                            this.aboutMenuItem.Click -= AboutMenuItem_Click;
+                            this.aboutMenuItem.Click -= this.AboutMenuItem_Click;
                             this.aboutMenuItem.Dispose();
                             this.aboutMenuItem = null;
                         }
 
                         if (this.quitMenuItem != null)
                         {
-                            this.quitMenuItem.Click -= QuitMenuItem_Click;
+                            this.quitMenuItem.Click -= this.QuitMenuItem_Click;
                             this.quitMenuItem.Dispose();
                             this.quitMenuItem = null;
                         }
@@ -223,7 +223,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event arguments.</param>
         protected virtual void QuitMenuItem_Click(object sender, EventArgs e)
         {
-            OnQuit(EventArgs.Empty);
+            this.OnQuit(EventArgs.Empty);
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event arguments.</param>
         protected virtual void AboutMenuItem_Click(object sender, EventArgs e)
         {
-            OnInfo(EventArgs.Empty);
+            this.OnInfo(EventArgs.Empty);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event arguments.</param>
         protected virtual void ConfigurationMenuItem_Click(object sender, EventArgs e)
         {
-            OnConfigure(EventArgs.Empty);
+            this.OnConfigure(EventArgs.Empty);
         }
 
         /// <summary>
@@ -252,9 +252,9 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnConfigure(EventArgs e)
         {
-            if (Configure != null)
+            if (this.Configure != null)
             {
-                Configure.Invoke(this, e);
+                this.Configure.Invoke(this, e);
             }
         }
 
@@ -264,9 +264,9 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnInfo(EventArgs e)
         {
-            if (Info != null)
+            if (this.Info != null)
             {
-                Info.Invoke(this, e);
+                this.Info.Invoke(this, e);
             }
         }
 
@@ -276,9 +276,9 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnQuit(EventArgs e)
         {
-            if (Quit != null)
+            if (this.Quit != null)
             {
-                Quit.Invoke(this, e);
+                this.Quit.Invoke(this, e);
             }
         }
 
