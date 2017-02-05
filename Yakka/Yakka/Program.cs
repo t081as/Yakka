@@ -58,6 +58,8 @@ namespace Yakka
             {
                 SystemTrayIconPresenter systemTrayIconPresenter = new SystemTrayIconPresenter(systemTrayIconView, new WorkingHoursCalculation());
 
+                systemTrayIconPresenter.Configure += Configure;
+                systemTrayIconPresenter.Info += Info;
                 systemTrayIconPresenter.Quit += Quit;
                 systemTrayIconPresenter.Show();
 
@@ -67,6 +69,8 @@ namespace Yakka
 
                 systemTrayIconPresenter.Hide();
                 systemTrayIconPresenter.Quit -= Quit;
+                systemTrayIconPresenter.Configure -= Configure;
+                systemTrayIconPresenter.Info -= Info;
             }
         }
 
@@ -93,6 +97,26 @@ namespace Yakka
 
             configuration.Start = DateTime.Now;
             configuration.Calculator = new DefaultGermanBreakWorkingHoursCalculator();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Info">info event of the presenter</see>.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        private static void Info(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Configure">configure event of the presenter</see>.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        private static void Configure(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

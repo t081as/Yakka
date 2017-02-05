@@ -108,6 +108,16 @@ namespace Yakka.Forms
         #region Events
 
         /// <summary>
+        /// Occurs when the user wants to edit the configuration.
+        /// </summary>
+        public event EventHandler Configure;
+
+        /// <summary>
+        /// Occurs when the user wants to display software information.
+        /// </summary>
+        public event EventHandler Info;
+
+        /// <summary>
         /// Occurs when the user wants to quit the application.
         /// </summary>
         public event EventHandler Quit;
@@ -280,7 +290,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event arguments.</param>
         protected virtual void View_Info(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.OnInfo(EventArgs.Empty);
         }
 
         /// <summary>
@@ -290,7 +300,31 @@ namespace Yakka.Forms
         /// <param name="e">The empty event arguments.</param>
         protected virtual void View_Configure(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.OnConfigure(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Configure"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnConfigure(EventArgs e)
+        {
+            if (this.Configure != null)
+            {
+                this.Configure.Invoke(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Info"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnInfo(EventArgs e)
+        {
+            if (this.Info != null)
+            {
+                this.Info.Invoke(this, e);
+            }
         }
 
         /// <summary>
