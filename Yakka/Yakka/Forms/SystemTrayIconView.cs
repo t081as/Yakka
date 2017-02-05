@@ -172,11 +172,21 @@ namespace Yakka.Forms
         {
             get
             {
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(GetType().Name);
+                }
+
                 return this.workingHours;
             }
 
             set
             {
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(GetType().Name);
+                }
+
                 this.workingHours = value;
 
                 if (this.workingHours != null)

@@ -231,15 +231,19 @@ namespace Yakka.Forms
                                     DateTime.Now);
                             }
                         }
-
-                        lock (this.monitorLock)
-                        {
-                            Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
-                        }
+                    }
+                    catch (ThreadAbortException)
+                    {
+                        throw;
                     }
                     catch (Exception)
                     {
                         this.view.WorkingHours = new WorkingHours();
+                    }
+
+                    lock (this.monitorLock)
+                    {
+                        Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
                     }
                 }
             }

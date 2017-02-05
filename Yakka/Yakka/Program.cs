@@ -31,6 +31,15 @@ namespace Yakka
     /// </summary>
     public static class Program
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// Represents the configuration initialized with the default configuration.
+        /// </summary>
+        private static UserConfiguration configuration;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -42,10 +51,8 @@ namespace Yakka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (string.IsNullOrEmpty(Thread.CurrentThread.Name))
-            {
-                Thread.CurrentThread.Name = "Main";
-            }
+            SetMainThreadName();
+            SetDefaultConfiguration();
 
             using (ISystemTrayIconView systemTrayIconView = new SystemTrayIconView())
             {
@@ -54,11 +61,38 @@ namespace Yakka
                 systemTrayIconPresenter.Quit += Quit;
                 systemTrayIconPresenter.Show();
 
+                systemTrayIconPresenter.Configuration = configuration;
+
                 Application.Run();
 
                 systemTrayIconPresenter.Hide();
                 systemTrayIconPresenter.Quit -= Quit;
             }
+        }
+
+        /// <summary>
+        /// Sets the name of the main thread if not set yet.
+        /// </summary>
+        private static void SetMainThreadName()
+        {
+            if (string.IsNullOrEmpty(Thread.CurrentThread.Name))
+            {
+                Thread.CurrentThread.Name = "Main";
+            }
+        }
+
+        /// <summary>
+        /// Sets the default configuration.
+        /// </summary>
+        private static void SetDefaultConfiguration()
+        {
+            if (configuration == null)
+            {
+                configuration = new UserConfiguration();
+            }
+
+            configuration.Start = DateTime.Now;
+            configuration.Calculator = new DefaultGermanBreakWorkingHoursCalculator();
         }
 
         /// <summary>

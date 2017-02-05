@@ -24,9 +24,10 @@ using System.Globalization;
 namespace Yakka.Calculator
 {
     /// <summary>
-    /// Represents an implementation of <see cref="IWorkingHoursCalculator"/> without any break.
+    /// Represents an implementation of <see cref="IWorkingHoursCalculator"/> calculating the break according to german law;
+    /// i.e. 30 minutes when working more than six hours and 45 minutes when working more than 9 hours.
     /// </summary>
-    public class NoBreakWorkingHoursCalculator : WorkingHoursCalculator
+    public class DefaultGermanBreakWorkingHoursCalculator : WorkingHoursCalculator
     {
         #region Methods
 
@@ -49,10 +50,10 @@ namespace Yakka.Calculator
             switch (culture.TwoLetterISOLanguageName.ToLowerInvariant())
             {
                 case "de":
-                    return "Keine Pause";
+                    return "Deutschland: Standardpause (30 min > 6h Arbeit, 45 min > 9h Arbeit)";
 
                 default:
-                    return "No break";
+                    return "Germany: default break (30 min > 6h work, 45 min > 9h work)";
             }
         }
 
@@ -70,7 +71,7 @@ namespace Yakka.Calculator
                 throw new InvalidOperationException("end > start");
             }
 
-            return end - start;
+            return (end - start) - this.CalculateBreak(start, end);
         }
 
         /// <summary>
@@ -82,7 +83,25 @@ namespace Yakka.Calculator
         /// <exception cref="InvalidOperationException">The break could not be calculated.</exception>
         public override TimeSpan CalculateBreak(DateTime start, DateTime end)
         {
-            return new TimeSpan(0);
+            if (start > end)
+            {
+                throw new InvalidOperationException("end > start");
+            }
+
+            TimeSpan workingHours = end - start;
+
+            if (workingHours.TotalHours < 6)
+            {
+                return new TimeSpan(0);
+            }
+            else if (workingHours.TotalHours < 9)
+            {
+                return TimeSpan.FromMinutes(30);
+            }
+            else
+            {
+                return TimeSpan.FromMinutes(45);
+            }
         }
 
         #endregion
