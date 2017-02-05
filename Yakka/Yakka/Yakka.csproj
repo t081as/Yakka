@@ -94,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Yakka-64.png" />
+    <EmbeddedResource Include="..\..\AUTHORS.txt">
+      <Link>Resources\AUTHORS.txt</Link>
+    </EmbeddedResource>
     <Content Include="Yakka.ico" />
   </ItemGroup>
   <ItemGroup>
