@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 #endregion
 
 namespace Yakka.Forms
@@ -33,6 +34,12 @@ namespace Yakka.Forms
     public class SystemTrayIconPresenter
     {
         #region Constants and Fields
+
+        /// <summary>
+        /// Represents the time in seconds the background thread sleeps before calculating or recalculating
+        /// the working hours based on the current time.
+        /// </summary>
+        private const int UPDATETIME = 30;
 
         /// <summary>
         /// Indicates if the system tray icon has been shown by the presenter.
@@ -49,6 +56,26 @@ namespace Yakka.Forms
         /// </summary>
         private UserConfiguration configuration;
 
+        /// <summary>
+        /// Represents the object used to lock the <see cref="configuration"/> property.
+        /// </summary>
+        private object configurationLock = new object();
+
+        /// <summary>
+        /// Represents the reference to the calculation module.
+        /// </summary>
+        private WorkingHoursCalculation calculation;
+
+        /// <summary>
+        /// Represents the reference to the background thread used for the calculations.
+        /// </summary>
+        private Thread calculationThread;
+
+        /// <summary>
+        /// Represents the object used to lock the <see cref="Monitor"/>.
+        /// </summary>
+        private object monitorLock = new object();
+
         #endregion
 
         #region Constructors and Destructors
@@ -57,15 +84,23 @@ namespace Yakka.Forms
         /// Initializes a new instance of the <see cref="SystemTrayIconPresenter"/> class.
         /// </summary>
         /// <param name="view">The view that shall be used.</param>
+        /// <param name="calculation">The reference to the calculation module.</param>
         /// <exception cref="ArgumentNullException"><c>view</c> is <c>null</c>.</exception>
-        public SystemTrayIconPresenter(ISystemTrayIconView view)
+        /// <exception cref="ArgumentNullException"><c>calculation</c> is <c>null</c>.</exception>
+        public SystemTrayIconPresenter(ISystemTrayIconView view, WorkingHoursCalculation calculation)
         {
             if (view == null)
             {
                 throw new ArgumentNullException("view");
             }
 
+            if (calculation == null)
+            {
+                throw new ArgumentNullException("calculation");
+            }
+
             this.view = view;
+            this.calculation = calculation;
         }
 
         #endregion
@@ -88,22 +123,28 @@ namespace Yakka.Forms
         {
             get
             {
-                return this.configuration;
+                lock (this.configurationLock)
+                {
+                    return this.configuration;
+                }
             }
 
             set
             {
-                if (this.configuration != null)
+                lock (this.configurationLock)
                 {
-                    this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
-                }
+                    if (this.configuration != null)
+                    {
+                        this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
+                    }
 
-                this.configuration = value;
+                    this.configuration = value;
 
-                if (this.configuration != null)
-                {
-                    this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
-                    this.Update();
+                    if (this.configuration != null)
+                    {
+                        this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
+                        this.Update();
+                    }
                 }
             }
         }
@@ -128,6 +169,11 @@ namespace Yakka.Forms
             this.view.Quit += this.View_Quit;
             this.view.Visible = true;
 
+            this.calculationThread = new Thread(new ThreadStart(this.UpdateThread));
+            this.calculationThread.Name = "Calculation";
+            this.calculationThread.IsBackground = true;
+            this.calculationThread.Start();
+
             this.isVisible = true;
         }
 
@@ -142,6 +188,9 @@ namespace Yakka.Forms
                 throw new InvalidOperationException();
             }
 
+            this.calculationThread.Abort();
+            this.calculationThread = null;
+
             this.view.Visible = false;
             this.view.Configure -= this.View_Configure;
             this.view.Info -= this.View_Info;
@@ -151,23 +200,52 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Updates all view-related elements by recalculating all shown values.
+        /// Triggers the <see cref="UpdateThread"/> to calculate new values immediately.
         /// </summary>
         protected virtual void Update()
         {
-            if (this.configuration != null)
+            lock (this.monitorLock)
             {
-                DateTime currentDateTime = DateTime.Now;
+                Monitor.Pulse(this.monitorLock);
+            }
+        }
 
-                TimeSpan currentWorkingHours = this.configuration.Calculator.CalculateWorkingHours(this.configuration.Start, currentDateTime);
-                TimeSpan currentBreak = this.configuration.Calculator.CalculateBreak(this.configuration.Start, currentDateTime);
-
-                Dictionary<byte, DateTime> endOfWorkDayEstimations = new Dictionary<byte, DateTime>();
-
-                for (byte hoursWorked = 0; hoursWorked < 12; hoursWorked++)
+        /// <summary>
+        /// Represents the method executed in a background thread to calculate the working hours.
+        /// </summary>
+        protected virtual void UpdateThread()
+        {
+            try
+            {
+                while (true)
                 {
-                    throw new NotImplementedException();
+                    try
+                    {
+                        lock (this.configurationLock)
+                        {
+                            if (this.configuration != null)
+                            {
+                                this.view.WorkingHours = this.calculation.Calculate(
+                                    this.configuration.Calculator,
+                                    this.configuration.Start,
+                                    DateTime.Now);
+                            }
+                        }
+
+                        lock (this.monitorLock)
+                        {
+                            Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        this.view.WorkingHours = new WorkingHours();
+                    }
                 }
+            }
+            catch (ThreadAbortException)
+            {
+                Thread.ResetAbort();
             }
         }
 

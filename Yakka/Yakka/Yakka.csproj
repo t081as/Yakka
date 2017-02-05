@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator\IWorkingHoursCalculator.cs" />
+    <Compile Include="Calculator\NoBreakWorkingHoursCalculator.cs" />
     <Compile Include="Calculator\WorkingHoursCalculator.cs" />
     <Compile Include="Forms\ContextMenuDisplayControl.cs">
       <SubType>UserControl</SubType>
@@ -62,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserConfiguration.cs" />
     <Compile Include="WorkingHours.cs" />
+    <Compile Include="WorkingHoursCalculation.cs" />
     <EmbeddedResource Include="Forms\ContextMenuDisplayControl.resx">
       <DependentUpon>ContextMenuDisplayControl.cs</DependentUpon>
     </EmbeddedResource>

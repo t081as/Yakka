@@ -34,7 +34,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Represents the string used to format the displayed times.
         /// </summary>
-        private const string TIMEFORMAT = "HH:mm";
+        private const string TIMEFORMAT = "hh\\:mm";
 
         /// <summary>
         /// Represents the working hours.

@@ -39,15 +39,6 @@ namespace Yakka
             this.CalculatedWorkingHours = new TimeSpan(0);
             this.CalculatedBreak = new TimeSpan(0);
             this.EndOfWorkDay = new Dictionary<byte, DateTime>();
-
-            Dictionary<byte, DateTime> initialExampleValues = new Dictionary<byte, DateTime>();
-
-            for (byte i = 0; i < 12; i++)
-            {
-                initialExampleValues.Add(i, this.Start.AddHours(i));
-            }
-
-            this.EndOfWorkDay = initialExampleValues;
         }
 
         #endregion

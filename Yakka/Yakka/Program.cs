@@ -18,7 +18,9 @@
 
 #region Namespaces
 using System;
+using System.Threading;
 using System.Windows.Forms;
+using Yakka.Calculator;
 using Yakka.Forms;
 #endregion
 
@@ -40,9 +42,14 @@ namespace Yakka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            if (string.IsNullOrEmpty(Thread.CurrentThread.Name))
+            {
+                Thread.CurrentThread.Name = "Main";
+            }
+
             using (ISystemTrayIconView systemTrayIconView = new SystemTrayIconView())
             {
-                SystemTrayIconPresenter systemTrayIconPresenter = new SystemTrayIconPresenter(systemTrayIconView);
+                SystemTrayIconPresenter systemTrayIconPresenter = new SystemTrayIconPresenter(systemTrayIconView, new WorkingHoursCalculation());
 
                 systemTrayIconPresenter.Quit += Quit;
                 systemTrayIconPresenter.Show();
