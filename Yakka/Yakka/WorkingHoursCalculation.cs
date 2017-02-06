@@ -68,6 +68,7 @@ namespace Yakka
             }
 
             WorkingHours workingHours = new WorkingHours();
+            workingHours.Start = startOfWorkDay;
             workingHours.CalculatedWorkingHours = currentWorkingHours;
             workingHours.CalculatedBreak = currentBreak;
             workingHours.EndOfWorkDay = endOfWorkDayEstimations;
