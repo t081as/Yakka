@@ -37,6 +37,11 @@ namespace Yakka.Forms
         #region Constants and Fields
 
         /// <summary>
+        /// Represents the message visibility time in milliseconds.
+        /// </summary>
+        private const int MESSAGETIME = 5000;
+
+        /// <summary>
         /// Indicates if the class has already been disposed.
         /// </summary>
         private bool disposed = false;
@@ -86,6 +91,7 @@ namespace Yakka.Forms
             this.systemTrayIcon = new NotifyIcon();
             this.systemTrayIcon.Text = Application.ProductName;
             this.systemTrayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            this.systemTrayIcon.Click += this.SystemTrayIcon_Click;
 
             this.configurationMenuItem = new ToolStripMenuItem("Configuration");
             this.configurationMenuItem.Click += this.ConfigurationMenuItem_Click;
@@ -201,6 +207,34 @@ namespace Yakka.Forms
         #region Methods
 
         /// <summary>
+        /// Shows a message to the user.
+        /// </summary>
+        /// <param name="message">The message that shall be shown to the user.</param>
+        /// <exception cref="ArgumentNullException"><c>message</c> is <c>null</c>.</exception>
+        /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
+        public void ShowMessage(string message)
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(GetType().Name);
+            }
+
+            if (message == null)
+            {
+                throw new ArgumentNullException("message");
+            }
+
+            if (this.systemTrayIcon.Visible)
+            {
+                this.systemTrayIcon.BalloonTipIcon = ToolTipIcon.Info;
+                this.systemTrayIcon.BalloonTipTitle = Application.ProductName;
+                this.systemTrayIcon.BalloonTipText = message;
+
+                this.systemTrayIcon.ShowBalloonTip(MESSAGETIME);
+            }
+        }
+
+        /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
@@ -278,6 +312,16 @@ namespace Yakka.Forms
         {
             this.contextMenuControl.CalculatedWorkingHours = this.workingHours.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHours.CalculatedBreak;
+        }
+
+        /// <summary>
+        /// Handles the click event of the <see cref="NotifyIcon"/>.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The empty event arguments.</param>
+        protected virtual void SystemTrayIcon_Click(object sender, EventArgs e)
+        {
+            this.ShowMessage("Fill me with details");
         }
 
         /// <summary>

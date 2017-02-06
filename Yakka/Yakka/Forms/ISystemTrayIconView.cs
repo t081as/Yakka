@@ -70,5 +70,17 @@ namespace Yakka.Forms
         }
 
         #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Shows a message to the user.
+        /// </summary>
+        /// <param name="message">The message that shall be shown to the user.</param>
+        /// <exception cref="ArgumentNullException"><c>message</c> is <c>null</c>.</exception>
+        /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
+        void ShowMessage(string message);
+
+        #endregion
     }
 }
