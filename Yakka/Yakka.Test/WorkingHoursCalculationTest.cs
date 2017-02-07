@@ -44,7 +44,7 @@ namespace Yakka.Test
         /// Tests the calculation with no break (see <see cref="WorkingHoursCalculatorStub"/>).
         /// </summary>
         [Test]
-        public void CalculateWorkingHoursNoBreak()
+        public void CalculateWorkingHoursTest()
         {
             WorkingHoursCalculation calculation = new WorkingHoursCalculation();
             DateTime end = new DateTime(1984, 11, 27, 12, 24, 0, 0);
@@ -57,6 +57,23 @@ namespace Yakka.Test
             Assert.That(result.Start == this.testStartTime, "start time incorrect");
             Assert.That(result.CalculatedBreak == new TimeSpan(0), "calculation incorrect");
             Assert.That(result.CalculatedWorkingHours == new TimeSpan(3, 59, 0), "calculation incorrect");
+
+            Assert.That(result.EndOfWorkDay.Count > 10, "estimation count too low");
+            Assert.That(result.EndOfWorkDay[1] == this.testStartTime.AddHours(1));
+            Assert.That(result.EndOfWorkDay[4] == this.testStartTime.AddHours(4).AddMinutes(30));
+            Assert.That(result.EndOfWorkDay[7] == this.testStartTime.AddHours(7).AddMinutes(30).AddMinutes(45));
+        }
+
+        /// <summary>
+        /// Tests the calculation an invalid argument.
+        /// </summary>
+        [Test]
+        public void CalculateWorkingHoursArgumentNullTest()
+        {
+            WorkingHoursCalculation calculation = new WorkingHoursCalculation();
+            DateTime end = new DateTime(1984, 11, 27, 12, 24, 0, 0);
+
+            Assert.Throws<ArgumentNullException>(() => calculation.Calculate(null, this.testStartTime, end));
         }
 
         #endregion
