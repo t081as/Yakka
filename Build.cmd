@@ -12,7 +12,10 @@ nuget restore Yakka.sln
 if errorlevel 1 goto error
 
 echo Building solution (release)
-msbuild.exe /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /property:Platform="Any CPU" /verbosity:quiet Yakka.sln
+msbuild.exe /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo ^
+  /property:Configuration=Release /property:Platform="Any CPU" ^
+  /verbosity:quiet ^
+  Yakka.sln
 if errorlevel 1 goto error
 
 :success
