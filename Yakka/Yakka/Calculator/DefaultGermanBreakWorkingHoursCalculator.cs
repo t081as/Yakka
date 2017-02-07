@@ -68,7 +68,7 @@ namespace Yakka.Calculator
         {
             if (start > end)
             {
-                throw new InvalidOperationException("end > start");
+                throw new InvalidOperationException("start > end");
             }
 
             return (end - start) - this.CalculateBreak(start, end);
@@ -85,7 +85,7 @@ namespace Yakka.Calculator
         {
             if (start > end)
             {
-                throw new InvalidOperationException("end > start");
+                throw new InvalidOperationException("start > end");
             }
 
             TimeSpan workingHours = end - start;

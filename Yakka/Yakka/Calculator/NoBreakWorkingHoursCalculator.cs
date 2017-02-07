@@ -67,7 +67,7 @@ namespace Yakka.Calculator
         {
             if (start > end)
             {
-                throw new InvalidOperationException("end > start");
+                throw new InvalidOperationException("start > end");
             }
 
             return end - start;
