@@ -32,7 +32,7 @@ namespace Yakka
         #region Constants and Fields
 
         /// <summary>
-        /// Represens the number of estimated working times that are calculated
+        /// Represents the number of estimated working times that are calculated
         /// </summary>
         private const byte WORKINGTIMECALCULATIONS = 20;
 
