@@ -50,7 +50,9 @@ namespace Yakka.Test.Calculator
         public void GetDescriptionArgument()
         {
             NoBreakWorkingHoursCalculator calculator = new NoBreakWorkingHoursCalculator();
+
             Assert.That(!string.IsNullOrEmpty(calculator.GetDescription(CultureInfo.CurrentCulture)));
+            Assert.That(calculator.GetDescription(CultureInfo.CurrentCulture) == calculator.ToString());
         }
 
         /// <summary>
