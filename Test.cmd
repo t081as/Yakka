@@ -20,7 +20,7 @@ echo Running unit tests
 if errorlevel 1 goto error
 
 echo Running code coverage analysis
-.\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:.\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe "-targetargs:.\Yakka\bin\Debug\Yakka.Test\Yakka.test.dll --result=.\Yakka\bin\Debug\Yakka.Test\Yakka.Test.xml" -output:.\Yakka\bin\Debug\Yakka.Test\Yakka.Coverage.xml
+.\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control" -target:.\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe "-targetargs:.\Yakka\bin\Debug\Yakka.Test\Yakka.test.dll --result=.\Yakka\bin\Debug\Yakka.Test\Yakka.Test.xml" -output:.\Yakka\bin\Debug\Yakka.Test\Yakka.Coverage.xml
 if errorlevel 1 goto error
 
 echo Generating coverage report
