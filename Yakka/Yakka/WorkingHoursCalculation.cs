@@ -29,6 +29,15 @@ namespace Yakka
     /// </summary>
     public class WorkingHoursCalculation
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// Represens the number of estimated working times that are calculated
+        /// </summary>
+        private const byte WORKINGTIMECALCULATIONS = 20;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -53,7 +62,7 @@ namespace Yakka
 
             Dictionary<byte, DateTime> endOfWorkDayEstimations = new Dictionary<byte, DateTime>();
 
-            for (byte hoursWorked = 0; hoursWorked < 12; hoursWorked++)
+            for (byte hoursWorked = 0; hoursWorked < WORKINGTIMECALCULATIONS; hoursWorked++)
             {
                 DateTime specificEndOfWorkDay = startOfWorkDay;
                 TimeSpan workedTimeSpan = new TimeSpan(0);
