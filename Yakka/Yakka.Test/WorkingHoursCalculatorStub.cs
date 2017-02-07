@@ -43,19 +43,7 @@ namespace Yakka.Test
         /// <exception cref="ArgumentNullException"><c>culture</c> is <c>null</c>.</exception>
         public string GetDescription(CultureInfo culture)
         {
-            if (culture == null)
-            {
-                throw new ArgumentNullException("culture");
-            }
-
-            switch (culture.TwoLetterISOLanguageName.ToLowerInvariant())
-            {
-                case "de":
-                    return "Testpause (30 min > 4h Arbeit, 75 min > 7h Arbeit)";
-
-                default:
-                    return "Test break (30 min > 4h work, 75 min > 7h work)";
-            }
+            return "n/a";
         }
 
         /// <summary>
