@@ -55,17 +55,17 @@ namespace Yakka.Test
                 end);
 
             Assert.That(result.Start == this.testStartTime, "start time incorrect");
-            Assert.That(result.CalculatedBreak == new TimeSpan(0), "calculation incorrect");
-            Assert.That(result.CalculatedWorkingHours == new TimeSpan(3, 59, 0), "calculation incorrect");
+            Assert.That(result.CalculatedBreak == new TimeSpan(0), "calculation (break) incorrect");
+            Assert.That(result.CalculatedWorkingHours == new TimeSpan(3, 59, 0), "calculation (working hours) incorrect");
 
             Assert.That(result.EndOfWorkDay.Count > 10, "estimation count too low");
-            Assert.That(result.EndOfWorkDay[1] == this.testStartTime.AddHours(1));
-            Assert.That(result.EndOfWorkDay[4] == this.testStartTime.AddHours(4).AddMinutes(30));
-            Assert.That(result.EndOfWorkDay[7] == this.testStartTime.AddHours(7).AddMinutes(30).AddMinutes(45));
+            Assert.That(result.EndOfWorkDay[1] == this.testStartTime.AddHours(1), "estimation #1 wrong");
+            Assert.That(result.EndOfWorkDay[4] == this.testStartTime.AddHours(4).AddMinutes(30), "estimation #4 wrong");
+            Assert.That(result.EndOfWorkDay[7] == this.testStartTime.AddHours(7).AddMinutes(30).AddMinutes(45), "estimation #7 wrong");
         }
 
         /// <summary>
-        /// Tests the calculation an invalid argument.
+        /// Tests the calculation with an invalid argument.
         /// </summary>
         [Test]
         public void CalculateWorkingHoursArgumentNullTest()
