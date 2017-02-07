@@ -18,6 +18,9 @@
 
 #region Namespaces
 using System;
+using System.Globalization;
+using NUnit.Framework;
+using Yakka.Calculator;
 #endregion
 
 namespace Yakka.Test.Calculator
