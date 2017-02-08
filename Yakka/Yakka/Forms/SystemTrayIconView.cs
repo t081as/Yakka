@@ -291,6 +291,7 @@ namespace Yakka.Forms
                             }
 
                             this.systemTrayIcon.Visible = false;
+                            this.systemTrayIcon.Click -= this.SystemTrayIcon_Click;
                             this.systemTrayIcon.Dispose();
                             this.systemTrayIcon = null;
                         }
