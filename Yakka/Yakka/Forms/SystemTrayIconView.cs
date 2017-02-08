@@ -20,6 +20,7 @@
 using System;
 using System.Drawing;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 #endregion
 
@@ -76,6 +77,16 @@ namespace Yakka.Forms
         /// </summary>
         private ContextMenuDisplayControl contextMenuControl = null;
 
+        /// <summary>
+        /// Represents the message shown on left-clicking the <see cref="NotifyIcon"/>.
+        /// </summary>
+        private string quickMessage;
+
+        /// <summary>
+        /// Represents the object used to lock the <see cref="quickMessage"/> property.
+        /// </summary>
+        private object quickMessageLock = new object();
+
         #endregion
 
         #region Constructors and Destructors
@@ -91,7 +102,7 @@ namespace Yakka.Forms
             this.systemTrayIcon = new NotifyIcon();
             this.systemTrayIcon.Text = Application.ProductName;
             this.systemTrayIcon.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-            this.systemTrayIcon.Click += this.SystemTrayIcon_Click;
+            this.systemTrayIcon.MouseUp += this.SystemTrayIcon_MouseUp;
 
             this.configurationMenuItem = new ToolStripMenuItem("Configuration");
             this.configurationMenuItem.Click += this.ConfigurationMenuItem_Click;
@@ -291,7 +302,7 @@ namespace Yakka.Forms
                             }
 
                             this.systemTrayIcon.Visible = false;
-                            this.systemTrayIcon.Click -= this.SystemTrayIcon_Click;
+                            this.systemTrayIcon.MouseUp -= this.SystemTrayIcon_MouseUp;
                             this.systemTrayIcon.Dispose();
                             this.systemTrayIcon = null;
                         }
@@ -313,16 +324,31 @@ namespace Yakka.Forms
         {
             this.contextMenuControl.CalculatedWorkingHours = this.workingHours.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHours.CalculatedBreak;
+            this.systemTrayIcon.Text = $"{Application.ProductName}\n\nWorking hours: {this.workingHours.CalculatedWorkingHours.ToString()}\nBreak: {this.workingHours.CalculatedBreak.ToString()}";
+
+            lock (this.quickMessageLock)
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.Append(this.systemTrayIcon.Text);
+
+                this.quickMessage = builder.ToString();
+            }
         }
 
         /// <summary>
-        /// Handles the click event of the <see cref="NotifyIcon"/>.
+        /// Handles the mouse up event of the <see cref="NotifyIcon"/>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
-        protected virtual void SystemTrayIcon_Click(object sender, EventArgs e)
+        /// <param name="e">The event arguments containing information about the click.</param>
+        protected virtual void SystemTrayIcon_MouseUp(object sender, MouseEventArgs e)
         {
-            this.ShowMessage("Fill me with details");
+            if (e.Button == MouseButtons.Left)
+            {
+                lock (this.quickMessageLock)
+                {
+                    this.ShowMessage(this.quickMessage);
+                }
+            }
         }
 
         /// <summary>
