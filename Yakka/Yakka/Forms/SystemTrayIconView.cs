@@ -38,6 +38,11 @@ namespace Yakka.Forms
         #region Constants and Fields
 
         /// <summary>
+        /// Represents the string used to format the displayed times.
+        /// </summary>
+        public const string TIMEFORMAT = "hh\\:mm";
+
+        /// <summary>
         /// Represents the message visibility time in milliseconds.
         /// </summary>
         private const int MESSAGETIME = 5000;
@@ -324,14 +329,11 @@ namespace Yakka.Forms
         {
             this.contextMenuControl.CalculatedWorkingHours = this.workingHours.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHours.CalculatedBreak;
-            this.systemTrayIcon.Text = $"{Application.ProductName}\n\nWorking hours: {this.workingHours.CalculatedWorkingHours.ToString()}\nBreak: {this.workingHours.CalculatedBreak.ToString()}";
+            this.systemTrayIcon.Text = $"{Application.ProductName}\n\nS: {this.workingHours.Start.ToShortTimeString()}\nW: {this.workingHours.CalculatedWorkingHours.ToString(TIMEFORMAT)}\nB: {this.workingHours.CalculatedBreak.ToString(TIMEFORMAT)}";
 
             lock (this.quickMessageLock)
             {
-                StringBuilder builder = new StringBuilder();
-                builder.Append(this.systemTrayIcon.Text);
-
-                this.quickMessage = builder.ToString();
+                this.quickMessage = this.systemTrayIcon.Text;
             }
         }
 

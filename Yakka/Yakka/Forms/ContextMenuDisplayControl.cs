@@ -32,11 +32,6 @@ namespace Yakka.Forms
         #region Constants and Fields
 
         /// <summary>
-        /// Represents the string used to format the displayed times.
-        /// </summary>
-        private const string TIMEFORMAT = "hh\\:mm";
-
-        /// <summary>
         /// Represents the working hours.
         /// </summary>
         private TimeSpan calculatedWorkingHours;
@@ -85,7 +80,7 @@ namespace Yakka.Forms
                 else
                 {
                     this.calculatedWorkingHours = value;
-                    this.labelWorkingHours.Text = this.calculatedWorkingHours.ToString(TIMEFORMAT, CultureInfo.CurrentUICulture);
+                    this.labelWorkingHours.Text = this.calculatedWorkingHours.ToString(SystemTrayIconView.TIMEFORMAT, CultureInfo.CurrentUICulture);
                 }
             }
         }
@@ -109,7 +104,7 @@ namespace Yakka.Forms
                 else
                 {
                     this.calculatedBreak = value;
-                    this.labelBreak.Text = this.calculatedBreak.ToString(TIMEFORMAT, CultureInfo.CurrentUICulture);
+                    this.labelBreak.Text = this.calculatedBreak.ToString(SystemTrayIconView.TIMEFORMAT, CultureInfo.CurrentUICulture);
                 }
             }
         }
