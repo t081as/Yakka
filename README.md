@@ -33,6 +33,7 @@ The following applictions must be available and included in you *PATH* environme
 
 #### Source code
 Get the source code using the following command:
+
     > git clone https://gitlab.com/tobiaskoch/Yakka.git
 
 #### Build
