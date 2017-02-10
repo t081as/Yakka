@@ -51,7 +51,6 @@ namespace Yakka.Forms
         public ContextMenuDisplayControl()
         {
             this.InitializeComponent();
-            this.labelApplicationName.Text = Application.ProductName.ToUpper(CultureInfo.CurrentUICulture);
 
             // Without setting a MinimumSize the control won't be visible in the ToolStripControlHost (see SystemTrayIconView)
             this.MinimumSize = this.Size;

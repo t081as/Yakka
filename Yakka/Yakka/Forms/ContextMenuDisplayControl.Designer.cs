@@ -52,7 +52,6 @@ namespace Yakka.Forms
             this.panelIcon = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelHorizontal = new System.Windows.Forms.TableLayoutPanel();
-            this.labelApplicationName = new Yakka.Utility.SmoothLabel();
             this.labelWorkingHours = new Yakka.Utility.SmoothLabel();
             this.labelBreak = new Yakka.Utility.SmoothLabel();
             this.panelIcon.SuspendLayout();
@@ -63,8 +62,8 @@ namespace Yakka.Forms
             // panelIcon
             // 
             this.panelIcon.Controls.Add(this.pictureBoxIcon);
-            this.panelIcon.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelIcon.Location = new System.Drawing.Point(0, 0);
+            this.panelIcon.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelIcon.Location = new System.Drawing.Point(105, 0);
             this.panelIcon.Margin = new System.Windows.Forms.Padding(0);
             this.panelIcon.Name = "panelIcon";
             this.panelIcon.Size = new System.Drawing.Size(70, 80);
@@ -84,40 +83,27 @@ namespace Yakka.Forms
             // 
             this.tableLayoutPanelHorizontal.ColumnCount = 1;
             this.tableLayoutPanelHorizontal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelHorizontal.Controls.Add(this.labelApplicationName, 0, 0);
-            this.tableLayoutPanelHorizontal.Controls.Add(this.labelWorkingHours, 0, 1);
-            this.tableLayoutPanelHorizontal.Controls.Add(this.labelBreak, 0, 2);
+            this.tableLayoutPanelHorizontal.Controls.Add(this.labelWorkingHours, 0, 0);
+            this.tableLayoutPanelHorizontal.Controls.Add(this.labelBreak, 0, 1);
             this.tableLayoutPanelHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelHorizontal.Location = new System.Drawing.Point(70, 0);
+            this.tableLayoutPanelHorizontal.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelHorizontal.Name = "tableLayoutPanelHorizontal";
-            this.tableLayoutPanelHorizontal.RowCount = 4;
+            this.tableLayoutPanelHorizontal.RowCount = 3;
+            this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelHorizontal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelHorizontal.Size = new System.Drawing.Size(105, 80);
             this.tableLayoutPanelHorizontal.TabIndex = 1;
-            // 
-            // labelApplicationName
-            // 
-            this.labelApplicationName.AutoSize = true;
-            this.labelApplicationName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelApplicationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelApplicationName.Location = new System.Drawing.Point(3, 0);
-            this.labelApplicationName.Name = "labelApplicationName";
-            this.labelApplicationName.Size = new System.Drawing.Size(99, 30);
-            this.labelApplicationName.TabIndex = 0;
-            this.labelApplicationName.Text = "NAME";
-            this.labelApplicationName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // labelWorkingHours
             // 
             this.labelWorkingHours.AutoSize = true;
             this.labelWorkingHours.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWorkingHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWorkingHours.Location = new System.Drawing.Point(3, 30);
+            this.labelWorkingHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWorkingHours.Location = new System.Drawing.Point(3, 0);
             this.labelWorkingHours.Name = "labelWorkingHours";
-            this.labelWorkingHours.Size = new System.Drawing.Size(99, 25);
+            this.labelWorkingHours.Size = new System.Drawing.Size(99, 35);
             this.labelWorkingHours.TabIndex = 1;
             this.labelWorkingHours.Text = "XX:XX";
             this.labelWorkingHours.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -126,9 +112,10 @@ namespace Yakka.Forms
             // 
             this.labelBreak.AutoSize = true;
             this.labelBreak.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelBreak.Location = new System.Drawing.Point(3, 55);
+            this.labelBreak.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBreak.Location = new System.Drawing.Point(3, 35);
             this.labelBreak.Name = "labelBreak";
-            this.labelBreak.Size = new System.Drawing.Size(99, 20);
+            this.labelBreak.Size = new System.Drawing.Size(99, 30);
             this.labelBreak.TabIndex = 2;
             this.labelBreak.Text = "YY:YY";
             this.labelBreak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -155,7 +142,6 @@ namespace Yakka.Forms
         private System.Windows.Forms.Panel panelIcon;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHorizontal;
-        private Yakka.Utility.SmoothLabel labelApplicationName;
         private Yakka.Utility.SmoothLabel labelWorkingHours;
         private Yakka.Utility.SmoothLabel labelBreak;
     }
