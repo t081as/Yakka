@@ -106,7 +106,11 @@ namespace Yakka
         /// <param name="e">The empty event arguments.</param>
         private static void Info(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(
+                "Yakka\nA system tray application calculating and displaying your working hours\nCopyright (C) 2017  Tobias Koch\n\nReleased under the GPL (V3)",
+                Application.ProductName,
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Information);
         }
 
         /// <summary>
