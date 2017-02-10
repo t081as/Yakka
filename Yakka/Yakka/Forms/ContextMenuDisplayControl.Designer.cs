@@ -52,9 +52,9 @@ namespace Yakka.Forms
             this.panelIcon = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelHorizontal = new System.Windows.Forms.TableLayoutPanel();
-            this.labelApplicationName = new System.Windows.Forms.Label();
-            this.labelWorkingHours = new System.Windows.Forms.Label();
-            this.labelBreak = new System.Windows.Forms.Label();
+            this.labelApplicationName = new Yakka.Utility.SmoothLabel();
+            this.labelWorkingHours = new Yakka.Utility.SmoothLabel();
+            this.labelBreak = new Yakka.Utility.SmoothLabel();
             this.panelIcon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tableLayoutPanelHorizontal.SuspendLayout();
@@ -155,8 +155,8 @@ namespace Yakka.Forms
         private System.Windows.Forms.Panel panelIcon;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHorizontal;
-        private System.Windows.Forms.Label labelApplicationName;
-        private System.Windows.Forms.Label labelWorkingHours;
-        private System.Windows.Forms.Label labelBreak;
+        private Yakka.Utility.SmoothLabel labelApplicationName;
+        private Yakka.Utility.SmoothLabel labelWorkingHours;
+        private Yakka.Utility.SmoothLabel labelBreak;
     }
 }

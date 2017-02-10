@@ -36,7 +36,7 @@ namespace Yakka.Utility
         /// <param name="e">A <see cref="PaintEventArgs"/> that contains the event data.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             base.OnPaint(e);
         }
 
