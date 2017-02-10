@@ -36,7 +36,7 @@ if errorlevel 1 goto error
 echo Generating coverage report
 packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe ^
   -reports:".\Yakka\bin\Debug\Yakka.Test\Yakka.Coverage.xml" ^
-  -targetdir:".\Yakka\bin\Debug\Yakka.Test\Coverage-Report"
+  -targetdir:".\Yakka\bin\Debug\Yakka.Test\Coverage"
 if errorlevel 1 goto error
 
 :success
