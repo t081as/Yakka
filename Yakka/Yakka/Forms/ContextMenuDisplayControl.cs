@@ -51,6 +51,8 @@ namespace Yakka.Forms
         public ContextMenuDisplayControl()
         {
             this.InitializeComponent();
+            this.toolTip.SetToolTip(this.labelWorkingHours, "Working hours");
+            this.toolTip.SetToolTip(this.labelBreak, "Break");
 
             // Without setting a MinimumSize the control won't be visible in the ToolStripControlHost (see SystemTrayIconView)
             this.MinimumSize = this.Size;

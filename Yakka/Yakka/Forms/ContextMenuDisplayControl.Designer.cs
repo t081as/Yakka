@@ -49,11 +49,13 @@ namespace Yakka.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelIcon = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelHorizontal = new System.Windows.Forms.TableLayoutPanel();
             this.labelWorkingHours = new Yakka.Utility.SmoothLabel();
             this.labelBreak = new Yakka.Utility.SmoothLabel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panelIcon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tableLayoutPanelHorizontal.SuspendLayout();
@@ -144,5 +146,6 @@ namespace Yakka.Forms
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHorizontal;
         private Yakka.Utility.SmoothLabel labelWorkingHours;
         private Yakka.Utility.SmoothLabel labelBreak;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
