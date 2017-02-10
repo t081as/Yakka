@@ -67,6 +67,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserConfiguration.cs" />
+    <Compile Include="Utility\SmoothLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WorkingHours.cs" />
     <Compile Include="WorkingHoursCalculation.cs" />
     <EmbeddedResource Include="Forms\ContextMenuDisplayControl.resx">
