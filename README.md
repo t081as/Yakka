@@ -25,7 +25,7 @@ There's no compiled version available yet.
 
 ### Option 2: Source
 #### Requirements
-The following applictions must be available and included in you *PATH* environment variable:
+The following applications must be available and included in you *PATH* environment variable:
 
 * [Git](https://git-scm.com/)
 * [Nuget.exe](https://www.nuget.org/)
