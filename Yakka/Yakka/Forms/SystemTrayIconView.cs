@@ -329,7 +329,7 @@ namespace Yakka.Forms
         {
             this.contextMenuControl.CalculatedWorkingHours = this.workingHours.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHours.CalculatedBreak;
-            this.systemTrayIcon.Text = $"{Application.ProductName}\n\nS: {this.workingHours.Start.ToShortTimeString()}\nW: {this.workingHours.CalculatedWorkingHours.ToString(TIMEFORMAT)}\nB: {this.workingHours.CalculatedBreak.ToString(TIMEFORMAT)}";
+            this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHours.Start.ToShortTimeString()} (Start)\n{this.workingHours.CalculatedWorkingHours.ToString(TIMEFORMAT)} (Working hours)\n{this.workingHours.CalculatedBreak.ToString(TIMEFORMAT)} (Break)";
 
             lock (this.quickMessageLock)
             {
