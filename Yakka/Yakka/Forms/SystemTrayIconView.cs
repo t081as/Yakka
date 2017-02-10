@@ -1,19 +1,19 @@
 ﻿#region GNU General Public License 3
-//  Yakka - A system tray application calculating and displaying your working hours
-//  Copyright (C) 2017  Tobias Koch
+// Yakka - A system tray application calculating and displaying your working hours
+// Copyright (C) 2017  Tobias Koch
 //
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-//  GNU General Public License for more details.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
 //
-//  You should have received a copy of the GNU General Public License
-//  along with this program. If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 #endregion
 
 #region Namespaces
@@ -170,7 +170,7 @@ namespace Yakka.Forms
             {
                 if (this.disposed)
                 {
-                    throw new ObjectDisposedException(GetType().Name);
+                    throw new ObjectDisposedException(this.GetType().Name);
                 }
 
                 return this.systemTrayIcon.Visible;
@@ -180,7 +180,7 @@ namespace Yakka.Forms
             {
                 if (this.disposed)
                 {
-                    throw new ObjectDisposedException(GetType().Name);
+                    throw new ObjectDisposedException(this.GetType().Name);
                 }
 
                 this.systemTrayIcon.Visible = value;
@@ -196,7 +196,7 @@ namespace Yakka.Forms
             {
                 if (this.disposed)
                 {
-                    throw new ObjectDisposedException(GetType().Name);
+                    throw new ObjectDisposedException(this.GetType().Name);
                 }
 
                 return this.workingHours;
@@ -206,7 +206,7 @@ namespace Yakka.Forms
             {
                 if (this.disposed)
                 {
-                    throw new ObjectDisposedException(GetType().Name);
+                    throw new ObjectDisposedException(this.GetType().Name);
                 }
 
                 this.workingHours = value;
@@ -232,7 +232,7 @@ namespace Yakka.Forms
         {
             if (this.disposed)
             {
-                throw new ObjectDisposedException(GetType().Name);
+                throw new ObjectDisposedException(this.GetType().Name);
             }
 
             if (message == null)
