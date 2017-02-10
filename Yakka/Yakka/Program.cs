@@ -120,7 +120,6 @@ namespace Yakka
         /// <param name="e">The empty event arguments.</param>
         private static void Configure(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         /// <summary>
