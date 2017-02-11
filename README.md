@@ -18,7 +18,7 @@ Yakka is small .NET based system tray application for the windows operating syst
 * Just creates a single configuration file in the isolated storage (later)
 
 ## Installation
-After installation there are no furthur steps necessary - but you might want to copy the executable or a link to the executable to your autostart folder.
+After "installation" (i.e. xcopy deployment) there are no furthur steps necessary - but you might want to copy the executable or a link to the executable to your autostart folder.
 
 ### Option 1: Binary
 There's no compiled version available yet.
