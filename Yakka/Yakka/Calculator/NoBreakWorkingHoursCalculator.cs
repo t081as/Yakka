@@ -57,23 +57,6 @@ namespace Yakka.Calculator
         }
 
         /// <summary>
-        /// Calculates the working hours.
-        /// </summary>
-        /// <param name="start">The date and time representing the start of the working day.</param>
-        /// <param name="end">The date and time representing the end of the working day.</param>
-        /// <returns>The <see cref="TimeSpan"/> representing the working hours.</returns>
-        /// <exception cref="InvalidOperationException">The working hours could not be calculated.</exception>
-        public override TimeSpan CalculateWorkingHours(DateTime start, DateTime end)
-        {
-            if (start > end)
-            {
-                throw new InvalidOperationException("start > end");
-            }
-
-            return end - start;
-        }
-
-        /// <summary>
         /// Calculates the break.
         /// </summary>
         /// <param name="start">The date and time representing the start of the working day.</param>

@@ -48,7 +48,15 @@ namespace Yakka.Calculator
         /// <param name="end">The date and time representing the end of the working day.</param>
         /// <returns>The <see cref="TimeSpan"/> representing the working hours.</returns>
         /// <exception cref="InvalidOperationException">The working hours could not be calculated.</exception>
-        public abstract TimeSpan CalculateWorkingHours(DateTime start, DateTime end);
+        public virtual TimeSpan CalculateWorkingHours(DateTime start, DateTime end)
+        {
+            if (start > end)
+            {
+                throw new InvalidOperationException("start > end");
+            }
+
+            return (end - start) - this.CalculateBreak(start, end);
+        }
 
         /// <summary>
         /// Calculates the break.
