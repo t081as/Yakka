@@ -44,7 +44,7 @@ The executable will be located in the directory *.\Yakka\bin\Release\Yakka* if t
 #### Test
     > .\Test.cmd
 
-The script will report if the unit tests succeeds, the coverage report will be placed in the directory *.\Yakka\bin\Debug\Yakka.Test\Coverage-Report*.
+The script will report if the unit tests succeeds, the coverage report will be placed in the directory *.\Yakka\bin\Debug\Yakka.Test\Coverage*.
 
 ## Contributing
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Yakka/blob/master/CONTRIBUTING.md)
