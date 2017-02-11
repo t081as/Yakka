@@ -19,8 +19,8 @@ msbuild.exe /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo ^
 if errorlevel 1 goto error
 
 echo Running unit tests
-.\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe .\Yakka\bin\Debug\Yakka.Test\Yakka.test.dll ^
---work=.\Yakka\bin\Debug\Yakka.Test\ ^
+.\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe .\Build\Debug\Yakka.test.dll ^
+--work=.\Build\Debug\ ^
 --result=Yakka.TestReport.xml
 if errorlevel 1 goto error
 
@@ -29,14 +29,14 @@ echo Running code coverage analysis
   -register:user ^
   "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control -[*]*.Properties.* -[*]*.Program -[*]*Label" ^
   -target:".\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe" ^
-  -targetargs:".\Yakka\bin\Debug\Yakka.Test\Yakka.test.dll --result=.\Yakka\bin\Debug\Yakka.Test\Yakka.TestReport.xml" ^
-  -output:.\Yakka\bin\Debug\Yakka.Test\Yakka.Coverage.xml
+  -targetargs:".\Build\Debug\Yakka.test.dll --result=.\Build\Debug\Yakka.TestReport.xml" ^
+  -output:.\Build\Debug\Yakka.Coverage.xml
 if errorlevel 1 goto error
 
 echo Generating coverage report
 packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe ^
-  -reports:".\Yakka\bin\Debug\Yakka.Test\Yakka.Coverage.xml" ^
-  -targetdir:".\Yakka\bin\Debug\Yakka.Test\Coverage"
+  -reports:".\Build\Debug\Yakka.Coverage.xml" ^
+  -targetdir:".\Build\Debug\Coverage"
 if errorlevel 1 goto error
 
 :success

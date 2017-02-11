@@ -13,7 +13,7 @@ release:
         - master
     artifacts:
         paths:
-          - Yakka/bin/Release/Yakka/Yakka.exe
+          - Build/Release/Yakka.exe
     script:
         - xbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
     
@@ -22,9 +22,9 @@ debug:
     artifacts:
         expire_in: 4 weeks
         paths:
-          - Yakka/bin/Debug/Yakka.Test/Yakka.Test.dll
-          - Yakka/bin/Debug/Yakka.Test/Yakka.exe
-          - Yakka/bin/Debug/Yakka.Test/Yakka.TestReport.xml
+          - Build/Debug/Yakka.Test.dll
+          - Build/Debug/Yakka.Test/Yakka.exe
+          - Build/Debug/Yakka.Test/Yakka.TestReport.xml
     script:
         - xbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
-        - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Yakka/bin/Debug/Yakka.Test/Yakka.Test.dll --work=Yakka/bin/Debug/Yakka.Test/ --result=Yakka.TestReport.xml
+        - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Build/Debug/Yakka.Test.dll --work=Build/Debug/ --result=Yakka.TestReport.xml
