@@ -19,7 +19,7 @@ msbuild.exe /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo ^
 if errorlevel 1 goto error
 
 echo Running unit tests
-.\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe .\Build\Debug\Yakka.test.dll ^
+.\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe .\Build\Debug\Yakka.Test.dll ^
 --work=.\Build\Debug\ ^
 --result=Yakka.TestReport.xml
 if errorlevel 1 goto error
@@ -29,7 +29,7 @@ echo Running code coverage analysis
   -register:user ^
   "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control -[*]*.Properties.* -[*]*.Program -[*]*Label" ^
   -target:".\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe" ^
-  -targetargs:".\Build\Debug\Yakka.test.dll --result=.\Build\Debug\Yakka.TestReport.xml" ^
+  -targetargs:".\Build\Debug\Yakka.Test.dll --result=.\Build\Debug\Yakka.TestReport.xml" ^
   -output:.\Build\Debug\Yakka.Coverage.xml
 if errorlevel 1 goto error
 

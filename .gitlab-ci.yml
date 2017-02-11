@@ -15,9 +15,13 @@ release:
         - triggers
     artifacts:
         paths:
-          - Build/Release/Yakka.exe
+          - Yakka.exe
+          - LICENSE.md
+          - CHANGELOG.md
+          - AUTHORS.txt
     script:
         - xbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
+        - cp Build/Release/Yakka.exe Yakka.exe
 
 ci-release:
     stage: build
@@ -29,9 +33,13 @@ ci-release:
     artifacts:
         expire_in: 4 weeks
         paths:
-          - Build/Release/Yakka.exe
+          - Yakka.exe
+          - LICENSE.md
+          - CHANGELOG.md
+          - AUTHORS.txt
     script:
         - xbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
+        - cp Build/Release/Yakka.exe Yakka.exe
     
 ci-debug:
     stage: test
@@ -41,6 +49,8 @@ ci-debug:
           - Build/Debug/Yakka.Test.dll
           - Build/Debug/Yakka.Test/Yakka.exe
           - Build/Debug/Yakka.Test/Yakka.TestReport.xml
+          - Build/Debug/Yakka.Test/Yakka.Coverage.xml
     script:
         - xbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
         - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Build/Debug/Yakka.Test.dll --work=Build/Debug/ --result=Yakka.TestReport.xml
+        - mono packages/OpenCover.4.6.519/tools/OpenCover.Console.exe -register:user "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control -[*]*.Properties.* -[*]*.Program -[*]*Label" -target:"packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe" -targetargs:"./Build/Debug/Yakka.Test.dll --result=Build/Debug/Yakka.TestReport.xml" -output:Build/Debug/Yakka.Coverage.xml
