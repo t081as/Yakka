@@ -39,12 +39,12 @@ Get the source code using the following command:
 #### Build
     > .\Build.cmd
 
-The executable will be located in the directory *.\Yakka\bin\Release\Yakka* if the build succeeds.
+The executable will be located in the directory *.\Build\Release* if the build succeeds.
 
 #### Test
     > .\Test.cmd
 
-The script will report if the unit tests succeeds, the coverage report will be placed in the directory *.\Yakka\bin\Debug\Yakka.Test\Coverage*.
+The script will report if the unit tests succeeds, the coverage report will be placed in the directory *.\Build\Debug\Coverage*.
 
 ## Contributing
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Yakka/blob/master/CONTRIBUTING.md)
