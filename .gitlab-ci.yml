@@ -53,4 +53,3 @@ ci-debug:
     script:
         - xbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
         - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Build/Debug/Yakka.Test.dll --work=Build/Debug/ --result=Yakka.TestReport.xml
-        - mono packages/OpenCover.4.6.519/tools/OpenCover.Console.exe -register:user "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control -[*]*.Properties.* -[*]*.Program -[*]*Label" -target:"packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe" -targetargs:"./Build/Debug/Yakka.Test.dll --result=Build/Debug/Yakka.TestReport.xml" -output:Build/Debug/Yakka.Coverage.xml
