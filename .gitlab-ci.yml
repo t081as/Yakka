@@ -10,7 +10,6 @@ before_script:
 release:
     stage: build
     only:
-        - master
         - tags
     artifacts:
         paths:
