@@ -12,7 +12,6 @@ release:
     only:
         - master
         - tags
-        - triggers
     artifacts:
         paths:
           - Yakka.exe
@@ -29,7 +28,6 @@ ci-release:
         - master
     except:
         - tags
-        - triggers
     artifacts:
         expire_in: 4 weeks
         paths:
