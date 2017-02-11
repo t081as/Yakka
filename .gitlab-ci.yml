@@ -1,0 +1,27 @@
+image: mono:4.6.0.245
+
+stages:
+    - build
+    - test
+
+before_script:     
+    - nuget restore -NonInteractive
+
+build:
+    stage: build
+    only:
+        - master
+    artifacts:
+        - Yakka/bin/Release/Yakka/Yakka.exe
+    script:
+        - xbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
+    
+test:
+    stage: test
+    artifacts:
+        - Yakka/bin/Debug/Yakka.Test/Yakka.Test.dll
+        - Yakka/bin/Debug/Yakka.Test/Yakka.exe
+        - Yakka/bin/Debug/Yakka.Test/Yakka.TestReport.xml
+    script:
+        - xbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
+        - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Yakka/bin/Debug/Yakka.Test/Yakka.Test.dll --work=Yakka/bin/Debug/Yakka.Test/ --result=Yakka.TestReport.xml
