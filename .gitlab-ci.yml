@@ -44,9 +44,8 @@ ci-debug:
         expire_in: 1 week
         paths:
           - Build/Debug/Yakka.Test.dll
-          - Build/Debug/Yakka.Test/Yakka.exe
-          - Build/Debug/Yakka.Test/Yakka.TestReport.xml
-          - Build/Debug/Yakka.Test/Yakka.Coverage.xml
+          - Build/Debug/Yakka.exe
+          - Build/Debug/Yakka.TestReport.xml
     script:
         - xbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
         - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Build/Debug/Yakka.Test.dll --work=Build/Debug/ --result=Yakka.TestReport.xml
