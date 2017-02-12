@@ -358,7 +358,7 @@ namespace Yakka.Forms
         /// Handles the click event of the specific menu item.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void QuitMenuItem_Click(object sender, EventArgs e)
         {
             this.OnQuit(EventArgs.Empty);
@@ -368,7 +368,7 @@ namespace Yakka.Forms
         /// Handles the click event of the specific menu item.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void AboutMenuItem_Click(object sender, EventArgs e)
         {
             this.OnInfo(EventArgs.Empty);

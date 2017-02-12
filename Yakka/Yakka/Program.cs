@@ -103,7 +103,7 @@ namespace Yakka
         /// Handles the <see cref="SystemTrayIconPresenter.Info">info event of the presenter</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         private static void Info(object sender, EventArgs e)
         {
             MessageBox.Show(
@@ -117,7 +117,7 @@ namespace Yakka
         /// Handles the <see cref="SystemTrayIconPresenter.Configure">configure event of the presenter</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         private static void Configure(object sender, EventArgs e)
         {
         }
@@ -126,7 +126,7 @@ namespace Yakka
         /// Handles the <see cref="SystemTrayIconPresenter.Quit">quit event of the presenter</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         private static void Quit(object sender, EventArgs e)
         {
             Application.ExitThread();

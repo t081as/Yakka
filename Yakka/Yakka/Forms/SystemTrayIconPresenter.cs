@@ -289,7 +289,7 @@ namespace Yakka.Forms
         /// Handles the <see cref="ISystemTrayIconView.Quit">quit event of the view</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void View_Quit(object sender, EventArgs e)
         {
             this.OnQuit(EventArgs.Empty);
@@ -299,7 +299,7 @@ namespace Yakka.Forms
         /// Handles the <see cref="ISystemTrayIconView.Info">info event of the view</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void View_Info(object sender, EventArgs e)
         {
             this.OnInfo(EventArgs.Empty);
@@ -309,7 +309,7 @@ namespace Yakka.Forms
         /// Handles the <see cref="ISystemTrayIconView.Configure">configure event of the view</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void View_Configure(object sender, EventArgs e)
         {
             this.OnConfigure(EventArgs.Empty);
