@@ -148,12 +148,19 @@ namespace Yakka.Forms
                         this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
                     }
 
+                    bool displayMessage = this.configuration == null && value != null;
+
                     this.configuration = value;
 
                     if (this.configuration != null)
                     {
                         this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
                         this.Update();
+                    }
+
+                    if (displayMessage)
+                    {
+                        this.view.ShowMessage($"Start: {this.configuration.Start.ToShortTimeString()}");
                     }
                 }
             }
@@ -271,6 +278,11 @@ namespace Yakka.Forms
         protected virtual void Configuration_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.Update();
+
+            if (e.PropertyName == "Start" && this.view != null)
+            {
+                this.view.ShowMessage($"Start: {this.configuration.Start.ToShortTimeString()}");
+            }
         }
 
         /// <summary>
