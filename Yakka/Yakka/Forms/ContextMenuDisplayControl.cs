@@ -60,6 +60,15 @@ namespace Yakka.Forms
 
         #endregion
 
+        #region Events
+
+        /// <summary>
+        /// Occurs when the user wants to display software information.
+        /// </summary>
+        public event EventHandler Info;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -108,6 +117,32 @@ namespace Yakka.Forms
                     this.labelBreak.Text = this.calculatedBreak.ToString(SystemTrayIconView.TIMEFORMAT, CultureInfo.CurrentUICulture);
                 }
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Raises the <see cref="Info"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        protected virtual void OnInfo(EventArgs e)
+        {
+            if (this.Info != null)
+            {
+                this.Info.Invoke(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="Control.Click"/> event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        protected virtual void PictureBoxIcon_Click(object sender, EventArgs e)
+        {
+            this.OnInfo(EventArgs.Empty);
         }
 
         #endregion

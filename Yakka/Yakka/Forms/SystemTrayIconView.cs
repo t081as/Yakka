@@ -103,6 +103,7 @@ namespace Yakka.Forms
         {
             this.workingHours = null;
             this.contextMenuControl = new ContextMenuDisplayControl();
+            this.contextMenuControl.Info += this.ContextMenuControl_Info;
 
             this.systemTrayIcon = new NotifyIcon();
             this.systemTrayIcon.Text = Application.ProductName;
@@ -377,10 +378,20 @@ namespace Yakka.Forms
         /// Handles the click event of the specific menu item.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The empty event arguments.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void ConfigurationMenuItem_Click(object sender, EventArgs e)
         {
             this.OnConfigure(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ContextMenuDisplayControl.Info"/> event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        protected virtual void ContextMenuControl_Info(object sender, EventArgs e)
+        {
+            this.OnInfo(EventArgs.Empty);
         }
 
         /// <summary>

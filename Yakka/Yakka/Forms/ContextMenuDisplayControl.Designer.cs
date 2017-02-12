@@ -53,9 +53,9 @@ namespace Yakka.Forms
             this.panelIcon = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelHorizontal = new System.Windows.Forms.TableLayoutPanel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.labelWorkingHours = new Yakka.Utility.SmoothLabel();
             this.labelBreak = new Yakka.Utility.SmoothLabel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panelIcon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tableLayoutPanelHorizontal.SuspendLayout();
@@ -80,6 +80,7 @@ namespace Yakka.Forms
             this.pictureBoxIcon.Size = new System.Drawing.Size(64, 64);
             this.pictureBoxIcon.TabIndex = 0;
             this.pictureBoxIcon.TabStop = false;
+            this.pictureBoxIcon.Click += new System.EventHandler(this.PictureBoxIcon_Click);
             // 
             // tableLayoutPanelHorizontal
             // 
