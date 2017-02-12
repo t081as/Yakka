@@ -231,24 +231,18 @@ namespace Yakka.Forms
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         public void ShowMessage(string message)
         {
-            if (this.disposed)
-            {
-                throw new ObjectDisposedException(this.GetType().Name);
-            }
+            this.ShowPopupMessage(ToolTipIcon.Info, message);
+        }
 
-            if (message == null)
-            {
-                throw new ArgumentNullException("message");
-            }
-
-            if (this.systemTrayIcon.Visible)
-            {
-                this.systemTrayIcon.BalloonTipIcon = ToolTipIcon.Info;
-                this.systemTrayIcon.BalloonTipTitle = Application.ProductName;
-                this.systemTrayIcon.BalloonTipText = message;
-
-                this.systemTrayIcon.ShowBalloonTip(MESSAGETIME);
-            }
+        /// <summary>
+        /// Shows a warning message to the user.
+        /// </summary>
+        /// <param name="message">The warning message that shall be shown to the user.</param>
+        /// <exception cref="ArgumentNullException"><c>message</c> is <c>null</c>.</exception>
+        /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
+        public void ShowWarning(string message)
+        {
+            this.ShowPopupMessage(ToolTipIcon.Warning, message);
         }
 
         /// <summary>
@@ -335,6 +329,35 @@ namespace Yakka.Forms
             lock (this.quickMessageLock)
             {
                 this.quickMessage = this.systemTrayIcon.Text;
+            }
+        }
+
+        /// <summary>
+        /// Shows a popup message to the user.
+        /// </summary>
+        /// <param name="icon">The icon that shall be shown to the user.</param>
+        /// <param name="message">The warning message that shall be shown to the user.</param>
+        /// <exception cref="ArgumentNullException"><c>message</c> is <c>null</c>.</exception>
+        /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
+        protected virtual void ShowPopupMessage(ToolTipIcon icon, string message)
+        {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
+            if (message == null)
+            {
+                throw new ArgumentNullException("message");
+            }
+
+            if (this.systemTrayIcon.Visible)
+            {
+                this.systemTrayIcon.BalloonTipIcon = icon;
+                this.systemTrayIcon.BalloonTipTitle = Application.ProductName;
+                this.systemTrayIcon.BalloonTipText = message;
+
+                this.systemTrayIcon.ShowBalloonTip(MESSAGETIME);
             }
         }
 

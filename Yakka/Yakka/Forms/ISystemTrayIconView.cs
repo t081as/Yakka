@@ -81,6 +81,14 @@ namespace Yakka.Forms
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         void ShowMessage(string message);
 
+        /// <summary>
+        /// Shows a warning message to the user.
+        /// </summary>
+        /// <param name="message">The warning message that shall be shown to the user.</param>
+        /// <exception cref="ArgumentNullException"><c>message</c> is <c>null</c>.</exception>
+        /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
+        void ShowWarning(string message);
+
         #endregion
     }
 }
