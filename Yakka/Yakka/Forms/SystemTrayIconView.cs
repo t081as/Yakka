@@ -288,6 +288,7 @@ namespace Yakka.Forms
 
                         if (this.contextMenuControl != null)
                         {
+                            this.contextMenuControl.Info -= this.ContextMenuControl_Info;
                             this.contextMenuControl.Dispose();
                             this.contextMenuControl = null;
                         }
