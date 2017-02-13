@@ -50,7 +50,7 @@ The script will report if the unit tests succeeds, the coverage report will be p
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Yakka/blob/master/CONTRIBUTING.md)
 
 ## Contributors
-see [AUHORS.txt](https://gitlab.com/tobiaskoch/Yakka/blob/master/AUTHORS.txt)
+see [AUTHORS.txt](https://gitlab.com/tobiaskoch/Yakka/blob/master/AUTHORS.txt)
 
 ## License
 **Yakka** © 2017  Tobias Koch. Released under the [GPL](https://gitlab.com/tobiaskoch/Yakka/blob/master/LICENSE.md).
