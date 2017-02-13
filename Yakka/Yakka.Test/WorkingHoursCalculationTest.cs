@@ -40,6 +40,8 @@ namespace Yakka.Test
 
         #region Methods
 
+        #region Tests
+
         /// <summary>
         /// Tests the calculation with no break (see <see cref="WorkingHoursCalculatorStub"/>).
         /// </summary>
@@ -75,6 +77,8 @@ namespace Yakka.Test
 
             Assert.Throws<ArgumentNullException>(() => calculation.Calculate(null, this.testStartTime, end));
         }
+
+        #endregion
 
         #endregion
     }
