@@ -18,6 +18,7 @@
 
 #region Namespaces
 using System;
+using System.Threading;
 using NUnit.Framework;
 using Yakka.Forms;
 #endregion
@@ -38,17 +39,22 @@ namespace Yakka.Test.Forms
         private SystemTrayIconViewStub viewStub = null;
 
         /// <summary>
-        /// Indicates whether the <see cref="SystemTrayIconViewStub.Info"/> event has been invoked.
+        /// Represents the subject under test.
+        /// </summary>
+        private SystemTrayIconPresenter presenter = null;
+
+        /// <summary>
+        /// Indicates whether the <see cref="SystemTrayIconPresenter.Info"/> event has been invoked.
         /// </summary>
         private volatile bool infoInvoked = false;
 
         /// <summary>
-        /// Indicates whether the <see cref="SystemTrayIconViewStub.Configure"/> event has been invoked.
+        /// Indicates whether the <see cref="SystemTrayIconPresenter.Configure"/> event has been invoked.
         /// </summary>
         private volatile bool configureInvoked = false;
 
         /// <summary>
-        /// Indicates whether the <see cref="SystemTrayIconViewStub.Quit"/> event has been invoked.
+        /// Indicates whether the <see cref="SystemTrayIconPresenter.Quit"/> event has been invoked.
         /// </summary>
         private volatile bool quitInvoked = false;
 
@@ -80,9 +86,11 @@ namespace Yakka.Test.Forms
             }
 
             this.viewStub = new SystemTrayIconViewStub();
-            this.viewStub.Configure += this.ViewStub_Configure;
-            this.viewStub.Info += this.ViewStub_Info;
-            this.viewStub.Quit += this.ViewStub_Quit;
+
+            this.presenter = new SystemTrayIconPresenter(this.viewStub, new WorkingHoursCalculation());
+            this.presenter.Configure += this.Configure;
+            this.presenter.Info += this.Info;
+            this.presenter.Quit += this.Quit;
         }
 
         /// <summary>
@@ -91,9 +99,11 @@ namespace Yakka.Test.Forms
         [TearDown]
         public void TearDown()
         {
-            this.viewStub.Configure -= this.ViewStub_Configure;
-            this.viewStub.Info -= this.ViewStub_Info;
-            this.viewStub.Quit -= this.ViewStub_Quit;
+            this.presenter.Configure -= this.Configure;
+            this.presenter.Info -= this.Info;
+            this.presenter.Quit -= this.Quit;
+            this.presenter = null;
+
             this.viewStub.Dispose();
             this.viewStub = null;
         }
@@ -120,34 +130,116 @@ namespace Yakka.Test.Forms
             Assert.Throws<ArgumentNullException>(() => new SystemTrayIconPresenter(this.viewStub, null));
         }
 
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Show"/> method.
+        /// </summary>
+        [Test]
+        public void ShowTest()
+        {
+            this.presenter.Show();
+            Assert.That(this.viewStub.Visible == true, "View not visible");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Show"/> method.
+        /// </summary>
+        [Test]
+        public void InvalidShowTest()
+        {
+            this.presenter.Show();
+            Assert.Throws<InvalidOperationException>(() => this.presenter.Show());
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Hide"/> method.
+        /// </summary>
+        [Test]
+        public void HideTest()
+        {
+            this.ShowTest();
+            this.presenter.Hide();
+            Assert.That(this.viewStub.Visible == false, "View still visible");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Hide"/> method.
+        /// </summary>
+        [Test]
+        public void InvalidHideTest()
+        {
+            Assert.Throws<InvalidOperationException>(() => this.presenter.Hide());
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configure"/> event.
+        /// </summary>
+        [Test]
+        public void ConfigureEventTest()
+        {
+            this.presenter.Show();
+            this.viewStub.OnConfigure();
+            Thread.Sleep(100);
+            this.presenter.Hide();
+
+            Assert.That(this.configureInvoked == true, "Event not invoked");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Info"/> event.
+        /// </summary>
+        [Test]
+        public void InfoEventTest()
+        {
+            this.presenter.Show();
+            this.viewStub.OnInfo();
+            Thread.Sleep(100);
+            this.presenter.Hide();
+
+            Assert.That(this.infoInvoked == true, "Event not invoked");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Quit"/> event.
+        /// </summary>
+        [Test]
+        public void QuitEventTest()
+        {
+            this.presenter.Show();
+            this.viewStub.OnQuit();
+            Thread.Sleep(100);
+            this.presenter.Hide();
+
+            Assert.That(this.quitInvoked == true, "Event not invoked");
+        }
+
         #endregion
 
         /// <summary>
-        /// Handles the <see cref="SystemTrayIconViewStub.Quit"/> event.
+        /// Handles the <see cref="SystemTrayIconPresenter.Quit"/> event.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> that contains the data.</param>
-        private void ViewStub_Quit(object sender, EventArgs e)
+        private void Quit(object sender, EventArgs e)
         {
             this.quitInvoked = true;
         }
 
         /// <summary>
-        /// Handles the <see cref="SystemTrayIconViewStub.Info"/> event.
+        /// Handles the <see cref="SystemTrayIconPresenter.Info"/> event.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> that contains the data.</param>
-        private void ViewStub_Info(object sender, EventArgs e)
+        private void Info(object sender, EventArgs e)
         {
             this.infoInvoked = true;
         }
 
         /// <summary>
-        /// Handles the <see cref="SystemTrayIconViewStub.Configure"/> event.
+        /// Handles the <see cref="SystemTrayIconPresenter.Configure"/> event.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> that contains the data.</param>
-        private void ViewStub_Configure(object sender, EventArgs e)
+        private void Configure(object sender, EventArgs e)
         {
             this.configureInvoked = true;
         }
