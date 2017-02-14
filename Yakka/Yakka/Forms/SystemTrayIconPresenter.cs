@@ -185,7 +185,7 @@ namespace Yakka.Forms
             this.view.Quit += this.View_Quit;
             this.view.Visible = true;
 
-            this.calculationThread = new Thread(new ThreadStart(this.UpdateThread));
+            this.calculationThread = new Thread(new ThreadStart(this.CalculationUpdateThread));
             this.calculationThread.Name = "Calculation";
             this.calculationThread.IsBackground = true;
             this.calculationThread.Start();
@@ -216,7 +216,7 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Triggers the <see cref="UpdateThread"/> to calculate new values immediately.
+        /// Triggers the <see cref="CalculationUpdateThread"/> to calculate new values immediately.
         /// </summary>
         protected virtual void Update()
         {
@@ -229,7 +229,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Represents the method executed in a background thread to calculate the working hours.
         /// </summary>
-        protected virtual void UpdateThread()
+        protected virtual void CalculationUpdateThread()
         {
             try
             {
@@ -278,9 +278,16 @@ namespace Yakka.Forms
         {
             this.Update();
 
-            if (e.PropertyName == "Start" && this.view != null)
+            if (e.PropertyName == "Start")
             {
-                this.view.ShowMessage($"Start: {this.configuration.Start.ToShortTimeString()}");
+                try
+                {
+                    this.view.ShowMessage($"Start: {this.configuration.Start.ToShortTimeString()}");
+                }
+                catch (ObjectDisposedException)
+                {
+                    // Object has already been disposed; ignore the exception
+                }
             }
         }
 
