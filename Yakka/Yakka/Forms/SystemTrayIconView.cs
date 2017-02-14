@@ -230,6 +230,11 @@ namespace Yakka.Forms
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         public void ShowMessage(string message)
         {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
             this.ShowPopupMessage(ToolTipIcon.Info, message);
         }
 
@@ -241,6 +246,11 @@ namespace Yakka.Forms
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         public void ShowWarning(string message)
         {
+            if (this.disposed)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
             this.ShowPopupMessage(ToolTipIcon.Warning, message);
         }
 
