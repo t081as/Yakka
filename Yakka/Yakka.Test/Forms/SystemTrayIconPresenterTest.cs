@@ -212,6 +212,116 @@ namespace Yakka.Test.Forms
             Assert.That(this.quitInvoked == true, "Event not invoked");
         }
 
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configuration"/> property.
+        /// </summary>
+        [Test]
+        public void UserConfigurationTest()
+        {
+            UserConfiguration configuration = new UserConfiguration();
+            configuration.Start = DateTime.Now.Subtract(TimeSpan.FromSeconds(1));
+            configuration.Calculator = new WorkingHoursCalculatorStub();
+
+            this.presenter.Show();
+            this.presenter.Configuration = configuration;
+            Thread.Sleep(100);
+            WorkingHours workingHours = this.viewStub.WorkingHours;
+            this.presenter.Hide();
+
+            Assert.That(workingHours.Start == configuration.Start, "Start invalid");
+            Assert.That(workingHours.CalculatedWorkingHours >= TimeSpan.FromSeconds(1), "Calculation invalid");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configuration"/> property.
+        /// </summary>
+        [Test]
+        public void UserConfigurationChangeValueTest()
+        {
+            UserConfiguration configuration = new UserConfiguration();
+            configuration.Start = DateTime.MinValue;
+            configuration.Calculator = new WorkingHoursCalculatorStub();
+
+            this.presenter.Show();
+            this.presenter.Configuration = configuration;
+            Thread.Sleep(500);
+
+            configuration.Start = DateTime.Now;
+            Thread.Sleep(500);
+
+            WorkingHours workingHours = this.viewStub.WorkingHours;
+            this.presenter.Hide();
+
+            Assert.That(workingHours.Start != DateTime.MinValue, "Start invalid");
+            Assert.That(workingHours.CalculatedWorkingHours <= TimeSpan.FromSeconds(10), "Calculation invalid");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configuration"/> property.
+        /// </summary>
+        [Test]
+        public void UserConfigurationChangeObjectTest()
+        {
+            UserConfiguration configuration = new UserConfiguration();
+            configuration.Start = DateTime.MinValue;
+            configuration.Calculator = new WorkingHoursCalculatorStub();
+
+            this.presenter.Show();
+            this.presenter.Configuration = configuration;
+            Thread.Sleep(500);
+
+            UserConfiguration configurationNew = new UserConfiguration();
+            configurationNew.Start = DateTime.Now;
+            configurationNew.Calculator = new WorkingHoursCalculatorStub();
+
+            this.presenter.Configuration = configurationNew;
+            Thread.Sleep(500);
+
+            WorkingHours workingHours = this.viewStub.WorkingHours;
+            this.presenter.Hide();
+
+            Assert.That(workingHours.Start != DateTime.MinValue, "Start invalid");
+            Assert.That(workingHours.CalculatedWorkingHours <= TimeSpan.FromSeconds(10), "Calculation invalid");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configuration"/> property.
+        /// </summary>
+        [Test]
+        public void UserConfigurationNullTest()
+        {
+            this.viewStub.WorkingHours = new WorkingHours();
+
+            this.presenter.Show();
+            this.presenter.Configuration = null;
+            Thread.Sleep(500);
+
+            WorkingHours workingHours = this.viewStub.WorkingHours;
+            this.presenter.Hide();
+
+            Assert.That(workingHours != null, "Value invalid");
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configuration"/> property.
+        /// </summary>
+        [Test]
+        public void UserInvalidConfigurationTest()
+        {
+            UserConfiguration configuration = new UserConfiguration();
+            configuration.Start = DateTime.MinValue;
+            configuration.Calculator = null;
+
+            this.presenter.Show();
+            this.presenter.Configuration = configuration;
+            Thread.Sleep(500);
+
+            WorkingHours workingHours = this.viewStub.WorkingHours;
+            this.presenter.Hide();
+
+            Assert.That(workingHours != null, "Value invalid");
+        }
+
         #endregion
 
         /// <summary>
