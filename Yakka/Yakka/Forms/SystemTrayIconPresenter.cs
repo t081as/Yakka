@@ -320,10 +320,7 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnConfigure(EventArgs e)
         {
-            if (this.Configure != null)
-            {
-                this.Configure.Invoke(this, e);
-            }
+            this.Configure?.Invoke(this, e);
         }
 
         /// <summary>
@@ -332,10 +329,7 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnInfo(EventArgs e)
         {
-            if (this.Info != null)
-            {
-                this.Info.Invoke(this, e);
-            }
+            this.Info?.Invoke(this, e);
         }
 
         /// <summary>
@@ -344,10 +338,7 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments.</param>
         protected virtual void OnQuit(EventArgs e)
         {
-            if (this.Quit != null)
-            {
-                this.Quit.Invoke(this, e);
-            }
+            this.Quit?.Invoke(this, e);
         }
 
         #endregion
