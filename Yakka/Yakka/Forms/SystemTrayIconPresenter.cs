@@ -273,7 +273,7 @@ namespace Yakka.Forms
         /// Handles changes of the user configuration.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The event arguments containing information about the changed property.</param>
+        /// <param name="e">A <see cref="PropertyChangedEventArgs"/> that contains the data.</param>
         protected virtual void Configuration_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.Update();
