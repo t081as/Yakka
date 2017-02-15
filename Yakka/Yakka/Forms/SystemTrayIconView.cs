@@ -29,9 +29,6 @@ namespace Yakka.Forms
     /// Represents an implementation of the <see cref="ISystemTrayIconView"/> interface using the <see cref="NotifyIcon"/> class
     /// to display a system tray icon.
     /// </summary>
-    /// <remarks>
-    /// see https://en.wikipedia.org/wiki/Model-view-presenter for additional information about the pattern
-    /// </remarks>
     public class SystemTrayIconView : ISystemTrayIconView
     {
         #region Constants and Fields

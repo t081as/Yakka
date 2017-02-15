@@ -25,9 +25,6 @@ namespace Yakka.Forms
     /// <summary>
     /// Provides the interface to a view managed by the <see cref="SystemTrayIconPresenter"/>.
     /// </summary>
-    /// <remarks>
-    /// see https://en.wikipedia.org/wiki/Model-view-presenter for additional information about the pattern
-    /// </remarks>
     public interface ISystemTrayIconView : IDisposable
     {
         #region Events

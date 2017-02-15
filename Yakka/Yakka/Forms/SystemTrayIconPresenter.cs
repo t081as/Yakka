@@ -27,9 +27,6 @@ namespace Yakka.Forms
     /// <summary>
     /// Represents the presenter managing the system tray icon.
     /// </summary>
-    /// <remarks>
-    /// see https://en.wikipedia.org/wiki/Model-view-presenter for additional information about the pattern
-    /// </remarks>
     public class SystemTrayIconPresenter
     {
         #region Constants and Fields
