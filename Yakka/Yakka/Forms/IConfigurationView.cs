@@ -17,6 +17,7 @@
 #endregion
 
 #region Namespaces
+using System;
 using Yakka.Calculator;
 #endregion
 
@@ -27,12 +28,30 @@ namespace Yakka.Forms
     /// </summary>
     public interface IConfigurationView
     {
+        #region
+
+        /// <summary>
+        /// Occurs when a value is changed by the user.
+        /// </summary>
+        event EventHandler ConfigurationValueChanged;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        /// Gets or sets the user configuration used to calculate the working hours.
+        /// Gets or sets the start time of the working hours.
         /// </summary>
-        UserConfiguration Configuration
+        DateTime StartTime
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the calculator choosen by the user.
+        /// </summary>
+        IWorkingHoursCalculator SelectedCalculator
         {
             get;
             set;

@@ -68,6 +68,11 @@ namespace Yakka.Forms
 
             this.view = view;
             this.configuration = configuration;
+
+            if (this.view != null && this.configuration != null)
+            {
+                // I'm only fixing the ci build
+            }
         }
 
         #endregion
