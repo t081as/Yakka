@@ -17,11 +17,7 @@
 #endregion
 
 #region Namespaces
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Yakka.Calculator;
 #endregion
 
 namespace Yakka.Forms
@@ -34,9 +30,18 @@ namespace Yakka.Forms
         #region Properties
 
         /// <summary>
-        /// Gets or sets the configuration used to calculate the working hours.
+        /// Gets or sets the user configuration used to calculate the working hours.
         /// </summary>
         UserConfiguration Configuration
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the calculators that are available and could be chosen by the user.
+        /// </summary>
+        IWorkingHoursCalculator[] AvailableCalculators
         {
             get;
             set;

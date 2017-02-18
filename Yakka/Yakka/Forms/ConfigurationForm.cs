@@ -46,5 +46,31 @@ namespace Yakka.Forms
         }
 
         #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Occurs when the configuration has been changed.
+        /// </summary>
+        public event EventHandler ConfigurationChanged;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Handles the <see cref="Form.FormClosing"/> event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="FormClosedEventArgs"/> that contains the data.</param>
+        private void ConfigurationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.OK)
+            {
+                this.ConfigurationChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        #endregion
     }
 }

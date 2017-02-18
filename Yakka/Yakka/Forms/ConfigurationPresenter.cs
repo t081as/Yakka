@@ -31,16 +31,43 @@ namespace Yakka.Forms
     /// </summary>
     public class ConfigurationPresenter
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// Represents the reference to the view managed by this presenter.
+        /// </summary>
+        private IConfigurationView view;
+
+        /// <summary>
+        /// Represents the reference to the user configuration that shall be displayed and updated..
+        /// </summary>
+        private UserConfiguration configuration;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationPresenter"/> class.
         /// </summary>
         /// <param name="view">The view that shall be used.</param>
-        /// <param name="configuration">The configuration which shall shown to the user.</param>
+        /// <param name="configuration">The user configuration that shall be displayed and updated.</param>
+        /// <exception cref="ArgumentNullException"><c>view</c> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
         public ConfigurationPresenter(IConfigurationView view, UserConfiguration configuration)
         {
+            if (view == null)
+            {
+                throw new ArgumentNullException("view");
+            }
 
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+
+            this.view = view;
+            this.configuration = configuration;
         }
 
         #endregion

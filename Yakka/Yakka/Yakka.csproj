@@ -85,6 +85,9 @@
     </Compile>
     <Compile Include="WorkingHours.cs" />
     <Compile Include="WorkingHoursCalculation.cs" />
+    <EmbeddedResource Include="Forms\ConfigurationForm.resx">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContextMenuDisplayControl.resx">
       <DependentUpon>ContextMenuDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
