@@ -31,9 +31,9 @@ namespace Yakka.Forms
         #region
 
         /// <summary>
-        /// Occurs when a value is changed by the user.
+        /// Occurs when the configuration is changed by the user.
         /// </summary>
-        event EventHandler ConfigurationValueChanged;
+        event EventHandler ConfigurationChanged;
 
         #endregion
 

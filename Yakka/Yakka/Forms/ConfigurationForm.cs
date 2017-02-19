@@ -26,6 +26,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Yakka.Calculator;
 #endregion
 
 namespace Yakka.Forms
@@ -33,7 +34,7 @@ namespace Yakka.Forms
     /// <summary>
     /// Represents the window that allows the user to change the configuration used to calculate the working hours.
     /// </summary>
-    public partial class ConfigurationForm : Form
+    public partial class ConfigurationForm : Form, IConfigurationView
     {
         #region Constructors and Destructors
 
@@ -50,9 +51,40 @@ namespace Yakka.Forms
         #region Events
 
         /// <summary>
-        /// Occurs when the configuration has been changed.
+        /// Occurs when the configuration is changed by the user.
         /// </summary>
         public event EventHandler ConfigurationChanged;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the start time of the working hours.
+        /// </summary>
+        public DateTime StartTime
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the calculator choosen by the user.
+        /// </summary>
+        public IWorkingHoursCalculator SelectedCalculator
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the calculators that are available and could be chosen by the user.
+        /// </summary>
+        public IWorkingHoursCalculator[] AvailableCalculators
+        {
+            get;
+            set;
+        }
 
         #endregion
 
