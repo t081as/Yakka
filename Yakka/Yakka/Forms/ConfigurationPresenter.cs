@@ -135,8 +135,15 @@ namespace Yakka.Forms
         /// <param name="e">A <see cref="EventArgs"/> that contains the data.</param>
         protected virtual void View_ConfigurationChanged(object sender, EventArgs e)
         {
-            this.configuration.Start = this.view.Start;
-            this.configuration.Calculator = this.view.SelectedCalculator;
+            if (this.view.Start != this.configuration.Start)
+            {
+                this.configuration.Start = this.view.Start;
+            }
+
+            if (this.view.SelectedCalculator != this.configuration.Calculator)
+            {
+                this.configuration.Calculator = this.view.SelectedCalculator;
+            }
         }
 
         #endregion

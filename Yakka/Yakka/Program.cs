@@ -120,6 +120,13 @@ namespace Yakka
         /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         private static void Configure(object sender, EventArgs e)
         {
+            using (ConfigurationForm configurationForm = new ConfigurationForm())
+            {
+                using (ConfigurationPresenter configurationPresenter = new ConfigurationPresenter(configurationForm, configuration))
+                {
+                    configurationForm.ShowDialog();
+                }
+            }
         }
 
         /// <summary>
