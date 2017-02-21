@@ -46,13 +46,39 @@ namespace Yakka.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.buttonAccept = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // buttonAccept
+            // 
+            this.buttonAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonAccept.Location = new System.Drawing.Point(261, 377);
+            this.buttonAccept.Name = "buttonAccept";
+            this.buttonAccept.Size = new System.Drawing.Size(75, 23);
+            this.buttonAccept.TabIndex = 0;
+            this.buttonAccept.Text = "OK";
+            this.buttonAccept.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(342, 377);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // ConfigurationForm
             // 
+            this.AcceptButton = this.buttonAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(429, 412);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonAccept);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -65,5 +91,8 @@ namespace Yakka.Forms
         }
 
         #endregion
+
+        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }
