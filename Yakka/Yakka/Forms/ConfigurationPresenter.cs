@@ -29,7 +29,7 @@ namespace Yakka.Forms
     /// <summary>
     /// Represents the presenter managing the <see cref="IConfigurationView"/>.
     /// </summary>
-    public class ConfigurationPresenter
+    public class ConfigurationPresenter : IDisposable
     {
         #region Constants and Fields
 
@@ -42,6 +42,11 @@ namespace Yakka.Forms
         /// Represents the reference to the user configuration that shall be displayed and updated..
         /// </summary>
         private UserConfiguration configuration;
+
+        /// <summary>
+        /// Indicates if the class has already been disposed.
+        /// </summary>
+        private bool disposed = false;
 
         #endregion
 
@@ -67,12 +72,71 @@ namespace Yakka.Forms
             }
 
             this.view = view;
+            this.view.ConfigurationChanged += this.View_ConfigurationChanged;
             this.configuration = configuration;
 
-            if (this.view != null && this.configuration != null)
+            this.view.Start = this.configuration.Start;
+            this.view.SelectedCalculator = this.configuration.Calculator;
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="ConfigurationPresenter"/> class.
+        /// </summary>
+        ~ConfigurationPresenter()
+        {
+            this.Dispose(false);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">Indicates whether managed resources shall also be disposed.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
             {
-                // I'm only fixing the ci build
+                if (disposing)
+                {
+                    try
+                    {
+                        if (this.view != null)
+                        {
+                            this.view.ConfigurationChanged -= this.View_ConfigurationChanged;
+                            this.view = null;
+                        }
+                    }
+                    catch
+                    {
+                        // The Dispose method must never throw exceptions
+                    }
+                }
+
+                this.disposed = true;
             }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="IConfigurationView.ConfigurationChanged"/> event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the data.</param>
+        protected virtual void View_ConfigurationChanged(object sender, EventArgs e)
+        {
+            this.configuration.Start = this.view.Start;
+            this.configuration.Calculator = this.view.SelectedCalculator;
         }
 
         #endregion

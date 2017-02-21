@@ -62,7 +62,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Gets or sets the start time of the working hours.
         /// </summary>
-        public DateTime StartTime
+        public DateTime Start
         {
             get;
             set;
