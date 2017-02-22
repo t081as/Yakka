@@ -48,12 +48,16 @@ namespace Yakka.Forms
         {
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxCalculator = new System.Windows.Forms.ComboBox();
+            this.smoothLabelCalculator = new Yakka.Utility.SmoothLabel();
+            this.smoothLabelStart = new Yakka.Utility.SmoothLabel();
             this.SuspendLayout();
             // 
             // buttonAccept
             // 
             this.buttonAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonAccept.Location = new System.Drawing.Point(261, 377);
+            this.buttonAccept.Location = new System.Drawing.Point(261, 65);
             this.buttonAccept.Name = "buttonAccept";
             this.buttonAccept.Size = new System.Drawing.Size(75, 23);
             this.buttonAccept.TabIndex = 0;
@@ -63,12 +67,47 @@ namespace Yakka.Forms
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(342, 377);
+            this.buttonCancel.Location = new System.Drawing.Point(342, 65);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePickerStart
+            // 
+            this.dateTimePickerStart.CustomFormat = "dd.MM.yyyy HH:mm";
+            this.dateTimePickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerStart.Location = new System.Drawing.Point(87, 12);
+            this.dateTimePickerStart.Name = "dateTimePickerStart";
+            this.dateTimePickerStart.Size = new System.Drawing.Size(330, 20);
+            this.dateTimePickerStart.TabIndex = 4;
+            // 
+            // comboBoxCalculator
+            // 
+            this.comboBoxCalculator.FormattingEnabled = true;
+            this.comboBoxCalculator.Location = new System.Drawing.Point(87, 38);
+            this.comboBoxCalculator.Name = "comboBoxCalculator";
+            this.comboBoxCalculator.Size = new System.Drawing.Size(330, 21);
+            this.comboBoxCalculator.TabIndex = 7;
+            // 
+            // smoothLabelCalculator
+            // 
+            this.smoothLabelCalculator.AutoSize = true;
+            this.smoothLabelCalculator.Location = new System.Drawing.Point(12, 41);
+            this.smoothLabelCalculator.Name = "smoothLabelCalculator";
+            this.smoothLabelCalculator.Size = new System.Drawing.Size(54, 13);
+            this.smoothLabelCalculator.TabIndex = 6;
+            this.smoothLabelCalculator.Text = "Calculator";
+            // 
+            // smoothLabelStart
+            // 
+            this.smoothLabelStart.AutoSize = true;
+            this.smoothLabelStart.Location = new System.Drawing.Point(12, 18);
+            this.smoothLabelStart.Name = "smoothLabelStart";
+            this.smoothLabelStart.Size = new System.Drawing.Size(29, 13);
+            this.smoothLabelStart.TabIndex = 5;
+            this.smoothLabelStart.Text = "Start";
             // 
             // ConfigurationForm
             // 
@@ -76,7 +115,11 @@ namespace Yakka.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(429, 412);
+            this.ClientSize = new System.Drawing.Size(429, 101);
+            this.Controls.Add(this.comboBoxCalculator);
+            this.Controls.Add(this.smoothLabelCalculator);
+            this.Controls.Add(this.smoothLabelStart);
+            this.Controls.Add(this.dateTimePickerStart);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAccept);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -87,6 +130,7 @@ namespace Yakka.Forms
             this.Text = "Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationForm_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -94,5 +138,9 @@ namespace Yakka.Forms
 
         private System.Windows.Forms.Button buttonAccept;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
+        private Utility.SmoothLabel smoothLabelStart;
+        private Utility.SmoothLabel smoothLabelCalculator;
+        private System.Windows.Forms.ComboBox comboBoxCalculator;
     }
 }

@@ -64,8 +64,15 @@ namespace Yakka.Forms
         /// </summary>
         public DateTime Start
         {
-            get;
-            set;
+            get
+            {
+                return this.dateTimePickerStart.Value;
+            }
+
+            set
+            {
+                this.dateTimePickerStart.Value = value;
+            }
         }
 
         /// <summary>
