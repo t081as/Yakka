@@ -85,6 +85,7 @@ namespace Yakka.Forms
             // 
             // comboBoxCalculator
             // 
+            this.comboBoxCalculator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCalculator.FormattingEnabled = true;
             this.comboBoxCalculator.Location = new System.Drawing.Point(87, 38);
             this.comboBoxCalculator.Name = "comboBoxCalculator";

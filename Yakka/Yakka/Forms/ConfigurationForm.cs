@@ -19,12 +19,7 @@
 #region Namespaces
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Yakka.Calculator;
 #endregion
@@ -80,8 +75,22 @@ namespace Yakka.Forms
         /// </summary>
         public IWorkingHoursCalculator SelectedCalculator
         {
-            get;
-            set;
+            get
+            {
+                return (IWorkingHoursCalculator)this.comboBoxCalculator.SelectedItem;
+            }
+
+            set
+            {
+                foreach (object item in this.comboBoxCalculator.Items)
+                {
+                    if (item.GetType() == value.GetType())
+                    {
+                        this.comboBoxCalculator.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -89,8 +98,23 @@ namespace Yakka.Forms
         /// </summary>
         public IWorkingHoursCalculator[] AvailableCalculators
         {
-            get;
-            set;
+            get
+            {
+                List<IWorkingHoursCalculator> calculators = new List<IWorkingHoursCalculator>();
+
+                foreach (object item in this.comboBoxCalculator.Items)
+                {
+                    calculators.Add((IWorkingHoursCalculator)item);
+                }
+
+                return calculators.ToArray();
+            }
+
+            set
+            {
+                this.comboBoxCalculator.Items.Clear();
+                this.comboBoxCalculator.Items.AddRange(value);
+            }
         }
 
         #endregion

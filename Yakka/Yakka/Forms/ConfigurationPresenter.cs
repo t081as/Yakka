@@ -20,8 +20,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Yakka.Calculator;
 #endregion
 
 namespace Yakka.Forms
@@ -76,6 +78,7 @@ namespace Yakka.Forms
             this.configuration = configuration;
 
             this.view.Start = this.configuration.Start;
+            this.view.AvailableCalculators = this.GetAvailableCalculators().ToArray();
             this.view.SelectedCalculator = this.configuration.Calculator;
         }
 
@@ -144,6 +147,27 @@ namespace Yakka.Forms
             {
                 this.configuration.Calculator = this.view.SelectedCalculator;
             }
+        }
+
+        /// <summary>
+        /// Returns all available implementations of <see cref="IWorkingHoursCalculator"/>.
+        /// </summary>
+        /// <returns>All available implementations of <see cref="IWorkingHoursCalculator"/>.</returns>
+        private IEnumerable<IWorkingHoursCalculator> GetAvailableCalculators()
+        {
+            List<IWorkingHoursCalculator> calculators = new List<IWorkingHoursCalculator>();
+
+            foreach (Type currentType in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                if (typeof(IWorkingHoursCalculator).IsAssignableFrom(currentType) &&
+                    currentType.IsClass &&
+                    !currentType.IsAbstract)
+                {
+                    calculators.Add((IWorkingHoursCalculator)Activator.CreateInstance(currentType));
+                }
+            }
+
+            return calculators;
         }
 
         #endregion
