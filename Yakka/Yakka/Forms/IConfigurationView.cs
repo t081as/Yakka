@@ -28,7 +28,7 @@ namespace Yakka.Forms
     /// </summary>
     public interface IConfigurationView
     {
-        #region
+        #region Events
 
         /// <summary>
         /// Occurs when the configuration is changed by the user.
