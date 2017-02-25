@@ -18,7 +18,9 @@
 
 #region Namespaces
 using System;
+using System.Threading;
 using NUnit.Framework;
+using Yakka.Calculator;
 using Yakka.Forms;
 #endregion
 
@@ -31,6 +33,16 @@ namespace Yakka.Test.Forms
     public class ConfigurationPresenterTest
     {
         #region Constants and Fields
+
+        /// <summary>
+        /// Represents the default start time used for tests.
+        /// </summary>
+        private DateTime defaultStart;
+
+        /// <summary>
+        /// Represents the default calculator used for tests.
+        /// </summary>
+        private IWorkingHoursCalculator defaultCalculator;
 
         /// <summary>
         /// Contains the test stub representing the view.
@@ -47,6 +59,11 @@ namespace Yakka.Test.Forms
         /// </summary>
         private UserConfiguration configuration = null;
 
+        /// <summary>
+        /// Used to check if the configuration has been changed internally.
+        /// </summary>
+        private volatile bool configurationChangedInvoked = false;
+
         #endregion
 
         #region Methods
@@ -59,8 +76,15 @@ namespace Yakka.Test.Forms
         [SetUp]
         public void SetUp()
         {
+            this.defaultStart = new DateTime(1984, 11, 27, 8, 0, 0);
+            this.defaultCalculator = new WorkingHoursCalculatorStub();
+            this.configurationChangedInvoked = false;
+
             this.viewStub = new ConfigurationViewStub();
             this.configuration = new UserConfiguration();
+            this.configuration.Start = this.defaultStart;
+            this.configuration.Calculator = this.defaultCalculator;
+            this.configuration.PropertyChanged += this.Configuration_PropertyChanged;
 
             this.presenter = new ConfigurationPresenter(this.viewStub, this.configuration);
         }
@@ -75,6 +99,9 @@ namespace Yakka.Test.Forms
             this.presenter = null;
 
             this.viewStub = null;
+
+            this.configuration.PropertyChanged -= this.Configuration_PropertyChanged;
+            this.configuration = null;
         }
 
         #endregion
@@ -95,6 +122,65 @@ namespace Yakka.Test.Forms
         public void ConstructorConfigurationNullTest()
         {
             Assert.Throws<ArgumentNullException>(() => new ConfigurationPresenter(this.viewStub, null));
+        }
+
+        /// <summary>
+        /// Tests that no changes are performed without the notification from the view.
+        /// </summary>
+        [Test]
+        public void NoChangeTest()
+        {
+            DateTime now = DateTime.Now;
+
+            this.viewStub.Start = now;
+            this.viewStub.SelectedCalculator = null;
+
+            Thread.Sleep(500);
+
+            Assert.That(this.configuration.Start == this.defaultStart, "Configuration invalid");
+            Assert.That(this.configuration.Calculator == this.defaultCalculator, "Configuration invalid");
+        }
+
+        /// <summary>
+        /// Tests that the changes are performed correctly when notified by the view.
+        /// </summary>
+        [Test]
+        public void ChangeTest()
+        {
+            DateTime now = DateTime.Now;
+
+            this.viewStub.Start = now;
+            this.viewStub.SelectedCalculator = null;
+
+            this.viewStub.OnConfigurationChanged(EventArgs.Empty);
+
+            Thread.Sleep(500);
+
+            Assert.That(this.configuration.Start == now, "Configuration invalid");
+            Assert.That(this.configuration.Calculator == null, "Configuration invalid");
+        }
+
+        /// <summary>
+        /// Tests that there are no changes if the event has been invoked by the view without actual data changes.
+        /// </summary>
+        [Test]
+        public void EventWithoutChangesTest()
+        {
+            this.viewStub.OnConfigurationChanged(EventArgs.Empty);
+
+            Thread.Sleep(500);
+
+            Assert.That(this.configurationChangedInvoked == false, "Event invocation detected without actual changes");
+        }
+
+        /// <summary>
+        /// Handles the <see cref="UserConfiguration.PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the data.</param>
+        private void Configuration_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.configurationChangedInvoked = true;
         }
 
         #endregion
