@@ -27,7 +27,7 @@ if errorlevel 1 goto error
 echo Running code coverage analysis
 .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe ^
   -register:user ^
-  "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control -[*]*.Properties.* -[*]*.Program -[*]*Label" ^
+  "-filter:+[*]* -[Yakka.Test]* -[*]*View -[*]*Control -[*]*.Properties.* -[*]*.Program -[*]*Label -[*]*Form" ^
   -target:".\packages\NUnit.ConsoleRunner.3.6.0\tools\nunit3-console.exe" ^
   -targetargs:".\Build\Debug\Yakka.Test.dll --result=.\Build\Debug\Yakka.TestReport.xml" ^
   -output:.\Build\Debug\Yakka.Coverage.xml
