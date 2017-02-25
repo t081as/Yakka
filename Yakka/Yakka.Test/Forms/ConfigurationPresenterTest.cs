@@ -17,6 +17,7 @@
 #endregion
 
 #region Namespaces
+using System;
 using NUnit.Framework;
 using Yakka.Forms;
 #endregion
@@ -29,5 +30,73 @@ namespace Yakka.Test.Forms
     [TestFixture]
     public class ConfigurationPresenterTest
     {
+        #region Constants and Fields
+
+        /// <summary>
+        /// Contains the test stub representing the view.
+        /// </summary>
+        private ConfigurationViewStub viewStub = null;
+
+        /// <summary>
+        /// Represents the subject under test.
+        /// </summary>
+        private ConfigurationPresenter presenter = null;
+
+        /// <summary>
+        /// Represents the <see cref="UserConfiguration"/> used by the presenter.
+        /// </summary>
+        private UserConfiguration configuration = null;
+
+        #endregion
+
+        #region Methods
+
+        #region Setup / Teardown
+
+        /// <summary>
+        /// Gets called before a test starts.
+        /// </summary>
+        [SetUp]
+        public void SetUp()
+        {
+            this.viewStub = new ConfigurationViewStub();
+            this.configuration = new UserConfiguration();
+
+            this.presenter = new ConfigurationPresenter(this.viewStub, this.configuration);
+        }
+
+        /// <summary>
+        /// Gets called after a test ends.
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            this.presenter.Dispose();
+            this.presenter = null;
+
+            this.viewStub = null;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Tests the presenter initialization with an invalid argument.
+        /// </summary>
+        [Test]
+        public void ConstructorViewNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ConfigurationPresenter(null, this.configuration));
+        }
+
+        /// <summary>
+        /// Tests the presenter initialization with an invalid argument.
+        /// </summary>
+        [Test]
+        public void ConstructorConfigurationNullTest()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ConfigurationPresenter(this.viewStub, null));
+        }
+
+        #endregion
     }
 }
