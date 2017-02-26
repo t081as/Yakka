@@ -39,6 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>..\Yakka.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>..\..\Build\Release\Yakka.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Yakka.ico</ApplicationIcon>
