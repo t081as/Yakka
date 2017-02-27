@@ -58,6 +58,20 @@ namespace Yakka
             this.calculator = null;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserConfiguration"/> class.
+        /// </summary>
+        /// <param name="configuration">The <see cref="UserConfiguration"/> that shall be copied.</param>
+        /// <remarks>
+        /// Only the values of the instance will be copied, the <see cref="PropertyChanged"/> event handler
+        /// will be ignored.
+        /// </remarks>
+        public UserConfiguration(UserConfiguration configuration)
+        {
+            this.start = configuration.Start;
+            this.calculator = configuration.Calculator;
+        }
+
         #endregion
 
         #region Events

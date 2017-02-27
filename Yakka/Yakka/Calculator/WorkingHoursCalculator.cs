@@ -26,6 +26,7 @@ namespace Yakka.Calculator
     /// <summary>
     /// Represents an abstract base class for implementations of the <see cref="IWorkingHoursCalculator"/> interface.
     /// </summary>
+    [Serializable]
     public abstract class WorkingHoursCalculator : IWorkingHoursCalculator
     {
         #region Methods

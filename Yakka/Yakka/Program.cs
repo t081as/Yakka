@@ -22,6 +22,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Yakka.Calculator;
 using Yakka.Forms;
+using Yakka.IO;
 #endregion
 
 namespace Yakka
@@ -34,9 +35,14 @@ namespace Yakka
         #region Constants and Fields
 
         /// <summary>
-        /// Represents the configuration initialized with the default configuration.
+        /// Represents the configuration loaded from the persistent storage or initialized with the default configuration.
         /// </summary>
         private static UserConfiguration configuration;
+
+        /// <summary>
+        /// Represents the reference to a class able to read and write the configuration.
+        /// </summary>
+        private static IConfigurationStorage configurationStorage;
 
         #endregion
 
@@ -52,7 +58,8 @@ namespace Yakka
             Application.SetCompatibleTextRenderingDefault(false);
 
             SetMainThreadName();
-            SetDefaultConfiguration();
+            SetConfigurationStorage();
+            ReadConfigurationOrSetDefaultConfiguration();
 
             using (ISystemTrayIconView systemTrayIconView = new SystemTrayIconView())
             {
@@ -72,6 +79,8 @@ namespace Yakka
                 systemTrayIconPresenter.Configure -= Configure;
                 systemTrayIconPresenter.Info -= Info;
             }
+
+            WriteConfiguration();
         }
 
         /// <summary>
@@ -86,17 +95,51 @@ namespace Yakka
         }
 
         /// <summary>
-        /// Sets the default configuration.
+        /// Sets the instance of <see cref="IConfigurationStorage"/> that shall be used.
         /// </summary>
-        private static void SetDefaultConfiguration()
+        private static void SetConfigurationStorage()
         {
+            configurationStorage = new DefaultConfigurationStorage();
+        }
+
+        /// <summary>
+        /// Tries to read the persistent <see cref="UserConfiguration"/>.
+        /// If the read fails the default configuration will be set.
+        /// </summary>
+        private static void ReadConfigurationOrSetDefaultConfiguration()
+        {
+            try
+            {
+                configuration = configurationStorage.Read();
+            }
+            catch
+            {
+                configuration = null;
+            }
+
             if (configuration == null)
             {
                 configuration = new UserConfiguration();
+                configuration.Start = DateTime.Now;
+                configuration.Calculator = new NoBreakWorkingHoursCalculator();
             }
+        }
 
-            configuration.Start = DateTime.Now;
-            configuration.Calculator = new DefaultGermanBreakWorkingHoursCalculator();
+        /// <summary>
+        /// Writes the <see cref="UserConfiguration"/> and ignores errors.
+        /// </summary>
+        private static void WriteConfiguration()
+        {
+            try
+            {
+                // Create a copy to avoid the serialization of the delegates attached to the PropertyChanged-event
+                UserConfiguration configurationCopy = new UserConfiguration(configuration);
+                configurationStorage.Write(configurationCopy);
+            }
+            catch
+            {
+                // Errors will be ignored
+            }
         }
 
         /// <summary>
