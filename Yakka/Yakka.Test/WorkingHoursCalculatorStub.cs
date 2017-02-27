@@ -28,6 +28,7 @@ namespace Yakka.Test
     /// Represents a stub for the <see cref="IWorkingHoursCalculator"/> interface adding 30 minutes break after
     /// four hours of work and additional 45 minutes after seven hours.
     /// </summary>
+    [Serializable]
     public class WorkingHoursCalculatorStub : IWorkingHoursCalculator
     {
         #region Methods

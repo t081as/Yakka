@@ -27,6 +27,7 @@ namespace Yakka.Calculator
     /// Represents an implementation of <see cref="IWorkingHoursCalculator"/> calculating the break according to german law;
     /// i.e. 30 minutes when working more than six hours and 45 minutes when working more than 9 hours.
     /// </summary>
+    [Serializable]
     public class DefaultGermanBreakWorkingHoursCalculator : WorkingHoursCalculator
     {
         #region Methods

@@ -26,6 +26,7 @@ namespace Yakka.Calculator
     /// <summary>
     /// Represents an implementation of <see cref="IWorkingHoursCalculator"/> without any break.
     /// </summary>
+    [Serializable]
     public class NoBreakWorkingHoursCalculator : WorkingHoursCalculator
     {
         #region Methods

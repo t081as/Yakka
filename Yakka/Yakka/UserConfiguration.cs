@@ -27,6 +27,7 @@ namespace Yakka
     /// <summary>
     /// Represents the configuration of the application including start of the working day and working <see cref="IWorkingHoursCalculator">hours calculator</see>.
     /// </summary>
+    [Serializable]
     public class UserConfiguration : INotifyPropertyChanged
     {
         #region Constants and Fields
