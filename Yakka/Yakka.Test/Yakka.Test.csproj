@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator\DefaultGermanBreakWorkingHoursCalculatorTest.cs" />
+    <Compile Include="Calculator\GermanStaticBreak45WorkingHoursCalculatorTest.cs" />
     <Compile Include="Calculator\NoBreakWorkingHoursCalculatorTest.cs" />
     <Compile Include="Forms\ConfigurationPresenterTest.cs" />
     <Compile Include="Forms\ConfigurationViewStub.cs" />
