@@ -79,6 +79,7 @@ namespace Yakka
         /// <summary>
         /// Occurs when a property has been changed.
         /// </summary>
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
