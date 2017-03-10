@@ -79,8 +79,10 @@
     <Compile Include="Forms\SystemTrayIconPresenter.cs" />
     <Compile Include="Forms\SystemTrayIconView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IO\CurrentTimeProvider.cs" />
     <Compile Include="IO\DefaultConfigurationStorage.cs" />
     <Compile Include="IO\IConfigurationStorage.cs" />
+    <Compile Include="IO\IStartTimeProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserConfiguration.cs" />
