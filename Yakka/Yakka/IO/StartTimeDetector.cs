@@ -75,7 +75,8 @@ namespace Yakka.IO
         public void SetStartTime()
         {
             /*
-             * When started the application will load the last saved start time from the storage.
+             * Upon launch the application will load the last saved start time from the storage.
+             *
              * Before trying to guess the start time of the working day the application shall check
              * if the start time is already accurate (because this could also be a simple application or
              * operating system restart).

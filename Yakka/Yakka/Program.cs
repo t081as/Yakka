@@ -60,6 +60,7 @@ namespace Yakka
             SetMainThreadName();
             SetConfigurationStorage();
             ReadConfigurationOrSetDefaultConfiguration();
+            DetectStartTime();
 
             using (ISystemTrayIconView systemTrayIconView = new SystemTrayIconView())
             {
@@ -120,9 +121,18 @@ namespace Yakka
             if (configuration == null)
             {
                 configuration = new UserConfiguration();
-                configuration.Start = DateTime.Now;
+                configuration.Start = DateTime.MinValue; // Start time will be detected later
                 configuration.Calculator = new NoBreakWorkingHoursCalculator();
             }
+        }
+
+        /// <summary>
+        /// Uses the <see cref="StartTimeDetector"/> to detect the start of the working day.
+        /// </summary>
+        private static void DetectStartTime()
+        {
+            StartTimeDetector detector = new StartTimeDetector(configuration);
+            detector.SetStartTime();
         }
 
         /// <summary>
