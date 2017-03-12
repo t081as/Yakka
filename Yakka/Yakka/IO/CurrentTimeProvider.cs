@@ -27,6 +27,8 @@ namespace Yakka.IO
     /// </summary>
     public class CurrentTimeProvider : IStartTimeProvider
     {
+        #region Properties
+
         /// <summary>
         /// Gets the start time of the working day.
         /// </summary>
@@ -37,5 +39,7 @@ namespace Yakka.IO
                 return DateTime.Now;
             }
         }
+
+        #endregion
     }
 }
