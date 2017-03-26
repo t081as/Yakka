@@ -61,6 +61,7 @@ namespace Yakka.IO
         {
             this.startTimeProviders = new List<IStartTimeProvider>();
 
+            this.startTimeProviders.Add(new OperatingSystemStartTimeProvider());
             this.startTimeProviders.Add(new CurrentTimeProvider());
         }
 

@@ -83,6 +83,7 @@
     <Compile Include="IO\DefaultConfigurationStorage.cs" />
     <Compile Include="IO\IConfigurationStorage.cs" />
     <Compile Include="IO\IStartTimeProvider.cs" />
+    <Compile Include="IO\OperatingSystemStartTimeProvider.cs" />
     <Compile Include="IO\StartTimeDetector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
