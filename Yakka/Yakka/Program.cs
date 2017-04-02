@@ -142,9 +142,7 @@ namespace Yakka
         {
             try
             {
-                // Create a copy to avoid the serialization of the delegates attached to the PropertyChanged-event
-                UserConfiguration configurationCopy = new UserConfiguration(configuration);
-                configurationStorage.Write(configurationCopy);
+                configurationStorage.Write(configuration);
             }
             catch
             {
@@ -178,6 +176,7 @@ namespace Yakka
                 using (ConfigurationPresenter configurationPresenter = new ConfigurationPresenter(configurationForm, configuration))
                 {
                     configurationForm.ShowDialog();
+                    WriteConfiguration();
                 }
             }
         }
