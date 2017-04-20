@@ -78,9 +78,17 @@ namespace Yakka.Calculator
             {
                 return new TimeSpan(0);
             }
-            else if (workingHours.TotalHours < 9)
+            else if (workingHours.Hours == 6 && workingHours.Minutes <= 30)
+            {
+                return TimeSpan.FromMinutes(workingHours.Minutes);
+            }
+            else if (workingHours.TotalHours < 9 || (workingHours.Hours == 9 && workingHours.Minutes <= 30))
             {
                 return TimeSpan.FromMinutes(30);
+            }
+            else if (workingHours.Hours == 9 && workingHours.Minutes > 30 && workingHours.Minutes <= 45)
+            {
+                return TimeSpan.FromMinutes(workingHours.Minutes);
             }
             else
             {
