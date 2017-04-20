@@ -98,6 +98,21 @@ namespace Yakka.Test.Calculator
         }
 
         /// <summary>
+        /// Tests the working hours calculation.
+        /// </summary>
+        [Test]
+        public void CalculateBreakTest()
+        {
+            DefaultGermanBreakWorkingHoursCalculator calculator = new DefaultGermanBreakWorkingHoursCalculator();
+            DateTime start = DateTime.Now;
+            DateTime end1 = start.AddHours(6).AddMinutes(28);
+            DateTime end2 = start.AddHours(9).AddMinutes(42);
+
+            Assert.That(calculator.CalculateBreak(start, end1) == TimeSpan.FromMinutes(28), "calculation (break) incorrect");
+            Assert.That(calculator.CalculateBreak(start, end2) == TimeSpan.FromMinutes(42), "calculation (break) incorrect");
+        }
+
+        /// <summary>
         /// Tests the working hours calculation with invalid arguments.
         /// </summary>
         [Test]
