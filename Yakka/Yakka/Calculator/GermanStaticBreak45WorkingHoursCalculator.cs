@@ -79,6 +79,10 @@ namespace Yakka.Calculator
             {
                 return new TimeSpan(0);
             }
+            else if (workingHours.Hours == 6 && workingHours.Minutes <= 45)
+            {
+                return TimeSpan.FromMinutes(workingHours.Minutes);
+            }
             else
             {
                 return TimeSpan.FromMinutes(45);
