@@ -77,10 +77,13 @@ namespace Yakka.Test.Calculator
         {
             GermanStaticBreak45WorkingHoursCalculator calculator = new GermanStaticBreak45WorkingHoursCalculator();
             DateTime start = DateTime.Now;
-            DateTime end = start.AddHours(6).AddMinutes(46);
+            DateTime end1 = start.AddHours(6).AddMinutes(46);
+            DateTime end2 = start.AddHours(6).AddMinutes(43);
 
-            Assert.That(calculator.CalculateWorkingHours(start, end) == TimeSpan.FromHours(6) + TimeSpan.FromMinutes(1), "calculation (working hours) incorrect");
-            Assert.That(calculator.CalculateBreak(start, end) == TimeSpan.FromMinutes(45), "calculation (break) incorrect");
+            Assert.That(calculator.CalculateWorkingHours(start, end1) == TimeSpan.FromHours(6) + TimeSpan.FromMinutes(1), "calculation (working hours) incorrect");
+            Assert.That(calculator.CalculateBreak(start, end1) == TimeSpan.FromMinutes(45), "calculation (break) incorrect");
+
+            Assert.That(calculator.CalculateBreak(start, end2) == TimeSpan.FromMinutes(43), "calculation (break) incorrect");
         }
 
         /// <summary>
