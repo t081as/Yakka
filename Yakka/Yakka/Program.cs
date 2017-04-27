@@ -80,8 +80,6 @@ namespace Yakka
                 systemTrayIconPresenter.Configure -= Configure;
                 systemTrayIconPresenter.Info -= Info;
             }
-
-            WriteConfiguration();
         }
 
         /// <summary>

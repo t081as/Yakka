@@ -65,7 +65,7 @@ namespace Yakka.IO
             this.startTimeProviders.Add(new CurrentTimeProvider());
         }
 
-        #endregion#
+        #endregion
 
         #region Methods
 
