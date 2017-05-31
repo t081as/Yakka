@@ -1,3 +1,5 @@
+** I, the contributor, agree to licence my contributions to this project under the terms noted in the project's LICENSE file **
+
 ### Summary
 Please summarize the merge request concisely.
 
