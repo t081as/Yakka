@@ -33,9 +33,9 @@ If you want to contribute code please obey the following workflow:
 
 # Workflow
 1. Create a fork of this project into your user space.
-2. Create a feature branch, branch away from ´master´.
+2. Create a feature branch, branch away from `master`.
 3. Write code and unit tests.
-4. Submit a merge request to the ´master´ branch using the merge request template; make sure you completed the checklist in the template and mention the issue solved by this merge request to auto-close it when the merge has been merged.
+4. Submit a merge request to the `master` branch using the merge request template; make sure you completed the checklist in the template and mention the issue solved by this merge request to auto-close it when the merge has been merged.
 
 # Acceptance criteria
 - Only submit merge requests for issues tagged as ~accepted
