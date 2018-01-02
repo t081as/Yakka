@@ -2,6 +2,8 @@
 
 # YAKKA
 
+[![pipeline status](https://gitlab.com/tobiaskoch/Yakka/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/Yakka/commits/master)
+
 [**yak**-*uh*]
 
 **noun**, *Australian*
