@@ -1,4 +1,4 @@
-image: mono:4.6.0.245
+image: mono:latest
 
 stages:
     - build
@@ -18,7 +18,7 @@ release:
           - CHANGELOG.md
           - AUTHORS.txt
     script:
-        - xbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
+        - msbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
         - cp Build/Release/Yakka.exe Yakka.exe
 
 ci-release:
@@ -35,7 +35,7 @@ ci-release:
           - CHANGELOG.md
           - AUTHORS.txt
     script:
-        - xbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
+        - msbuild "Yakka.sln" /p:Configuration="Release" /p:Platform="Any CPU"
         - cp Build/Release/Yakka.exe Yakka.exe
     
 ci-debug:
@@ -47,5 +47,5 @@ ci-debug:
           - Build/Debug/Yakka.exe
           - Build/Debug/Yakka.TestReport.xml
     script:
-        - xbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
+        - msbuild "Yakka.sln" /p:Configuration="Debug" /p:Platform="Any CPU"
         - mono packages/NUnit.ConsoleRunner.3.6.0/tools/nunit3-console.exe Build/Debug/Yakka.Test.dll --work=Build/Debug/ --result=Yakka.TestReport.xml
