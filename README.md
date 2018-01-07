@@ -2,6 +2,8 @@
 
 # YAKKA
 
+[![pipeline status](https://gitlab.com/tobiaskoch/Yakka/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/Yakka/commits/master)
+
 [**yak**-*uh*]
 
 **noun**, *Australian*
@@ -29,7 +31,7 @@ The following applications must be available and included in you *PATH* environm
 
 * [Git](https://git-scm.com/)
 * [Nuget.exe](https://www.nuget.org/)
-* MSBuild / XBuild ([Visual Studio](https://www.visualstudio.com) recommended for development)
+* MSBuild (.NET Framework / Mono; [Visual Studio](https://www.visualstudio.com) recommended for development)
 
 #### Source code
 Get the source code using the following command:
