@@ -1,6 +1,6 @@
 ﻿#region GNU General Public License 3
 // Yakka - A system tray application calculating and displaying your working hours
-// Copyright (C) 2017  Tobias Koch
+// Copyright (C) 2017-2018  Tobias Koch
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tobias Koch")]
 [assembly: AssemblyProduct("Yakka")]
-[assembly: AssemblyCopyright("Copyright © Tobias Koch, 2017")]
+[assembly: AssemblyCopyright("Copyright © Tobias Koch, 2017-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

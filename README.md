@@ -53,4 +53,4 @@ see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Yakka/blob/master/CONTRIBUTI
 see [AUTHORS.txt](https://gitlab.com/tobiaskoch/Yakka/blob/master/AUTHORS.txt)
 
 ## License
-**Yakka** © 2017  Tobias Koch. Released under the [GPL](https://gitlab.com/tobiaskoch/Yakka/blob/master/LICENSE.md).
+**Yakka** © 2017-2018  Tobias Koch. Released under the [GPL](https://gitlab.com/tobiaskoch/Yakka/blob/master/LICENSE.md).
