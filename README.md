@@ -3,6 +3,8 @@
 # YAKKA
 
 [![pipeline status](https://gitlab.com/tobiaskoch/Yakka/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/Yakka/commits/master)
+[![maintained: yes](https://tobiaskoch.gitlab.io/badges/maintained-yes.svg)](https://gitlab.com/tobiaskoch/Yakka/commits/master)
+[![donate: paypal](https://tobiaskoch.gitlab.io/badges/donate-paypal.svg)](https://www.tk-software.de/donate)
 
 [**yak**-*uh*]
 
@@ -53,6 +55,9 @@ see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Yakka/blob/master/CONTRIBUTI
 
 ## Contributors
 see [AUTHORS.txt](https://gitlab.com/tobiaskoch/Yakka/blob/master/AUTHORS.txt)
+
+## Donating
+Thanks for your interest in this project. You can show your appreciation and support further development by [donating](https://www.tk-software.de/donate).
 
 ## License
 **Yakka** © 2017-2018  Tobias Koch. Released under the [GPL](https://gitlab.com/tobiaskoch/Yakka/blob/master/LICENSE.md).
