@@ -2,10 +2,6 @@
 
 # YAKKA
 
-[![pipeline status](https://gitlab.com/tobiaskoch/Yakka/badges/master/pipeline.svg)](https://gitlab.com/tobiaskoch/Yakka/commits/master)
-[![maintained: yes](https://tobiaskoch.gitlab.io/badges/maintained-yes.svg)](https://gitlab.com/tobiaskoch/Yakka/commits/master)
-[![donate: paypal](https://tobiaskoch.gitlab.io/badges/donate-paypal.svg)](https://www.tk-software.de/donate)
-
 [**yak**-*uh*]
 
 **noun**, *Australian*
