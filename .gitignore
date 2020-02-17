@@ -222,3 +222,5 @@ public/
 
 # Nuke build output
 output/
+
+*.zip
