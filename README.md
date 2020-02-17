@@ -1,4 +1,4 @@
-![YAKKA](https://gitlab.com/tobiaskoch/Yakka/raw/master/Media/Yakka-256.png)
+![YAKKA](https://gitlab.com/tobiaskoch/Yakka/raw/master/assets/Yakka-256.png)
 
 # YAKKA
 
