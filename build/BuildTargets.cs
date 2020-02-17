@@ -100,7 +100,7 @@ class BuildTargets : NukeBuild
 
             if (IsWin)
             {
-                ReportGenerator(_ =>
+                ReportGenerator(_ => _
                     .SetToolPath(ToolPathResolver.GetPackageExecutable("ReportGenerator", "ReportGenerator.exe", null, "netcoreapp3.0"))
                     .SetReports(RootDirectory / GlobCoverageFiles)
                     .SetTargetDirectory(CoverageDirectory)
