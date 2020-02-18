@@ -10,6 +10,8 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Utilities.Collections;
+using static Mjolnir.Build.PackageNameTasks;
+using static Mjolnir.Build.VCS.GitVersionTasks;
 using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
@@ -25,6 +27,9 @@ class BuildTargets : NukeBuild
     [Parameter("Configuration to build")]
     readonly Configuration Configuration = Configuration.Debug;
 
+    [Parameter("The build number provided by the continuous integration system")]
+    readonly ulong Buildnumber = 0;
+
     [Solution] readonly Solution Solution;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
@@ -37,6 +42,10 @@ class BuildTargets : NukeBuild
 
     readonly string GlobCoverageFiles = "**/TestResults/*/coverage.cobertura.xml";
     readonly string GlobTestResultFiles = "**/TestResults/TestResults.xml";
+
+    string shortVersion = "0.0.0";
+    string version = "0.0.0.0";
+    string semanticVersion = "0.0.0+XXXXXXXX";
 
     Target Clean => _ => _
         .Executes(() =>
@@ -60,8 +69,30 @@ class BuildTargets : NukeBuild
                 .SetProjectFile(Solution));
         });
 
+    Target Version => _ => _
+        .Executes(() =>
+        {
+            (string shortVersion, string version, string semanticVersion) = GetGitTagVersion(RootDirectory, Buildnumber);
+
+            Logger.Info($"Version: {version}");
+            Logger.Info($"Short Version: {shortVersion}");
+            Logger.Info($"Semantic Version: {semanticVersion}");
+            Logger.Info($"Buildnumber: {Buildnumber}");
+
+            if (Configuration == Configuration.Release)
+            {
+                this.shortVersion = shortVersion;
+                this.version = version;
+                this.semanticVersion = semanticVersion;
+            }
+            else
+            {
+                Logger.Info("Debug build - skipping version");
+            }
+        });
+
     Target Compile => _ => _
-        .DependsOn(Restore)
+        .DependsOn(Restore, Version)
         .Executes(() =>
         {
             if (Configuration == Configuration.Release)
@@ -72,6 +103,9 @@ class BuildTargets : NukeBuild
                     .SetConfiguration(Configuration)
                     .AddProperty("DebugType", "None")
                     .AddProperty("DebugSymbols", "false")
+                    .SetVersion(semanticVersion)
+                    .SetAssemblyVersion(version)
+                    .SetFileVersion(version)
                     .EnableNoRestore());
             }
             else
@@ -124,6 +158,9 @@ class BuildTargets : NukeBuild
                 .EnableSelfContained()
                 .AddProperty("PublishSingleFile", "true")
                 .AddProperty("PublishTrimmed", "true")
+                .SetVersion(semanticVersion)
+                .SetAssemblyVersion(version)
+                .SetFileVersion(version)
                 .SetRuntime("win-x64"));
 
             DotNetPublish(_ => _
@@ -135,25 +172,34 @@ class BuildTargets : NukeBuild
                 .EnableSelfContained()
                 .AddProperty("PublishSingleFile", "true")
                 .AddProperty("PublishTrimmed", "true")
+                .SetVersion(semanticVersion)
+                .SetAssemblyVersion(version)
+                .SetFileVersion(version)
                 .SetRuntime("win-x86"));
+
+            string versionLabel = semanticVersion.Contains(DevMarker) switch
+            {
+                false => shortVersion,
+                true => semanticVersion
+            };
 
             CompressionTasks.CompressZip(
                 BuildDirectory,
-                RootDirectory / "Yakka-windows-any.zip",
+                RootDirectory / GenerateBinaryPackageName("Yakka", versionLabel, Mjolnir.Build.OperatingSystem.Windows, Mjolnir.Build.Architecture.AnyCpu) + ".zip",
                 null,
                 System.IO.Compression.CompressionLevel.Optimal,
                 System.IO.FileMode.CreateNew);
 
             CompressionTasks.CompressZip(
                 PublishDirectory / "win-x64",
-                RootDirectory / "Yakka-windows-amd64.zip",
+                RootDirectory / GenerateBinaryPackageName("Yakka", versionLabel, Mjolnir.Build.OperatingSystem.Windows, Mjolnir.Build.Architecture.X64) + ".zip",
                 null,
                 System.IO.Compression.CompressionLevel.Optimal,
                 System.IO.FileMode.CreateNew);
 
             CompressionTasks.CompressZip(
                 PublishDirectory / "win-x86",
-                RootDirectory / "Yakka-windows-i386.zip",
+                RootDirectory / GenerateBinaryPackageName("Yakka", versionLabel, Mjolnir.Build.OperatingSystem.Windows, Mjolnir.Build.Architecture.X86) + ".zip",
                 null,
                 System.IO.Compression.CompressionLevel.Optimal,
                 System.IO.FileMode.CreateNew);
