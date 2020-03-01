@@ -18,7 +18,15 @@ using System;
 
 namespace Yakka.Calculation
 {
+    /// <summary>
+    /// Describes objects providing the ability to calculate working hours.
+    /// </summary>
     public interface IWorkingHoursCalculator
     {
+        /// <summary>
+        /// Gets the unique id of the calculator.
+        /// </summary>
+        /// <value>The unique id of the calculator.</value>
+        Guid Id { get; }
     }
 }
