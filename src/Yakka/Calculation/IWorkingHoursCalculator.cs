@@ -28,5 +28,25 @@ namespace Yakka.Calculation
         /// </summary>
         /// <value>The unique id of the calculator.</value>
         Guid Id { get; }
+
+        /// <summary>
+        /// Gets the description of this calculator.
+        /// </summary>
+        /// <value>The description of this calculator.</value>
+        string Description { get; }
+
+        /// <summary>
+        /// Calculates and returns the working hours and the break.
+        /// </summary>
+        /// <param name="start">The date and time representing the start of the working day.</param>
+        /// <param name="end">The date and time representing the end of the working day.</param>
+        /// <returns>
+        /// A <see cref="ValueTuple{T1, T2}"/> containing the following values:
+        /// <list type="bullet">
+        /// <item>workTimeSpan: a <see cref="TimeSpan"/> representing the calculated working hours.</item>
+        /// <item>breakTimeSpan: a <see cref="TimeSpan"/> representing the calculated break.</item>
+        /// </list>
+        /// </returns>
+        (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime start, DateTime end);
     }
 }

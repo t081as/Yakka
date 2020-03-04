@@ -5,6 +5,8 @@
     <IsPackable>false</IsPackable>
     <CodeAnalysisRuleSet>..\..\common\Yakka.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Yakka.xml</DocumentationFile>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
