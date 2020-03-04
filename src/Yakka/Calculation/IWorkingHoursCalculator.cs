@@ -38,8 +38,8 @@ namespace Yakka.Calculation
         /// <summary>
         /// Calculates and returns the working hours and the break.
         /// </summary>
-        /// <param name="start">The date and time representing the start of the working day.</param>
-        /// <param name="end">The date and time representing the end of the working day.</param>
+        /// <param name="startTime">The date and time representing the start of the working day.</param>
+        /// <param name="endTime">The date and time representing the end of the working day.</param>
         /// <returns>
         /// A <see cref="ValueTuple{T1, T2}"/> containing the following values:
         /// <list type="bullet">
@@ -47,6 +47,6 @@ namespace Yakka.Calculation
         /// <item>breakTimeSpan: a <see cref="TimeSpan"/> representing the calculated break.</item>
         /// </list>
         /// </returns>
-        (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime start, DateTime end);
+        (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime);
     }
 }
