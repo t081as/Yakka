@@ -30,6 +30,12 @@ namespace Yakka.Calculation
         Guid Id { get; }
 
         /// <summary>
+        /// Gets the title of this calculator.
+        /// </summary>
+        /// <value>The title of this calculator.</value>
+        string Title { get; }
+
+        /// <summary>
         /// Gets the description of this calculator.
         /// </summary>
         /// <value>The description of this calculator.</value>
