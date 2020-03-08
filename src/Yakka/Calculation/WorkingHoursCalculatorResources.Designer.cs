@@ -61,7 +61,7 @@ namespace Yakka.Calculation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to startTime is greater than endTime.
+        ///   Looks up a localized string similar to startTime is bigger than endTime.
         /// </summary>
         internal static string ArgumentException {
             get {

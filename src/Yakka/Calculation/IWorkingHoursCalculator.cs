@@ -53,7 +53,7 @@ namespace Yakka.Calculation
         /// <item>breakTimeSpan: a <see cref="TimeSpan"/> representing the calculated break.</item>
         /// </list>
         /// </returns>
-        /// <exception cref="ArgumentException"><c>startTime</c> is greater than <c>endTime</c>.</exception>
+        /// <exception cref="ArgumentException"><c>startTime</c> is bigger than <c>endTime</c>.</exception>
         (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime);
     }
 }
