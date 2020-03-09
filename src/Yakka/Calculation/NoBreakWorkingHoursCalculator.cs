@@ -31,7 +31,7 @@ namespace Yakka.Calculation
         public string Title => NoBreakWorkingHoursCalculatorResources.Title;
 
         /// <inheritdoc/>
-        public string Description => NoBreakWorkingHoursCalculatorResources.Title;
+        public string Description => NoBreakWorkingHoursCalculatorResources.Description;
 
         /// <inheritdoc/>
         public (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime)
