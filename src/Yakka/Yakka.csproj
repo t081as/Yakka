@@ -32,6 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Calculation\GermanDefaultWorkingHoursCalculatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GermanDefaultWorkingHoursCalculatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Calculation\NoBreakWorkingHoursCalculatorResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -55,6 +60,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Calculation\GermanDefaultWorkingHoursCalculatorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GermanDefaultWorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Calculation\NoBreakWorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>NoBreakWorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
