@@ -22,7 +22,60 @@ namespace Yakka.Calculation
     /// Represents an implementation of <see cref="IWorkingHoursCalculator"/> calculating the break according to german law;
     /// i.e. 30 minutes when working more than six hours and 45 minutes when working more than 9 hours.
     /// </summary>
-    public class GermanDefaultWorkingHoursCalculator
+    public class GermanDefaultWorkingHoursCalculator : IWorkingHoursCalculator
     {
+        /// <inheritdoc/>
+        public Guid Id => Guid.Parse("{4536F994-A4EB-4D11-9FB2-674A2ACA7177}");
+
+        /// <inheritdoc/>
+        public string Title => GermanDefaultWorkingHoursCalculatorResources.Title;
+
+        /// <inheritdoc/>
+        public string Description => GermanDefaultWorkingHoursCalculatorResources.Description;
+
+        /// <inheritdoc/>
+        public (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime)
+        {
+            if (startTime > endTime)
+            {
+                throw new ArgumentException(WorkingHoursCalculatorResources.ArgumentException);
+            }
+
+            var calculatedBreak = this.CalculateBreak(startTime, endTime);
+
+            return (endTime - startTime - calculatedBreak, calculatedBreak);
+        }
+
+        /// <summary>
+        /// Calculates the break.
+        /// </summary>
+        /// <param name="startTime">The date and time representing the start of the working day.</param>
+        /// <param name="endTime">The date and time representing the end of the working day.</param>
+        /// <returns>A <see cref="TimeSpan"/> representing the break.</returns>
+        private TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
+        {
+            TimeSpan workingHours = endTime - startTime;
+
+            if (workingHours.TotalHours < 6)
+            {
+                return new TimeSpan(0);
+            }
+            else if (workingHours.Hours == 6 && workingHours.Minutes <= 30)
+            {
+                return TimeSpan.FromMinutes(workingHours.Minutes);
+            }
+            else if (workingHours.TotalHours < 9 || (workingHours.Hours == 9 && workingHours.Minutes <= 30))
+            {
+                return TimeSpan.FromMinutes(30);
+            }
+            else if (workingHours.Hours == 9 && workingHours.Minutes > 30 && workingHours.Minutes <= 45)
+            {
+                return TimeSpan.FromMinutes(workingHours.Minutes);
+            }
+            else
+            {
+                return TimeSpan.FromMinutes(45);
+            }
+        }
     }
 }
