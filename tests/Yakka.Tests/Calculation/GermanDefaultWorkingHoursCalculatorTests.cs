@@ -26,5 +26,64 @@ namespace Yakka.Tests.Calculation
     [TestClass]
     public class GermanDefaultWorkingHoursCalculatorTests
     {
+        /// <summary>
+        /// Checks the <see cref="GermanDefaultWorkingHoursCalculator.Calculate(DateTime, DateTime)"/> method.
+        /// </summary>
+        [TestMethod]
+        public void CalculateTest()
+        {
+            var calulator = new GermanDefaultWorkingHoursCalculator();
+
+            DateTime start;
+            DateTime end;
+            (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) result;
+
+            // 6h, 0m
+            end = DateTime.Now;
+            start = end - TimeSpan.FromHours(6);
+            result = calulator.Calculate(start, end);
+
+            Assert.AreEqual(0, result.breakTimeSpan.TotalMinutes);
+            Assert.AreEqual(6, result.workTimeSpan.TotalHours);
+
+            // 6h, 30m
+            end = DateTime.Now;
+            start = end - TimeSpan.FromHours(6) - TimeSpan.FromMinutes(30);
+            result = calulator.Calculate(start, end);
+
+            Assert.AreEqual(30, result.breakTimeSpan.TotalMinutes);
+            Assert.AreEqual(6, result.workTimeSpan.TotalHours);
+
+            // 8h, 30m
+            end = DateTime.Now;
+            start = end - TimeSpan.FromHours(8) - TimeSpan.FromMinutes(30);
+            result = calulator.Calculate(start, end);
+
+            Assert.AreEqual(30, result.breakTimeSpan.TotalMinutes);
+            Assert.AreEqual(8, result.workTimeSpan.TotalHours);
+
+            // 9h, 45m
+            end = DateTime.Now;
+            start = end - TimeSpan.FromHours(9) - TimeSpan.FromMinutes(45);
+            result = calulator.Calculate(start, end);
+
+            Assert.AreEqual(45, result.breakTimeSpan.TotalMinutes);
+            Assert.AreEqual(9, result.workTimeSpan.TotalHours);
+        }
+
+        /// <summary>
+        /// Checks the <see cref="GermanDefaultWorkingHoursCalculator.Calculate(DateTime, DateTime)"/> method
+        /// with invalid arguments.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CalculateWrongArgumentsTest()
+        {
+            var calulator = new GermanDefaultWorkingHoursCalculator();
+            var start = DateTime.Now.AddHours(5);
+            var end = DateTime.Now;
+
+            var result = calulator.Calculate(start, end);
+        }
     }
 }
