@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <CodeAnalysisRuleSet>..\..\common\Yakka.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Yakka.xml</DocumentationFile>
     <ApplicationIcon>Yakka.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\common\Yakka.ruleset" Link="Yakka.ruleset" />
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>

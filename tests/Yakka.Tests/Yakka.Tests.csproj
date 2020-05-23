@@ -3,15 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
-    <CodeAnalysisRuleSet>..\..\common\Yakka.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Yakka.xml</DocumentationFile>
+    <CodeAnalysisRuleSet></CodeAnalysisRuleSet>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Yakka.Tests.xml</DocumentationFile>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\..\common\Yakka.ruleset" Link="Yakka.ruleset" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="JunitXml.TestLogger" Version="2.1.32" />
