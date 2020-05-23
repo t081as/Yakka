@@ -22,7 +22,7 @@ using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
 [UnsetVisualStudioEnvironmentVariables]
 class BuildTargets : NukeBuild
 {
-    public static int Main () => Execute<BuildTargets>(x => x.All);
+    public static int Main () => Execute<BuildTargets>(x => x.Default);
 
     [Parameter("Configuration to build")]
     readonly Configuration Configuration = Configuration.Debug;
@@ -205,7 +205,7 @@ class BuildTargets : NukeBuild
                 System.IO.FileMode.CreateNew);
         });
 
-    Target All => _ => _
+    Target Default => _ => _
         .DependsOn(Publish, Test);
 
 }
