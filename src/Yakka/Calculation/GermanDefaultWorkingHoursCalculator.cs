@@ -41,7 +41,7 @@ namespace Yakka.Calculation
                 throw new ArgumentException(WorkingHoursCalculatorResources.ArgumentException);
             }
 
-            var calculatedBreak = this.CalculateBreak(startTime, endTime);
+            var calculatedBreak = CalculateBreak(startTime, endTime);
 
             return (endTime - startTime - calculatedBreak, calculatedBreak);
         }
@@ -52,7 +52,7 @@ namespace Yakka.Calculation
         /// <param name="startTime">The date and time representing the start of the working day.</param>
         /// <param name="endTime">The date and time representing the end of the working day.</param>
         /// <returns>A <see cref="TimeSpan"/> representing the break.</returns>
-        private TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
+        private static TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
         {
             TimeSpan workingHours = endTime - startTime;
 

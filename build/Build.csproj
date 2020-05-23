@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Mjolnir.Build" Version="0.7.0" />
-    <PackageReference Include="Nuke.Common" Version="0.24.2" />
-    <PackageReference Include="ReportGenerator" Version="4.5.0" />
+    <PackageReference Include="Nuke.Common" Version="0.24.11" />
+    <PackageReference Include="ReportGenerator" Version="4.5.8" />
   </ItemGroup>
 
 </Project>
