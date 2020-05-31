@@ -74,5 +74,22 @@ namespace Yakka
 
             Properties.Settings.Default.Save();
         }
+
+        /// <summary>
+        /// Loads the saved <see cref="WorkingHoursConfiguration"/>.
+        /// </summary>
+        /// <returns>A <see cref="WorkingHoursConfiguration"/> that has been loaded.</returns>
+        public static WorkingHoursConfiguration Load()
+        {
+            var result = new WorkingHoursConfiguration();
+            result.StartTime = Properties.Settings.Default.StartTime;
+            result.WorkingHoursCalculator = null; // TODO: Resolve correct instance
+            result.BreakMode = Enum.IsDefined(typeof(BreakMode), Properties.Settings.Default.BreakMode)
+                ? (BreakMode)Properties.Settings.Default.BreakMode
+                : BreakMode.Automatic;
+            result.ManualBreakTime = Properties.Settings.Default.ManualBreakTime;
+
+            return result;
+        }
     }
 }

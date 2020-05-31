@@ -50,9 +50,9 @@ namespace Yakka.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public byte BreakMode {
+        public int BreakMode {
             get {
-                return ((byte)(this["BreakMode"]));
+                return ((int)(this["BreakMode"]));
             }
             set {
                 this["BreakMode"] = value;
