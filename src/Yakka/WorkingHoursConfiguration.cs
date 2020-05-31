@@ -54,5 +54,25 @@ namespace Yakka
         /// This value will only be used if <see cref="BreakMode"/> is set to <see cref="BreakMode.Manual"/>.
         /// </remarks>
         public TimeSpan ManualBreakTime { get; set; } = TimeSpan.FromSeconds(0);
+
+        /// <summary>
+        /// Saves the specified <paramref name="configuration"/>.
+        /// </summary>
+        /// <param name="configuration">The configuration that shall be saved.</param>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
+        public static void Save(WorkingHoursConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            Properties.Settings.Default.StartTime = configuration.StartTime;
+            Properties.Settings.Default.WorkingHoursCalculator = configuration.WorkingHoursCalculator?.Id ?? Guid.Empty;
+            Properties.Settings.Default.BreakMode = (byte)configuration.BreakMode;
+            Properties.Settings.Default.ManualBreakTime = configuration.ManualBreakTime;
+
+            Properties.Settings.Default.Save();
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Yakka
     /// <summary>
     /// Enumerates the possible break modes.
     /// </summary>
-    public enum BreakMode
+    public enum BreakMode : byte
     {
         /// <summary>
         /// The break time configured by the user will be used.
