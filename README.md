@@ -16,7 +16,7 @@ Yakka is a .NET based system tray application for the windows operating system d
 * No installation necessary
 * Single executable file
 * No framework required to run
-* Just creates a single configuration file in the temp directory
+* Just creates a single configuration file in the user data directory
 
 ## Installation
 After "installation" (i.e. xcopy deployment) there are no further steps necessary - but you might want to copy the executable or a link to the executable to your autostart folder.
