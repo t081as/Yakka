@@ -32,6 +32,9 @@ The following tools must be available to build the software:
 
 The following tools are recommended for development:
 
+* [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
+* [Visual Studio Code](https://code.visualstudio.com/)
+
 #### Source code
 Get the source code using the following command:
 
