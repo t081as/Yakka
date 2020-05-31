@@ -15,25 +15,16 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Yakka.StartTime;
 
-namespace Yakka.Tests.StartTime
+namespace Yakka.StartTime
 {
     /// <summary>
-    /// Contains unit tests of the <see cref="CurrentTimeProvider"/> class.
+    /// Represents an implementation of the <see cref="IStartTimeProvider"/> interface
+    /// providing the current time.
     /// </summary>
-    [TestClass]
-    public class CurrentTimeProviderTests
+    public class CurrentStartTimeProvider : IStartTimeProvider
     {
-        /// <summary>
-        /// Checks the <see cref="CurrentTimeProvider.StartTime"/> property.
-        /// </summary>
-        [TestMethod]
-        public void StartTimeTest()
-        {
-            var provider = new CurrentTimeProvider();
-            Assert.IsTrue((DateTime.Now - provider.StartTime)?.TotalMilliseconds < 2000);
-        }
+        /// <inheritdoc/>
+        public DateTime? StartTime => DateTime.Now;
     }
 }
