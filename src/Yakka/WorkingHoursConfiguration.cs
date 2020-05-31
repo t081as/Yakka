@@ -89,7 +89,9 @@ namespace Yakka
                 : BreakMode.Automatic;
             result.ManualBreakTime = Properties.Settings.Default.ManualBreakTime;
 
-            return result;
+            throw new NotImplementedException();
+
+            //// return result;
         }
     }
 }
