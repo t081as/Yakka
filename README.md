@@ -40,12 +40,14 @@ Get the source code using the following command:
 
     > git clone https://gitlab.com/tobiaskoch/Yakka.git
 
-#### Test
+#### Test (debug build)
+The build script can be executed using the following command:
+
     > ./build
 
 The script will report if the unit tests succeeds, the coverage report will be located in the directory *./output/coverage*.
 
-#### Build
+#### Build (release build)
 The build script can be executed using the following command:
 
     > ./build --configuration Release
