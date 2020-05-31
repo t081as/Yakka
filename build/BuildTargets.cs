@@ -24,10 +24,10 @@ class BuildTargets : NukeBuild
 {
     public static int Main () => Execute<BuildTargets>(x => x.Default);
 
-    [Parameter("Configuration to build")]
+    [Parameter]
     readonly Configuration Configuration = Configuration.Debug;
 
-    [Parameter("The build number provided by the continuous integration system")]
+    [Parameter(Name = "$CI_PIPELINE_IID")]
     readonly ulong Buildnumber = 0;
 
     [Solution] readonly Solution Solution;
