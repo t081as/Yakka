@@ -20,6 +20,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Mjolnir" Version="0.6.0" />
+    <PackageReference Include="Mjolnir.Forms" Version="0.6.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -41,6 +43,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>WorkingHoursCalculatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\SystemTrayIconViewResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SystemTrayIconViewResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -66,6 +73,10 @@
     <EmbeddedResource Update="Calculation\WorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\SystemTrayIconViewResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SystemTrayIconViewResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
