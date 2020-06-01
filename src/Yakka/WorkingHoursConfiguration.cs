@@ -15,6 +15,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
 using Yakka.Calculation;
 
 namespace Yakka
@@ -83,15 +84,13 @@ namespace Yakka
         {
             var result = new WorkingHoursConfiguration();
             result.StartTime = Properties.Settings.Default.StartTime;
-            result.WorkingHoursCalculator = null; // TODO: Resolve correct instance
+            result.WorkingHoursCalculator = WorkingHoursCalculators.All.FirstOrDefault(c => c.Id == Properties.Settings.Default.WorkingHoursCalculator) ?? WorkingHoursCalculators.Default;
             result.BreakMode = Enum.IsDefined(typeof(BreakMode), Properties.Settings.Default.BreakMode)
                 ? (BreakMode)Properties.Settings.Default.BreakMode
                 : BreakMode.Automatic;
             result.ManualBreakTime = Properties.Settings.Default.ManualBreakTime;
 
-            throw new NotImplementedException();
-
-            //// return result;
+            return result;
         }
     }
 }
