@@ -39,7 +39,7 @@ namespace Yakka
         /// The implementation of the <see cref="IWorkingHoursCalculator"/> interface
         /// that shall be used to calculate.
         /// </value>
-        public IWorkingHoursCalculator WorkingHoursCalculator { get; set; } = null;
+        public IWorkingHoursCalculator WorkingHoursCalculator { get; set; } = new NoBreakWorkingHoursCalculator();
 
         /// <summary>
         /// Gets or sets the break mode configured by the user.
