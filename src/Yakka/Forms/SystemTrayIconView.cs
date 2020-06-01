@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -45,7 +46,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Represents the working hours information.
         /// </summary>
-        private WorkingHoursConfiguration workingHours;
+        private WorkingHoursCalculation workingHoursCalculation = new WorkingHoursCalculation();
 
         /// <summary>
         /// Represents the component creating the icon in the system tray.
@@ -87,7 +88,6 @@ namespace Yakka.Forms
         /// </summary>
         public SystemTrayIconView()
         {
-            this.workingHours = null;
             this.contextMenuControl = new ContextMenuDisplayControl();
             this.contextMenuControl.Info += this.ContextMenuControlInfo;
 
@@ -135,7 +135,7 @@ namespace Yakka.Forms
         public event EventHandler? Quit;
 
         /// <inheritdoc />
-        public WorkingHoursConfiguration WorkingHours
+        public WorkingHoursCalculation WorkingHoursCalculation
         {
             get
             {
@@ -144,7 +144,7 @@ namespace Yakka.Forms
                     throw new ObjectDisposedException(this.GetType().Name);
                 }
 
-                return this.workingHours;
+                return this.workingHoursCalculation;
             }
 
             set
@@ -154,12 +154,8 @@ namespace Yakka.Forms
                     throw new ObjectDisposedException(this.GetType().Name);
                 }
 
-                this.workingHours = value;
-
-                if (this.workingHours != null)
-                {
-                    this.Update();
-                }
+                this.workingHoursCalculation = value;
+                this.Update();
             }
         }
 
@@ -268,9 +264,9 @@ namespace Yakka.Forms
         /// </summary>
         protected virtual void Update()
         {
-            this.contextMenuControl.CalculatedWorkingHours = this.workingHours.CalculatedWorkingHours;
-            this.contextMenuControl.CalculatedBreak = this.workingHours.CalculatedBreak;
-            this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHours.Start.ToShortTimeString()} (Start)\n{this.workingHours.CalculatedWorkingHours.ToString(TimeFormat)} (Working hours)\n{this.workingHours.CalculatedBreak.ToString(TimeFormat)} (Break)";
+            this.contextMenuControl.CalculatedWorkingHours = this.workingHoursCalculation.CalculatedWorkingHours;
+            this.contextMenuControl.CalculatedBreak = this.workingHoursCalculation.CalculatedBreak;
+            this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHoursCalculation.Configuration.StartTime.ToShortTimeString()} (Start)\n{this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture)} (Working hours)\n{this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture)} (Break)";
 
             lock (this.quickMessageLock)
             {
@@ -314,7 +310,7 @@ namespace Yakka.Forms
         /// <param name="e">The event arguments containing information about the click.</param>
         protected virtual void SystemTrayIconMouseUp(object? sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e?.Button == MouseButtons.Left)
             {
                 lock (this.quickMessageLock)
                 {

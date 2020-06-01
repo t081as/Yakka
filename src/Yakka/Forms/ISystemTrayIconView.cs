@@ -45,10 +45,10 @@ namespace Yakka.Forms
         bool Visible { get; set; }
 
         /// <summary>
-        /// Gets or sets the working hours configuration.
+        /// Gets or sets the working hours calculation result.
         /// </summary>
-        /// <value>The working hours configuration.</value>
-        WorkingHoursConfiguration WorkingHours { get; set; }
+        /// <value>The working hours  calculation result.</value>
+        WorkingHoursCalculation WorkingHoursCalculation { get; set; }
 
         /// <summary>
         /// Shows a message to the user.
