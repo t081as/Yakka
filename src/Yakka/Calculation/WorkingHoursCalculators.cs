@@ -15,6 +15,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Yakka.Calculation
 {
@@ -23,5 +26,35 @@ namespace Yakka.Calculation
     /// </summary>
     public static class WorkingHoursCalculators
     {
+        /// <summary>
+        /// Initializes static members of the <see cref="WorkingHoursCalculators"/> class.
+        /// </summary>
+        static WorkingHoursCalculators()
+        {
+            var instances = new List<IWorkingHoursCalculator>();
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsAssignableFrom(typeof(IWorkingHoursCalculator)) && t.IsClass);
+
+            foreach (var type in types)
+            {
+                if (Activator.CreateInstance(type) is IWorkingHoursCalculator currentCalculator)
+                {
+                    instances.Add(currentCalculator);
+                }
+            }
+
+            All = instances;
+        }
+
+        /// <summary>
+        /// Gets all available implementations of the <see cref="IWorkingHoursCalculator"/> interface.
+        /// </summary>
+        /// <value>All available implementations of the <see cref="IWorkingHoursCalculator"/> interface.</value>
+        public static IEnumerable<IWorkingHoursCalculator> All { get; }
+
+        /// <summary>
+        /// Gets the default implementation of the <see cref="IWorkingHoursCalculator"/> interface.
+        /// </summary>
+        /// <value>The default implementation of the <see cref="IWorkingHoursCalculator"/> interface.</value>
+        public static IWorkingHoursCalculator Default => new NoBreakWorkingHoursCalculator();
     }
 }
