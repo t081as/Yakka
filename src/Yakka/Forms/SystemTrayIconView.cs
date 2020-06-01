@@ -35,7 +35,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Represents the message visibility time in milliseconds.
         /// </summary>
-        private const int MESSAGETIME = 5000;
+        private const int MessageTime = 5000;
 
         /// <summary>
         /// Indicates if the class has already been disposed.
@@ -45,7 +45,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Represents the working hours information.
         /// </summary>
-        private WorkingHours workingHours;
+        private WorkingHoursConfiguration workingHours;
 
         /// <summary>
         /// Represents the component creating the icon in the system tray.
@@ -135,31 +135,7 @@ namespace Yakka.Forms
         public event EventHandler? Quit;
 
         /// <inheritdoc />
-        public bool Visible
-        {
-            get
-            {
-                if (this.disposed)
-                {
-                    throw new ObjectDisposedException(this.GetType().Name);
-                }
-
-                return this.systemTrayIcon.Visible;
-            }
-
-            set
-            {
-                if (this.disposed)
-                {
-                    throw new ObjectDisposedException(this.GetType().Name);
-                }
-
-                this.systemTrayIcon.Visible = value;
-            }
-        }
-
-        /// <inheritdoc />
-        public WorkingHours WorkingHours
+        public WorkingHoursConfiguration WorkingHours
         {
             get
             {
@@ -184,6 +160,30 @@ namespace Yakka.Forms
                 {
                     this.Update();
                 }
+            }
+        }
+
+        /// <inheritdoc />
+        public bool Visible
+        {
+            get
+            {
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(this.GetType().Name);
+                }
+
+                return this.systemTrayIcon.Visible;
+            }
+
+            set
+            {
+                if (this.disposed)
+                {
+                    throw new ObjectDisposedException(this.GetType().Name);
+                }
+
+                this.systemTrayIcon.Visible = value;
             }
         }
 
@@ -303,7 +303,7 @@ namespace Yakka.Forms
                 this.systemTrayIcon.BalloonTipTitle = Application.ProductName;
                 this.systemTrayIcon.BalloonTipText = message;
 
-                this.systemTrayIcon.ShowBalloonTip(MESSAGETIME);
+                this.systemTrayIcon.ShowBalloonTip(MessageTime);
             }
         }
 
