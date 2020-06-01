@@ -22,3 +22,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "The Dispose method must never throw exceptions", Scope = "member", Target = "~M:Yakka.Forms.SystemTrayIconView.Dispose(System.Boolean)")]
+[assembly: SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Exceptions in the thread shall be ignored", Scope = "member", Target = "~M:Yakka.Forms.SystemTrayIconPresenter.CalculationUpdateThread")]

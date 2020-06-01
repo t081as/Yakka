@@ -28,19 +28,13 @@ namespace Yakka
         /// Calculates the working hours using the specified <see cref="IWorkingHoursCalculator"/> and the given
         /// start of the work day.
         /// </summary>
-        /// <param name="calculator">The calculator that shall be used.</param>
-        /// <param name="configuration">Theworking hours configuration.</param>
+        /// <param name="configuration">The working hours configuration.</param>
         /// <param name="currentTime">The current time.</param>
         /// <returns>An instance of <see cref="WorkingHoursCalculation"/> containing the information about the working hours.</returns>
         /// <exception cref="ArgumentNullException"><c>calculator</c> is <c>null</c>.</exception>
         /// <exception cref="InvalidOperationException">The working hours could not be calculated.</exception>
-        public static WorkingHoursCalculation Calculate(IWorkingHoursCalculator calculator, WorkingHoursConfiguration configuration, DateTime currentTime)
+        public static WorkingHoursCalculation Calculate(WorkingHoursConfiguration configuration, DateTime currentTime)
         {
-            if (calculator == null)
-            {
-                throw new ArgumentNullException(nameof(calculator));
-            }
-
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
@@ -50,7 +44,7 @@ namespace Yakka
 
             if (configuration.BreakMode == BreakMode.Automatic)
             {
-                (result.CalculatedWorkingHours, result.CalculatedBreak) = calculator.Calculate(configuration.StartTime, currentTime);
+                (result.CalculatedWorkingHours, result.CalculatedBreak) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, currentTime);
             }
             else if (configuration.BreakMode == BreakMode.Manual)
             {
@@ -64,27 +58,21 @@ namespace Yakka
 
             Dictionary<byte, DateTime> endOfWorkDayEstimations = new Dictionary<byte, DateTime>();
 
-            for (byte hoursWorked = 0; hoursWorked < WORKINGTIMECALCULATIONS; hoursWorked++)
+            for (byte hoursWorked = 0; hoursWorked < 20; hoursWorked++)
             {
-                DateTime specificEndOfWorkDay = startOfWorkDay;
+                DateTime specificEndOfWorkDay = configuration.StartTime;
                 TimeSpan workedTimeSpan = new TimeSpan(0);
 
                 while (workedTimeSpan.TotalHours < hoursWorked)
                 {
                     specificEndOfWorkDay = specificEndOfWorkDay.AddMinutes(1);
-                    workedTimeSpan = calculator.CalculateWorkingHours(startOfWorkDay, specificEndOfWorkDay);
+                    (workedTimeSpan, _) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, specificEndOfWorkDay);
                 }
 
                 endOfWorkDayEstimations.Add(hoursWorked, specificEndOfWorkDay);
             }
 
-            WorkingHours workingHours = new WorkingHours();
-            workingHours.Start = startOfWorkDay;
-            workingHours.CalculatedWorkingHours = currentWorkingHours;
-            workingHours.CalculatedBreak = currentBreak;
-            workingHours.EndOfWorkDay = endOfWorkDayEstimations;
-
-            return workingHours;
+            return result;
         }
     }
 }

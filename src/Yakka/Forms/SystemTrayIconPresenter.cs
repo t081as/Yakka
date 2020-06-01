@@ -42,6 +42,11 @@ namespace Yakka.Forms
         private ISystemTrayIconView view;
 
         /// <summary>
+        /// Represents the working hours configuration.
+        /// </summary>
+        private WorkingHoursConfiguration configuration = new WorkingHoursConfiguration();
+
+        /// <summary>
         /// Represents the object used to lock the <see cref="configuration"/> property.
         /// </summary>
         private object configurationLock = new object();
@@ -171,9 +176,8 @@ namespace Yakka.Forms
                         {
                             if (this.configuration != null)
                             {
-                                this.view.WorkingHours = this.calculation.Calculate(
-                                    this.configuration.Calculator,
-                                    this.configuration.Start,
+                                this.view.WorkingHoursCalculation = WorkingHoursCalculator.Calculate(
+                                    this.configuration,
                                     DateTime.Now);
                             }
                         }
@@ -182,9 +186,9 @@ namespace Yakka.Forms
                     {
                         throw;
                     }
-                    catch (Exception)
+                    catch
                     {
-                        this.view.WorkingHours = new WorkingHours();
+                        this.view.WorkingHoursCalculation = new WorkingHoursCalculation();
                     }
 
                     lock (this.monitorLock)
@@ -196,28 +200,6 @@ namespace Yakka.Forms
             catch (ThreadAbortException)
             {
                 Thread.ResetAbort();
-            }
-        }
-
-        /// <summary>
-        /// Handles changes of the user configuration.
-        /// </summary>
-        /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">A <see cref="PropertyChangedEventArgs"/> that contains the data.</param>
-        protected virtual void ConfigurationPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            this.Update();
-
-            if (e.PropertyName == "Start")
-            {
-                try
-                {
-                    this.view.ShowMessage($"Start: {this.configuration.Start.ToShortTimeString()}");
-                }
-                catch (ObjectDisposedException)
-                {
-                    // Object has already been disposed; ignore the exception
-                }
             }
         }
 
