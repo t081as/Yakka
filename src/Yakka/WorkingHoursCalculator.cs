@@ -41,6 +41,7 @@ namespace Yakka
             }
 
             var result = new WorkingHoursCalculation();
+            result.Configuration = configuration;
 
             if (configuration.BreakMode == BreakMode.Automatic)
             {

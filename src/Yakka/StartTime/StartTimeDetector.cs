@@ -32,7 +32,7 @@ namespace Yakka.StartTime
         /// <summary>
         /// Initializes a new instance of the <see cref="StartTimeDetector"/> class.
         /// </summary>
-        private StartTimeDetector()
+        public StartTimeDetector()
         {
             this.startTimeProviders = new List<IStartTimeProvider>();
 

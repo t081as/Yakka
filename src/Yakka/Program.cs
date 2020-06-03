@@ -17,6 +17,7 @@
 using System;
 using System.Windows.Forms;
 using Yakka.Forms;
+using Yakka.StartTime;
 
 namespace Yakka
 {
@@ -39,12 +40,37 @@ namespace Yakka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var configuration = WorkingHoursConfiguration.Load();
+            configuration.StartTime = new StartTimeDetector().StartTime;
+
             using var mainView = new SystemTrayIconView();
-            mainPresenter = new SystemTrayIconPresenter(mainView, WorkingHoursConfiguration.Load());
+            mainPresenter = new SystemTrayIconPresenter(mainView, configuration);
             mainPresenter.Quit += MainPresenterQuit;
+            mainPresenter.Configure += MainPresenterConfigure;
+            mainPresenter.Info += MainPresenterInfo;
             mainPresenter.Show();
 
             Application.Run();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Info"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+        private static void MainPresenterInfo(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Configure"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+        private static void MainPresenterConfigure(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
