@@ -25,6 +25,22 @@ namespace Yakka
     public class WorkingHoursCalculation
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="WorkingHoursCalculation"/> class.
+        /// </summary>
+        public WorkingHoursCalculation()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkingHoursCalculation"/> class with the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The <see cref="WorkingHoursConfiguration"/> that shall be used.</param>
+        public WorkingHoursCalculation(WorkingHoursConfiguration configuration)
+        {
+            this.Configuration = configuration;
+        }
+
+        /// <summary>
         /// Gets or sets the working hours configurationused for the calculation.
         /// </summary>
         /// <value>The working hours configurationused for the calculation.</value>

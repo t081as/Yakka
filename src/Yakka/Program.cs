@@ -80,6 +80,7 @@ namespace Yakka
         /// <param name="e">An empty <see cref="EventArgs"/>.</param>
         private static void MainPresenterQuit(object? sender, EventArgs e)
         {
+            mainPresenter?.Hide();
             Application.Exit();
         }
     }

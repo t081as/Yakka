@@ -208,7 +208,6 @@ namespace Yakka.Forms
                     }
                     catch
                     {
-                        this.view.WorkingHoursCalculation = new WorkingHoursCalculation();
                     }
 
                     lock (this.monitorLock)
