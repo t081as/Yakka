@@ -15,6 +15,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 
 namespace Yakka
 {
@@ -40,5 +41,11 @@ namespace Yakka
         /// </summary>
         /// <value>The calculated break.</value>
         public TimeSpan CalculatedBreak { get; set; } = TimeSpan.Zero;
+
+        /// <summary>
+        /// Gets a dictionary containing the <see cref="DateTime"/> of full working hours.
+        /// </summary>
+        /// <value>A dictionary containing the <see cref="DateTime"/> of full working hours.</value>
+        public IDictionary<int, DateTime> FullHoursWorked { get; } = new Dictionary<int, DateTime>();
     }
 }

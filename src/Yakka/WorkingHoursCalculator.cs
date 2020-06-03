@@ -56,9 +56,7 @@ namespace Yakka
                 throw new InvalidOperationException();
             }
 
-            Dictionary<byte, DateTime> endOfWorkDayEstimations = new Dictionary<byte, DateTime>();
-
-            for (byte hoursWorked = 0; hoursWorked < 20; hoursWorked++)
+            for (byte hoursWorked = 0; hoursWorked < 12; hoursWorked++)
             {
                 DateTime specificEndOfWorkDay = configuration.StartTime;
                 TimeSpan workedTimeSpan = new TimeSpan(0);
@@ -69,7 +67,7 @@ namespace Yakka
                     (workedTimeSpan, _) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, specificEndOfWorkDay);
                 }
 
-                endOfWorkDayEstimations.Add(hoursWorked, specificEndOfWorkDay);
+                result.FullHoursWorked.Add(hoursWorked, specificEndOfWorkDay);
             }
 
             return result;

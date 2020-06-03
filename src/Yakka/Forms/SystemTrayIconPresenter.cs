@@ -52,11 +52,6 @@ namespace Yakka.Forms
         private object configurationLock = new object();
 
         /// <summary>
-        /// Represents the reference to the calculation module.
-        /// </summary>
-        private WorkingHoursCalculation calculation;
-
-        /// <summary>
         /// Represents the reference to the background thread used for the calculations.
         /// </summary>
         private Thread? calculationThread;
@@ -70,23 +65,23 @@ namespace Yakka.Forms
         /// Initializes a new instance of the <see cref="SystemTrayIconPresenter"/> class.
         /// </summary>
         /// <param name="view">The view that shall be used.</param>
-        /// <param name="calculation">The reference to the calculation module.</param>
+        /// <param name="configuration">The reference to the configuration.</param>
         /// <exception cref="ArgumentNullException"><c>view</c> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentNullException"><c>calculation</c> is <c>null</c>.</exception>
-        public SystemTrayIconPresenter(ISystemTrayIconView view, WorkingHoursCalculation calculation)
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
+        public SystemTrayIconPresenter(ISystemTrayIconView view, WorkingHoursConfiguration configuration)
         {
             if (view == null)
             {
                 throw new ArgumentNullException(nameof(view));
             }
 
-            if (calculation == null)
+            if (configuration == null)
             {
-                throw new ArgumentNullException(nameof(calculation));
+                throw new ArgumentNullException(nameof(configuration));
             }
 
             this.view = view;
-            this.calculation = calculation;
+            this.configuration = configuration;
         }
 
         /// <summary>
@@ -103,6 +98,31 @@ namespace Yakka.Forms
         /// Occurs when the user wants to quit the application.
         /// </summary>
         public event EventHandler? Quit;
+
+        /// <summary>
+        /// Gets or sets the working hours configuration.
+        /// </summary>
+        /// <value>The working hours configuration.</value>
+        public WorkingHoursConfiguration Configuration
+        {
+            get
+            {
+                lock (this.configurationLock)
+                {
+                    return this.configuration;
+                }
+            }
+
+            set
+            {
+                lock (this.configurationLock)
+                {
+                    this.configuration = value;
+                }
+
+                this.Update();
+            }
+        }
 
         /// <summary>
         /// Displays the system tray icon.

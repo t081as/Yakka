@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Forms;
+using Yakka.Forms;
 
 namespace Yakka
 {
@@ -25,6 +26,11 @@ namespace Yakka
     public static class Program
     {
         /// <summary>
+        /// The presenter of the main view.
+        /// </summary>
+        private static SystemTrayIconPresenter? mainPresenter;
+
+        /// <summary>
         /// The main entry point of the application.
         /// </summary>
         [STAThread]
@@ -33,7 +39,22 @@ namespace Yakka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            using var mainView = new SystemTrayIconView();
+            mainPresenter = new SystemTrayIconPresenter(mainView, WorkingHoursConfiguration.Load());
+            mainPresenter.Quit += MainPresenterQuit;
+            mainPresenter.Show();
+
             Application.Run();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Quit"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">An empty <see cref="EventArgs"/>.</param>
+        private static void MainPresenterQuit(object? sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
