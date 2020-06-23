@@ -62,6 +62,11 @@ namespace Yakka.Forms
         private object monitorLock = new object();
 
         /// <summary>
+        /// The source for the token used to cancel the calculation thread.
+        /// </summary>
+        private CancellationTokenSource calculationThreadCancellationTokenSource = new CancellationTokenSource();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SystemTrayIconPresenter"/> class.
         /// </summary>
         /// <param name="view">The view that shall be used.</param>
@@ -140,10 +145,10 @@ namespace Yakka.Forms
             this.view.Quit += this.ViewQuit;
             this.view.Visible = true;
 
-            this.calculationThread = new Thread(new ThreadStart(this.CalculationUpdateThread));
+            this.calculationThread = new Thread(new ParameterizedThreadStart(this.CalculationUpdateThread));
             this.calculationThread.Name = "Calculation";
             this.calculationThread.IsBackground = true;
-            this.calculationThread.Start();
+            this.calculationThread.Start(this.calculationThreadCancellationTokenSource.Token);
 
             this.isVisible = true;
         }
@@ -159,7 +164,8 @@ namespace Yakka.Forms
                 throw new InvalidOperationException();
             }
 
-            this.calculationThread?
+            this.calculationThreadCancellationTokenSource.Cancel();
+            this.Update();
             this.calculationThread = null;
 
             this.view.Visible = false;
@@ -184,41 +190,39 @@ namespace Yakka.Forms
         /// <summary>
         /// Represents the method executed in a background thread to calculate the working hours.
         /// </summary>
-        protected virtual void CalculationUpdateThread()
+        /// <param name="obj">An <see cref="object"/> given to the thread.</param>
+        /// <exception cref="ArgumentNullException"><c>obj</c> is <c>null</c>.</exception>
+        protected virtual void CalculationUpdateThread(object? obj)
         {
-            try
+            if (obj == null)
             {
-                while (true)
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            CancellationToken token = (CancellationToken)obj;
+
+            while (!token.IsCancellationRequested)
+            {
+                try
                 {
-                    try
+                    lock (this.configurationLock)
                     {
-                        lock (this.configurationLock)
+                        if (this.configuration != null)
                         {
-                            if (this.configuration != null)
-                            {
-                                this.view.WorkingHoursCalculation = WorkingHoursCalculator.Calculate(
-                                    this.configuration,
-                                    DateTime.Now);
-                            }
+                            this.view.WorkingHoursCalculation = WorkingHoursCalculator.Calculate(
+                                this.configuration,
+                                DateTime.Now);
                         }
                     }
-                    catch (ThreadAbortException)
-                    {
-                        throw;
-                    }
-                    catch
-                    {
-                    }
-
-                    lock (this.monitorLock)
-                    {
-                        Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
-                    }
                 }
-            }
-            catch (ThreadAbortException)
-            {
-                Thread.ResetAbort();
+                catch (Exception)
+                {
+                }
+
+                lock (this.monitorLock)
+                {
+                    Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
+                }
             }
         }
 
