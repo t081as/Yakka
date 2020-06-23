@@ -1,5 +1,5 @@
 ﻿// Yakka - A system tray application calculating and displaying your working hours
-// Copyright (C) 2017-2018  Tobias Koch
+// Copyright (C) 2017-2020  Tobias Koch
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,17 +41,26 @@ namespace Yakka.Forms
         public ContextMenuDisplayControl()
         {
             this.InitializeComponent();
-            //// this.toolTip.SetToolTip(this.labelWorkingHours, "Working hours");
-            //// this.toolTip.SetToolTip(this.labelBreak, "Break");
+            this.toolTip.SetToolTip(this.labelWorkingHours, ContextMenuDisplayControlResources.ToolTipWorkingHours);
+            this.toolTip.SetToolTip(this.labelBreak, ContextMenuDisplayControlResources.ToolTipBreak);
+
+            this.Width = 175;
+            this.Height = 150;
 
             // Without setting a MinimumSize the control won't be visible in the ToolStripControlHost (see SystemTrayIconView)
             this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
         }
 
         /// <summary>
         /// Occurs when the user wants to display software information.
         /// </summary>
         public event EventHandler? Info;
+
+        /// <summary>
+        /// Occurs when the user wants to configure the working hours.
+        /// </summary>
+        public event EventHandler? Configure;
 
         /// <summary>
         /// Gets or sets the calculated working hours that shall be displayed.
@@ -107,10 +116,16 @@ namespace Yakka.Forms
         /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
         protected virtual void OnInfo(EventArgs e)
         {
-            if (this.Info != null)
-            {
-                this.Info.Invoke(this, e);
-            }
+            this.Info?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Configure"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        protected virtual void OnConfigure(EventArgs e)
+        {
+            this.Configure?.Invoke(this, e);
         }
 
         /// <summary>
@@ -121,6 +136,26 @@ namespace Yakka.Forms
         protected virtual void PictureBoxIconClick(object sender, EventArgs e)
         {
             this.OnInfo(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the click event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        private void LabelWorkingHoursClick(object sender, EventArgs e)
+        {
+            this.OnConfigure(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the click event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        private void LabelBreakClick(object sender, EventArgs e)
+        {
+            this.OnConfigure(EventArgs.Empty);
         }
     }
 }

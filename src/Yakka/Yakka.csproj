@@ -44,6 +44,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WorkingHoursCalculatorResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Forms\ContextMenuDisplayControlResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ContextMenuDisplayControlResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\SystemTrayIconViewResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -73,6 +78,10 @@
     <EmbeddedResource Update="Calculation\WorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ContextMenuDisplayControlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContextMenuDisplayControlResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\SystemTrayIconViewResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

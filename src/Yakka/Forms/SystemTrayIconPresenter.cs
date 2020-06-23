@@ -159,7 +159,7 @@ namespace Yakka.Forms
                 throw new InvalidOperationException();
             }
 
-            this.calculationThread?.Abort();
+            this.calculationThread?
             this.calculationThread = null;
 
             this.view.Visible = false;
