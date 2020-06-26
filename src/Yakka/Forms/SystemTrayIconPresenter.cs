@@ -23,7 +23,7 @@ namespace Yakka.Forms
     /// <summary>
     /// Represents the presenter managing the system tray icon.
     /// </summary>
-    public class SystemTrayIconPresenter
+    public class SystemTrayIconPresenter : IDisposable
     {
         /// <summary>
         /// Represents the time in seconds the background thread sleeps before calculating or recalculating
@@ -67,6 +67,11 @@ namespace Yakka.Forms
         private CancellationTokenSource calculationThreadCancellationTokenSource = new CancellationTokenSource();
 
         /// <summary>
+        /// Indicates if the class has already been disposed.
+        /// </summary>
+        private bool disposed = false;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SystemTrayIconPresenter"/> class.
         /// </summary>
         /// <param name="view">The view that shall be used.</param>
@@ -87,6 +92,14 @@ namespace Yakka.Forms
 
             this.view = view;
             this.configuration = configuration;
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="SystemTrayIconPresenter"/> class.
+        /// </summary>
+        ~SystemTrayIconPresenter()
+        {
+            this.Dispose(false);
         }
 
         /// <summary>
@@ -174,6 +187,15 @@ namespace Yakka.Forms
             this.view.Quit -= this.ViewQuit;
 
             this.isVisible = false;
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -281,6 +303,30 @@ namespace Yakka.Forms
         protected virtual void OnQuit(EventArgs e)
         {
             this.Quit?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">Indicates whether managed resources shall also be disposed.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    try
+                    {
+                        this.calculationThreadCancellationTokenSource.Dispose();
+                    }
+                    catch
+                    {
+                        // The Dispose method must never throw exceptions
+                    }
+                }
+
+                this.disposed = true;
+            }
         }
     }
 }
