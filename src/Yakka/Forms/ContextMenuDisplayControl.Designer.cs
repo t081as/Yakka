@@ -46,62 +46,51 @@ namespace Yakka.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContextMenuDisplayControl));
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelWorkingHours = new System.Windows.Forms.Label();
-            this.labelBreak = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.labelWorkingHours = new Mjolnir.Forms.RenderingHintLabel();
+            this.labelBreak = new Mjolnir.Forms.RenderingHintLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel
+            // pictureBoxLogo
             // 
-            resources.ApplyResources(this.tableLayoutPanel, "tableLayoutPanel");
-            this.tableLayoutPanel.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelWorkingHours, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.labelBreak, 0, 2);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::Yakka.Properties.Resources.Yakka_64;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxLogo.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.pictureBoxLogo, "pictureBoxLogo");
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.TabStop = false;
+            this.pictureBoxLogo.Click += new System.EventHandler(this.PictureBoxLogoClick);
             // 
             // labelWorkingHours
             // 
             resources.ApplyResources(this.labelWorkingHours, "labelWorkingHours");
             this.labelWorkingHours.Name = "labelWorkingHours";
-            this.labelWorkingHours.Click += new System.EventHandler(this.LabelWorkingHoursClick);
+            this.labelWorkingHours.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             // 
             // labelBreak
             // 
             resources.ApplyResources(this.labelBreak, "labelBreak");
             this.labelBreak.Name = "labelBreak";
-            this.labelBreak.Click += new System.EventHandler(this.LabelBreakClick);
+            this.labelBreak.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             // 
             // ContextMenuDisplayControl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.tableLayoutPanel);
+            this.Controls.Add(this.labelBreak);
+            this.Controls.Add(this.labelWorkingHours);
+            this.Controls.Add(this.pictureBoxLogo);
             this.Name = "ContextMenuDisplayControl";
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label labelWorkingHours;
-        private System.Windows.Forms.Label labelBreak;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private Mjolnir.Forms.RenderingHintLabel labelWorkingHours;
+        private Mjolnir.Forms.RenderingHintLabel labelBreak;
     }
 }

@@ -17,6 +17,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Forms;
+using Yakka.Properties;
 
 namespace Yakka.Forms
 {
@@ -156,6 +157,16 @@ namespace Yakka.Forms
         private void LabelBreakClick(object sender, EventArgs e)
         {
             this.OnConfigure(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Handles the click event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        private void PictureBoxLogoClick(object sender, EventArgs e)
+        {
+            this.OnInfo(EventArgs.Empty);
         }
     }
 }

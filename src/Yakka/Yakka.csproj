@@ -54,11 +54,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SystemTrayIconViewResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -86,10 +81,6 @@
     <EmbeddedResource Update="Forms\SystemTrayIconViewResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SystemTrayIconViewResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

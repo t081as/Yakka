@@ -1,64 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
+﻿<root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -117,140 +57,139 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="pictureBoxLogo.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        AElFTkSuQmCC
+</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+  <data name="pictureBoxLogo.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 18</value>
+  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBoxLogo.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 0</value>
   </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 64</value>
+  <data name="pictureBoxLogo.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>175, 84</value>
   </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+  <assembly alias="System.Private.CoreLib" name="System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e" />
+  <data name="pictureBoxLogo.TabIndex" type="System.Int32, System.Private.CoreLib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
+  <data name="&gt;&gt;pictureBoxLogo.Name" xml:space="preserve">
+    <value>pictureBoxLogo</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;pictureBoxLogo.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
+  <data name="&gt;&gt;pictureBoxLogo.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;pictureBoxLogo.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="labelWorkingHours.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+  <data name="labelWorkingHours.Font" type="System.Drawing.Font, System.Drawing.Common">
+    <value>Segoe UI, 21.75pt, style=Bold</value>
   </data>
-  <data name="labelWorkingHours.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="labelWorkingHours.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 87</value>
   </data>
-  <data name="labelWorkingHours.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 20.25pt, style=Bold</value>
+  <data name="labelWorkingHours.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>175, 35</value>
   </data>
-  <data name="labelWorkingHours.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 104</value>
-  </data>
-  <data name="labelWorkingHours.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 31</value>
-  </data>
-  <data name="labelWorkingHours.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelWorkingHours.TabIndex" type="System.Int32, System.Private.CoreLib">
     <value>1</value>
   </data>
   <data name="labelWorkingHours.Text" xml:space="preserve">
     <value>00:00</value>
   </data>
+  <data name="labelWorkingHours.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing.Common">
+    <value>MiddleCenter</value>
+  </data>
   <data name="&gt;&gt;labelWorkingHours.Name" xml:space="preserve">
     <value>labelWorkingHours</value>
   </data>
   <data name="&gt;&gt;labelWorkingHours.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Mjolnir.Forms.RenderingHintLabel, Mjolnir.Forms, Version=0.6.19.0, Culture=neutral, PublicKeyToken=b463c7051373caf1</value>
   </data>
   <data name="&gt;&gt;labelWorkingHours.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;labelWorkingHours.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="labelBreak.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
+  <data name="labelBreak.Font" type="System.Drawing.Font, System.Drawing.Common">
+    <value>Segoe UI, 14.25pt</value>
   </data>
-  <data name="labelBreak.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="labelBreak.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>0, 122</value>
   </data>
-  <data name="labelBreak.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
+  <data name="labelBreak.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>175, 20</value>
   </data>
-  <data name="labelBreak.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 150</value>
-  </data>
-  <data name="labelBreak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 20</value>
-  </data>
-  <data name="labelBreak.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="labelBreak.TabIndex" type="System.Int32, System.Private.CoreLib">
+    <value>1</value>
   </data>
   <data name="labelBreak.Text" xml:space="preserve">
     <value>00:00</value>
+  </data>
+  <data name="labelBreak.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing.Common">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;labelBreak.Name" xml:space="preserve">
     <value>labelBreak</value>
   </data>
   <data name="&gt;&gt;labelBreak.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Mjolnir.Forms.RenderingHintLabel, Mjolnir.Forms, Version=0.6.19.0, Culture=neutral, PublicKeyToken=b463c7051373caf1</value>
   </data>
   <data name="&gt;&gt;labelBreak.Parent" xml:space="preserve">
-    <value>tableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;labelBreak.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 180</value>
-  </data>
-  <data name="tableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel.Name" xml:space="preserve">
-    <value>tableLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelBreak.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWorkingHours" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBreak" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Absolute,100,Absolute,40,Absolute,40" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
     <value>True</value>
   </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing.Primitives">
+    <value>7, 15</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 180</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>175, 150</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ContextMenuDisplayControl</value>
