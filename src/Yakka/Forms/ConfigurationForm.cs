@@ -46,6 +46,15 @@ namespace Yakka.Forms
         }
 
         /// <inheritdoc />
+        public event EventHandler? Confirm;
+
+        /// <inheritdoc />
+        public event EventHandler? Apply;
+
+        /// <inheritdoc />
+        public event EventHandler? Cancel;
+
+        /// <inheritdoc />
         public DateTime StartTime { get; set; }
 
         /// <inheritdoc />
@@ -56,5 +65,29 @@ namespace Yakka.Forms
 
         /// <inheritdoc />
         public TimeSpan ManualBreakTime { get; set; }
+
+        /// <summary>
+        /// Triggers the <see cref="Confirm"/> event.
+        /// </summary>
+        protected virtual void OnConfirm()
+        {
+            this.Confirm?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Triggers the <see cref="Apply"/> event.
+        /// </summary>
+        protected virtual void OnApply()
+        {
+            this.Apply?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Triggers the <see cref="Cancel"/> event.
+        /// </summary>
+        protected virtual void OnCancel()
+        {
+            this.Cancel?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
