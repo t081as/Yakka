@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -42,6 +43,7 @@ namespace Yakka.Forms
 
             this.InitializeComponent();
             this.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            this.comboBoxCalculator.Items.AddRange(availableCalculators.ToArray());
             this.WorkingHoursCalculator = availableCalculators.First();
         }
 
@@ -55,16 +57,70 @@ namespace Yakka.Forms
         public event EventHandler? Cancel;
 
         /// <inheritdoc />
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime
+        {
+            get
+            {
+                return this.dateTimeStartTime.Value;
+            }
+
+            set
+            {
+                this.dateTimeStartTime.Value = value;
+            }
+        }
 
         /// <inheritdoc />
-        public IWorkingHoursCalculator WorkingHoursCalculator { get; set; }
+        public IWorkingHoursCalculator WorkingHoursCalculator
+        {
+            get
+            {
+                return (IWorkingHoursCalculator)this.comboBoxCalculator.SelectedItem;
+            }
+
+            set
+            {
+                this.comboBoxCalculator.SelectedItem = value;
+            }
+        }
 
         /// <inheritdoc />
-        public BreakMode BreakMode { get; set; }
+        public BreakMode BreakMode
+        {
+            get
+            {
+                return this.checkBoxManual.Checked switch
+                {
+                    true => BreakMode.Manual,
+                    false => BreakMode.Automatic,
+                };
+            }
+
+            set
+            {
+                this.checkBoxManual.Checked = value switch
+                {
+                    BreakMode.Automatic => false,
+                    BreakMode.Manual => true,
+                    _ => false,
+                };
+            }
+        }
 
         /// <inheritdoc />
-        public TimeSpan ManualBreakTime { get; set; }
+        public TimeSpan ManualBreakTime
+        {
+            get
+            {
+                string[] parts = this.maskedTextBoxManualBreak.Text.Split(":");
+                return new TimeSpan(0, int.Parse(parts[0], CultureInfo.CurrentCulture), int.Parse(parts[1], CultureInfo.CurrentCulture));
+            }
+
+            set
+            {
+                this.maskedTextBoxManualBreak.Text = $"{value.Hours}:{value.Minutes}";
+            }
+        }
 
         /// <summary>
         /// Triggers the <see cref="Confirm"/> event.

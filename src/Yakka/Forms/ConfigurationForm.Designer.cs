@@ -46,7 +46,7 @@ namespace Yakka.Forms
         {
             this.labelStartTime = new System.Windows.Forms.Label();
             this.dateTimeStartTime = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxCalculator = new System.Windows.Forms.ComboBox();
             this.labelCalculator = new System.Windows.Forms.Label();
             this.checkBoxManual = new System.Windows.Forms.CheckBox();
             this.maskedTextBoxManualBreak = new System.Windows.Forms.MaskedTextBox();
@@ -72,13 +72,13 @@ namespace Yakka.Forms
             this.dateTimeStartTime.Size = new System.Drawing.Size(300, 23);
             this.dateTimeStartTime.TabIndex = 1;
             // 
-            // comboBox1
+            // comboBoxCalculator
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(148, 41);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(300, 23);
-            this.comboBox1.TabIndex = 2;
+            this.comboBoxCalculator.FormattingEnabled = true;
+            this.comboBoxCalculator.Location = new System.Drawing.Point(148, 41);
+            this.comboBoxCalculator.Name = "comboBoxCalculator";
+            this.comboBoxCalculator.Size = new System.Drawing.Size(300, 23);
+            this.comboBoxCalculator.TabIndex = 2;
             // 
             // labelCalculator
             // 
@@ -150,7 +150,7 @@ namespace Yakka.Forms
             this.Controls.Add(this.maskedTextBoxManualBreak);
             this.Controls.Add(this.checkBoxManual);
             this.Controls.Add(this.labelCalculator);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxCalculator);
             this.Controls.Add(this.dateTimeStartTime);
             this.Controls.Add(this.labelStartTime);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -167,7 +167,7 @@ namespace Yakka.Forms
 
         private System.Windows.Forms.Label labelStartTime;
         private System.Windows.Forms.DateTimePicker dateTimeStartTime;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxCalculator;
         private System.Windows.Forms.Label labelCalculator;
         private System.Windows.Forms.CheckBox checkBoxManual;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxManualBreak;
