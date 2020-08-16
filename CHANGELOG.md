@@ -1,17 +1,16 @@
-## NEXT RELEASE
+# Changelog
 
-## 0.4 (2017-04-22)
+## Unreleased
+- Updated project to .NET Core 3.1
 
-- Start time provider infrastructure and implementations added
+## [0.4.0] - 2017-04-22
+- Added start time providers
 
-## 0.3 (2017-03-04)
+## [0.3.0] - 2017-03-04
+- Added persistent configuration
 
-- Configuration persistence added
+## [0.2.0] - 2017-02-26
+- Added a configuration dialog
 
-## 0.2 (2017-02-26)
-
-- Configuration dialog added
-
-## 0.1 (2017-02-10)
-
+## [0.1.0] - 2017-02-10
 - Initial release
