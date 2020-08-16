@@ -89,5 +89,45 @@ namespace Yakka.Forms
         {
             this.Cancel?.Invoke(this, EventArgs.Empty);
         }
+
+        /// <summary>
+        /// Handles the <c>CheckedChanged</c> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event args.</param>
+        private void CheckBoxManual_CheckedChanged(object sender, EventArgs e)
+        {
+            this.maskedTextBoxManualBreak.ReadOnly = !this.checkBoxManual.Checked;
+        }
+
+        /// <summary>
+        /// Handles the <c>Clicked</c> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event args.</param>
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            this.OnCancel();
+        }
+
+        /// <summary>
+        /// Handles the <c>Clicked</c> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event args.</param>
+        private void ButtonApply_Click(object sender, EventArgs e)
+        {
+            this.OnApply();
+        }
+
+        /// <summary>
+        /// Handles the <c>Clicked</c> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event args.</param>
+        private void ButtonConfirm_Click(object sender, EventArgs e)
+        {
+            this.OnConfirm();
+        }
     }
 }

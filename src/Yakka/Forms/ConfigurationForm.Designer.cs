@@ -98,12 +98,14 @@ namespace Yakka.Forms
             this.checkBoxManual.TabIndex = 3;
             this.checkBoxManual.Text = "MANUAL BREAK";
             this.checkBoxManual.UseVisualStyleBackColor = true;
+            this.checkBoxManual.CheckedChanged += new System.EventHandler(this.CheckBoxManual_CheckedChanged);
             // 
             // maskedTextBoxManualBreak
             // 
             this.maskedTextBoxManualBreak.Location = new System.Drawing.Point(148, 70);
             this.maskedTextBoxManualBreak.Mask = "90:00";
             this.maskedTextBoxManualBreak.Name = "maskedTextBoxManualBreak";
+            this.maskedTextBoxManualBreak.ReadOnly = true;
             this.maskedTextBoxManualBreak.Size = new System.Drawing.Size(300, 23);
             this.maskedTextBoxManualBreak.TabIndex = 4;
             // 
@@ -115,6 +117,7 @@ namespace Yakka.Forms
             this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "CANCEL";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // buttonApply
             // 
@@ -124,6 +127,7 @@ namespace Yakka.Forms
             this.buttonApply.TabIndex = 5;
             this.buttonApply.Text = "APPLY";
             this.buttonApply.UseVisualStyleBackColor = true;
+            this.buttonApply.Click += new System.EventHandler(this.ButtonApply_Click);
             // 
             // buttonConfirm
             // 
@@ -133,6 +137,7 @@ namespace Yakka.Forms
             this.buttonConfirm.TabIndex = 5;
             this.buttonConfirm.Text = "OK";
             this.buttonConfirm.UseVisualStyleBackColor = true;
+            this.buttonConfirm.Click += new System.EventHandler(this.ButtonConfirm_Click);
             // 
             // ConfigurationForm
             // 
