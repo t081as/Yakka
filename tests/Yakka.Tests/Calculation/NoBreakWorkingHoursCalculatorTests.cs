@@ -27,7 +27,7 @@ namespace Yakka.Tests.Calculation
     public class NoBreakWorkingHoursCalculatorTests
     {
         /// <summary>
-        /// Checks the <see cref="NoBreakWorkingHoursCalculator.Calculate(DateTime, DateTime)"/> method.
+        /// Checks the calculation.
         /// </summary>
         [TestMethod]
         public void CalculateTest()
@@ -43,8 +43,7 @@ namespace Yakka.Tests.Calculation
         }
 
         /// <summary>
-        /// Checks the <see cref="NoBreakWorkingHoursCalculator.Calculate(DateTime, DateTime)"/> method
-        /// with invalid arguments.
+        /// Checks the calculation with invalid arguments.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
