@@ -107,7 +107,7 @@ namespace Yakka.Forms
             get
             {
                 string[] parts = this.maskedTextBoxManualBreak.Text.Split(":");
-                return new TimeSpan(0, int.Parse(parts[0], CultureInfo.CurrentCulture), int.Parse(parts[1], CultureInfo.CurrentCulture));
+                return new TimeSpan(int.Parse(parts[0], CultureInfo.CurrentCulture), int.Parse(parts[1], CultureInfo.CurrentCulture), 0);
             }
 
             set

@@ -66,7 +66,8 @@ namespace Yakka.Forms
             // 
             // dateTimeStartTime
             // 
-            this.dateTimeStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimeStartTime.CustomFormat = "dd.MM.yyyy HH:mm";
+            this.dateTimeStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeStartTime.Location = new System.Drawing.Point(148, 12);
             this.dateTimeStartTime.Name = "dateTimeStartTime";
             this.dateTimeStartTime.Size = new System.Drawing.Size(300, 23);
@@ -74,6 +75,7 @@ namespace Yakka.Forms
             // 
             // comboBoxCalculator
             // 
+            this.comboBoxCalculator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCalculator.FormattingEnabled = true;
             this.comboBoxCalculator.Location = new System.Drawing.Point(148, 41);
             this.comboBoxCalculator.Name = "comboBoxCalculator";
