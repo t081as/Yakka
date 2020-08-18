@@ -141,7 +141,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event args.</param>
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Yakka.Forms
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
             this.OnChanged();
-            this.Close();
+            this.Hide();
         }
     }
 }

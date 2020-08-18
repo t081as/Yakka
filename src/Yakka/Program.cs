@@ -78,6 +78,7 @@ namespace Yakka
         {
             if (mainPresenter != null)
             {
+                WorkingHoursConfiguration.Save(e.Configuration);
                 mainPresenter.Configuration = e.Configuration;
             }
         }

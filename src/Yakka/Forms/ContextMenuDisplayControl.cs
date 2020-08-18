@@ -77,7 +77,11 @@ namespace Yakka.Forms
             {
                 if (this.InvokeRequired)
                 {
-                    this.Invoke(new Action(() => this.calculatedWorkingHours = value));
+                    this.Invoke(new Action(() =>
+                    {
+                        this.calculatedWorkingHours = value;
+                        this.labelWorkingHours.Text = this.calculatedWorkingHours.ToString(SystemTrayIconView.TimeFormat, CultureInfo.CurrentCulture);
+                    }));
                 }
                 else
                 {
@@ -101,7 +105,11 @@ namespace Yakka.Forms
             {
                 if (this.InvokeRequired)
                 {
-                    this.Invoke(new Action(() => this.calculatedBreak = value));
+                    this.Invoke(new Action(() =>
+                    {
+                        this.calculatedBreak = value;
+                        this.labelBreak.Text = this.calculatedBreak.ToString(SystemTrayIconView.TimeFormat, CultureInfo.CurrentCulture);
+                    }));
                 }
                 else
                 {
