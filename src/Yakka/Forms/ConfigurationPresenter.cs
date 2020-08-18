@@ -29,21 +29,39 @@ namespace Yakka.Forms
         private IConfigurationView view;
 
         /// <summary>
-        /// Represents the working hours configuration.
-        /// </summary>
-        private WorkingHoursConfiguration configuration;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationPresenter"/> class.
         /// </summary>
         /// <param name="view">The reference to the view that shall be managed.</param>
         /// <param name="configuration">The working hours configuration.</param>
         public ConfigurationPresenter(IConfigurationView view, WorkingHoursConfiguration configuration)
         {
+            if (configuration is null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
             this.view = view ?? throw new ArgumentNullException(nameof(view));
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(view));
 
             this.view.Changed += this.View_Changed;
+
+            this.view.StartTime = configuration.StartTime;
+            this.view.WorkingHoursCalculator = configuration.WorkingHoursCalculator;
+            this.view.BreakMode = configuration.BreakMode;
+            this.view.ManualBreakTime = configuration.ManualBreakTime;
+        }
+
+        /// <summary>
+        /// Occurs when the configuration has been changed.
+        /// </summary>
+        public event EventHandler<WorkingHoursConfigurationEventArgs>? ConfigurationChanged;
+
+        /// <summary>
+        /// Triggers the <see cref="ConfigurationChanged"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="WorkingHoursConfigurationEventArgs"/> containing the updated configuration.</param>
+        protected virtual void OnConfigurationChanged(WorkingHoursConfigurationEventArgs e)
+        {
+            this.ConfigurationChanged?.Invoke(this, e);
         }
 
         /// <summary>
@@ -53,7 +71,15 @@ namespace Yakka.Forms
         /// <param name="e">The empty event args.</param>
         private void View_Changed(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var newConfiguration = new WorkingHoursConfiguration
+            {
+                StartTime = this.view.StartTime,
+                WorkingHoursCalculator = this.view.WorkingHoursCalculator,
+                BreakMode = this.view.BreakMode,
+                ManualBreakTime = this.view.ManualBreakTime,
+            };
+
+            this.OnConfigurationChanged(new WorkingHoursConfigurationEventArgs(newConfiguration));
         }
     }
 }
