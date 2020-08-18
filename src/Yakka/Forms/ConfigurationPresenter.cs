@@ -23,5 +23,37 @@ namespace Yakka.Forms
     /// </summary>
     public class ConfigurationPresenter
     {
+        /// <summary>
+        /// Represents the reference to the view managed by this presenter.
+        /// </summary>
+        private IConfigurationView view;
+
+        /// <summary>
+        /// Represents the working hours configuration.
+        /// </summary>
+        private WorkingHoursConfiguration configuration;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationPresenter"/> class.
+        /// </summary>
+        /// <param name="view">The reference to the view that shall be managed.</param>
+        /// <param name="configuration">The working hours configuration.</param>
+        public ConfigurationPresenter(IConfigurationView view, WorkingHoursConfiguration configuration)
+        {
+            this.view = view ?? throw new ArgumentNullException(nameof(view));
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(view));
+
+            this.view.Changed += this.View_Changed;
+        }
+
+        /// <summary>
+        /// Handles the <see cref="IConfigurationView.Changed"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event args.</param>
+        private void View_Changed(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

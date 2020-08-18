@@ -25,19 +25,9 @@ namespace Yakka.Forms
     public interface IConfigurationView
     {
         /// <summary>
-        /// Occurs when the user wants to apply the changes and close the dialog.
+        /// Occurs when the user changed the configuration.
         /// </summary>
-        event EventHandler? Confirm;
-
-        /// <summary>
-        /// Occurs wqhen the user wants to apply the changes.
-        /// </summary>
-        event EventHandler? Apply;
-
-        /// <summary>
-        /// Occurs when the user wants to close the dialog without applying the changes.
-        /// </summary>
-        event EventHandler? Cancel;
+        event EventHandler? Changed;
 
         /// <summary>
         /// Gets or sets the start date and time of the current working day.

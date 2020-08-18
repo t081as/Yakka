@@ -48,13 +48,7 @@ namespace Yakka.Forms
         }
 
         /// <inheritdoc />
-        public event EventHandler? Confirm;
-
-        /// <inheritdoc />
-        public event EventHandler? Apply;
-
-        /// <inheritdoc />
-        public event EventHandler? Cancel;
+        public event EventHandler? Changed;
 
         /// <inheritdoc />
         public DateTime StartTime
@@ -123,27 +117,11 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Triggers the <see cref="Confirm"/> event.
+        /// Triggers the <see cref="Changed"/> event.
         /// </summary>
-        protected virtual void OnConfirm()
+        protected virtual void OnChanged()
         {
-            this.Confirm?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Triggers the <see cref="Apply"/> event.
-        /// </summary>
-        protected virtual void OnApply()
-        {
-            this.Apply?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Triggers the <see cref="Cancel"/> event.
-        /// </summary>
-        protected virtual void OnCancel()
-        {
-            this.Cancel?.Invoke(this, EventArgs.Empty);
+            this.Changed?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -163,7 +141,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event args.</param>
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            this.OnCancel();
+            this.Close();
         }
 
         /// <summary>
@@ -173,7 +151,7 @@ namespace Yakka.Forms
         /// <param name="e">The empty event args.</param>
         private void ButtonApply_Click(object sender, EventArgs e)
         {
-            this.OnApply();
+            this.OnChanged();
         }
 
         /// <summary>
@@ -183,7 +161,8 @@ namespace Yakka.Forms
         /// <param name="e">The empty event args.</param>
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            this.OnConfirm();
+            this.OnChanged();
+            this.Close();
         }
     }
 }
