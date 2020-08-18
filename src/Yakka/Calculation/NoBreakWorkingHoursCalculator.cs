@@ -22,32 +22,21 @@ namespace Yakka.Calculation
     /// Represents an implementation of the <see cref="IWorkingHoursCalculator"/> interface
     /// calculating the working hours without any break.
     /// </summary>
-    public class NoBreakWorkingHoursCalculator : IWorkingHoursCalculator
+    public class NoBreakWorkingHoursCalculator : WorkingHoursCalculatorBase
     {
         /// <inheritdoc/>
-        public Guid Id => Guid.Parse("{28C2C346-282A-437A-A54A-70E4B347A7DB}");
+        public override Guid Id => Guid.Parse("{28C2C346-282A-437A-A54A-70E4B347A7DB}");
 
         /// <inheritdoc/>
-        public string Title => NoBreakWorkingHoursCalculatorResources.Title;
+        public override string Title => NoBreakWorkingHoursCalculatorResources.Title;
 
         /// <inheritdoc/>
-        public string Description => NoBreakWorkingHoursCalculatorResources.Description;
+        public override string Description => NoBreakWorkingHoursCalculatorResources.Description;
 
         /// <inheritdoc/>
-        public (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime)
+        public override TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
         {
-            if (startTime > endTime)
-            {
-                throw new ArgumentException(WorkingHoursCalculatorResources.ArgumentException);
-            }
-
-            return (endTime - startTime, TimeSpan.Zero);
+            return TimeSpan.Zero;
         }
-
-        /// <summary>
-        /// Gets the <see cref="string"/> representation of this class.
-        /// </summary>
-        /// <returns>The <see cref="string"/> representation of this class.</returns>
-        public override string ToString() => this.Title;
     }
 }

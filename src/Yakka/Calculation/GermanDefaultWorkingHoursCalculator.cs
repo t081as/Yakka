@@ -22,43 +22,19 @@ namespace Yakka.Calculation
     /// Represents an implementation of <see cref="IWorkingHoursCalculator"/> calculating the break according to german law;
     /// i.e. 30 minutes when working more than six hours and 45 minutes when working more than 9 hours.
     /// </summary>
-    public class GermanDefaultWorkingHoursCalculator : IWorkingHoursCalculator
+    public class GermanDefaultWorkingHoursCalculator : WorkingHoursCalculatorBase
     {
         /// <inheritdoc/>
-        public Guid Id => Guid.Parse("{4536F994-A4EB-4D11-9FB2-674A2ACA7177}");
+        public override Guid Id => Guid.Parse("{4536F994-A4EB-4D11-9FB2-674A2ACA7177}");
 
         /// <inheritdoc/>
-        public string Title => GermanDefaultWorkingHoursCalculatorResources.Title;
+        public override string Title => GermanDefaultWorkingHoursCalculatorResources.Title;
 
         /// <inheritdoc/>
-        public string Description => GermanDefaultWorkingHoursCalculatorResources.Description;
+        public override string Description => GermanDefaultWorkingHoursCalculatorResources.Description;
 
         /// <inheritdoc/>
-        public (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime)
-        {
-            if (startTime > endTime)
-            {
-                throw new ArgumentException(WorkingHoursCalculatorResources.ArgumentException);
-            }
-
-            var calculatedBreak = CalculateBreak(startTime, endTime);
-
-            return (endTime - startTime - calculatedBreak, calculatedBreak);
-        }
-
-        /// <summary>
-        /// Gets the <see cref="string"/> representation of this class.
-        /// </summary>
-        /// <returns>The <see cref="string"/> representation of this class.</returns>
-        public override string ToString() => this.Title;
-
-        /// <summary>
-        /// Calculates the break.
-        /// </summary>
-        /// <param name="startTime">The date and time representing the start of the working day.</param>
-        /// <param name="endTime">The date and time representing the end of the working day.</param>
-        /// <returns>A <see cref="TimeSpan"/> representing the break.</returns>
-        private static TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
+        public override TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
         {
             TimeSpan workingHours = endTime - startTime;
 

@@ -32,7 +32,7 @@ namespace Yakka.Calculation
         static WorkingHoursCalculators()
         {
             var instances = new List<IWorkingHoursCalculator>();
-            var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => typeof(IWorkingHoursCalculator).IsAssignableFrom(t) && t.IsClass);
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => typeof(IWorkingHoursCalculator).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
 
             foreach (var type in types)
             {
