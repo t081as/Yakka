@@ -43,5 +43,11 @@ namespace Yakka.Calculation
 
             return (endTime - startTime, TimeSpan.Zero);
         }
+
+        /// <summary>
+        /// Gets the <see cref="string"/> representation of this class.
+        /// </summary>
+        /// <returns>The <see cref="string"/> representation of this class.</returns>
+        public override string ToString() => this.Title;
     }
 }

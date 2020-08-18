@@ -112,7 +112,7 @@ namespace Yakka.Forms
 
             set
             {
-                this.maskedTextBoxManualBreak.Text = $"{value.Hours}:{value.Minutes}";
+                this.maskedTextBoxManualBreak.Text = $"{value.Hours:00}:{value.Minutes:00}";
             }
         }
 

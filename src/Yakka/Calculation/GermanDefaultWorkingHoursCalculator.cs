@@ -47,6 +47,12 @@ namespace Yakka.Calculation
         }
 
         /// <summary>
+        /// Gets the <see cref="string"/> representation of this class.
+        /// </summary>
+        /// <returns>The <see cref="string"/> representation of this class.</returns>
+        public override string ToString() => this.Title;
+
+        /// <summary>
         /// Calculates the break.
         /// </summary>
         /// <param name="startTime">The date and time representing the start of the working day.</param>

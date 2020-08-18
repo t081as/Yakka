@@ -15,7 +15,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using Yakka.Calculation;
 using Yakka.Forms;
 using Yakka.StartTime;
 
@@ -30,6 +32,16 @@ namespace Yakka
         /// The presenter of the main view.
         /// </summary>
         private static SystemTrayIconPresenter? mainPresenter;
+
+        /// <summary>
+        /// The configuration view.
+        /// </summary>
+        private static ConfigurationForm? configurationView;
+
+        /// <summary>
+        /// The presenter of the configuration view.
+        /// </summary>
+        private static ConfigurationPresenter? configurationPresenter;
 
         /// <summary>
         /// The main entry point of the application.
@@ -50,7 +62,24 @@ namespace Yakka
             mainPresenter.Info += MainPresenterInfo;
             mainPresenter.Show();
 
+            configurationView = new ConfigurationForm(WorkingHoursCalculators.All);
+            configurationPresenter = new ConfigurationPresenter(configurationView, configuration);
+            configurationPresenter.ConfigurationChanged += ConfigurationPresenterConfigurationChanged;
+
             Application.Run();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ConfigurationPresenter.ConfigurationChanged"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">A <see cref="WorkingHoursConfigurationEventArgs"/> containing the updated configuration.</param>
+        private static void ConfigurationPresenterConfigurationChanged(object? sender, WorkingHoursConfigurationEventArgs e)
+        {
+            if (mainPresenter != null)
+            {
+                mainPresenter.Configuration = e.Configuration;
+            }
         }
 
         /// <summary>
@@ -70,7 +99,7 @@ namespace Yakka
         /// <param name="e">An empty <see cref="EventArgs"/>.</param>
         private static void MainPresenterConfigure(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            configurationView?.Show();
         }
 
         /// <summary>
