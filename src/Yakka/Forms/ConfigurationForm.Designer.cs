@@ -44,6 +44,7 @@ namespace Yakka.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelStartTime = new System.Windows.Forms.Label();
             this.dateTimeStartTime = new System.Windows.Forms.DateTimePicker();
             this.comboBoxCalculator = new System.Windows.Forms.ComboBox();
@@ -53,6 +54,7 @@ namespace Yakka.Forms
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
             this.buttonConfirm = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelStartTime
@@ -81,6 +83,7 @@ namespace Yakka.Forms
             this.comboBoxCalculator.Name = "comboBoxCalculator";
             this.comboBoxCalculator.Size = new System.Drawing.Size(300, 23);
             this.comboBoxCalculator.TabIndex = 2;
+            this.comboBoxCalculator.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCalculator_SelectedIndexChanged);
             // 
             // labelCalculator
             // 
@@ -176,5 +179,6 @@ namespace Yakka.Forms
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonConfirm;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

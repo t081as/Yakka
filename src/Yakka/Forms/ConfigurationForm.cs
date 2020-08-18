@@ -164,5 +164,22 @@ namespace Yakka.Forms
             this.OnChanged();
             this.Hide();
         }
+
+        /// <summary>
+        /// Handles the <see cref="ComboBox.SelectedIndexChanged"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event args.</param>
+        private void ComboBoxCalculator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxCalculator.SelectedItem != null)
+            {
+                this.toolTip.SetToolTip(this.comboBoxCalculator, (this.comboBoxCalculator.SelectedItem as IWorkingHoursCalculator)?.Description);
+            }
+            else
+            {
+                this.toolTip.SetToolTip(this.comboBoxCalculator, string.Empty);
+            }
+        }
     }
 }
