@@ -45,6 +45,14 @@ namespace Yakka.Forms
             this.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
             this.comboBoxCalculator.Items.AddRange(availableCalculators.ToArray());
             this.WorkingHoursCalculator = availableCalculators.First();
+
+            this.Text = ConfigurationFormResources.Title;
+            this.labelStartTime.Text = ConfigurationFormResources.LabelTime;
+            this.labelCalculator.Text = ConfigurationFormResources.LabelCalculator;
+            this.checkBoxManual.Text = ConfigurationFormResources.LabelManualBreak;
+            this.buttonConfirm.Text = ConfigurationFormResources.ButtonOk;
+            this.buttonApply.Text = ConfigurationFormResources.ButtonApply;
+            this.buttonCancel.Text = ConfigurationFormResources.ButtonCancel;
         }
 
         /// <inheritdoc />
