@@ -63,7 +63,7 @@ namespace Yakka.Forms
         {
             get
             {
-                return this.dateTimeStartTime.Value;
+                return this.dateTimeStartTime.Value.WithoutSeconds();
             }
 
             set

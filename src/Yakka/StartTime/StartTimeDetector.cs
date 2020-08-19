@@ -61,7 +61,7 @@ namespace Yakka.StartTime
                     }
                 }
 
-                return startTime ?? DateTime.Now;
+                return startTime?.WithoutSeconds() ?? DateTime.Now;
             }
         }
     }
