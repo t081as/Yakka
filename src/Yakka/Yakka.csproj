@@ -34,6 +34,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>GermanDefaultWorkingHoursCalculatorResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Calculation\GermanStatic45WorkingHoursCalculatorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GermanStatic45WorkingHoursCalculatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Calculation\NoBreakWorkingHoursCalculatorResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -70,6 +75,10 @@
     <EmbeddedResource Update="Calculation\GermanDefaultWorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GermanDefaultWorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Calculation\GermanStatic45WorkingHoursCalculatorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GermanStatic45WorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Calculation\NoBreakWorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
