@@ -16,9 +16,8 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Yakka.StartTime;
 
-namespace Yakka.Tests.StartTime
+namespace Yakka.Tests
 {
     /// <summary>
     /// Contains unit tests of the <see cref="DateTimeExtensions"/> class.
