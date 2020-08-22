@@ -138,6 +138,7 @@ class BuildTargets : NukeBuild
                     .SetToolPath(ToolPathResolver.GetPackageExecutable("ReportGenerator", "ReportGenerator.exe", null, "netcoreapp3.0"))
                     .SetReports(RootDirectory / GlobCoverageFiles)
                     .SetTargetDirectory(CoverageDirectory)
+                    .SetFileFilters("-*Resources", "-*Form", "-*Control", "-*Settings", "-*Program")
                     .SetReportTypes(ReportTypes.TextSummary, ReportTypes.Html));
 
                 Logger.Info(File.ReadAllText(CoverageDirectory / "Summary.txt"));
