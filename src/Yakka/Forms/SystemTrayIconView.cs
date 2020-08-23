@@ -74,16 +74,6 @@ namespace Yakka.Forms
         private ContextMenuDisplayControl contextMenuControl;
 
         /// <summary>
-        /// Represents the message shown on left-clicking the <see cref="NotifyIcon"/>.
-        /// </summary>
-        private string quickMessage = string.Empty;
-
-        /// <summary>
-        /// Represents the object used to lock the <see cref="quickMessage"/> property.
-        /// </summary>
-        private object quickMessageLock = new object();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SystemTrayIconView"/> class.
         /// </summary>
         public SystemTrayIconView()
@@ -133,6 +123,9 @@ namespace Yakka.Forms
 
         /// <inheritdoc />
         public event EventHandler? Quit;
+
+        /// <inheritdoc />
+        public event EventHandler? Details;
 
         /// <inheritdoc />
         public WorkingHoursCalculation WorkingHoursCalculation
@@ -267,11 +260,6 @@ namespace Yakka.Forms
             this.contextMenuControl.CalculatedWorkingHours = this.workingHoursCalculation.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHoursCalculation.CalculatedBreak;
             this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHoursCalculation.Configuration.StartTime.ToShortTimeString()} (Start)\n{this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture)} (Working hours)\n{this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture)} (Break)";
-
-            lock (this.quickMessageLock)
-            {
-                this.quickMessage = this.systemTrayIcon.Text;
-            }
         }
 
         /// <summary>
@@ -312,10 +300,7 @@ namespace Yakka.Forms
         {
             if (e?.Button == MouseButtons.Left)
             {
-                lock (this.quickMessageLock)
-                {
-                    this.ShowMessage(this.quickMessage);
-                }
+                this.OnDetails(EventArgs.Empty);
             }
         }
 
@@ -384,6 +369,15 @@ namespace Yakka.Forms
         protected virtual void OnQuit(EventArgs e)
         {
             this.Quit?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Details"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnDetails(EventArgs e)
+        {
+            this.Details?.Invoke(this, e);
         }
     }
 }
