@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Added full screen working hours information
+
 ## [0.5.0] - 2020-08-23
 - Updated project to .NET Core 3.1
 
