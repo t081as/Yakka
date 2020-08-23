@@ -44,6 +44,16 @@ namespace Yakka
         private static ConfigurationPresenter? configurationPresenter;
 
         /// <summary>
+        /// The detail view.
+        /// </summary>
+        private static DetailForm? detailView;
+
+        /// <summary>
+        /// The presenter of the detail view.
+        /// </summary>
+        private static DetailPresenter? detailPresenter;
+
+        /// <summary>
         /// The main entry point of the application.
         /// </summary>
         [STAThread]
@@ -60,13 +70,32 @@ namespace Yakka
             mainPresenter.Quit += MainPresenterQuit;
             mainPresenter.Configure += MainPresenterConfigure;
             mainPresenter.Info += MainPresenterInfo;
+            mainPresenter.Details += MainPresenterDetails;
             mainPresenter.Show();
 
             configurationView = new ConfigurationForm(WorkingHoursCalculators.All);
             configurationPresenter = new ConfigurationPresenter(configurationView, configuration);
             configurationPresenter.ConfigurationChanged += ConfigurationPresenterConfigurationChanged;
 
+            detailView = new DetailForm();
+            detailPresenter = new DetailPresenter(detailView);
+
             Application.Run();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="SystemTrayIconPresenter.Details"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">A <see cref="WorkingHoursCalculationEventArgs"/> containing the calculation.</param>
+        private static void MainPresenterDetails(object? sender, WorkingHoursCalculationEventArgs e)
+        {
+            detailView?.Show();
+
+            if (detailPresenter != null)
+            {
+                detailPresenter.WorkingHoursCalculation = e.Calculation;
+            }
         }
 
         /// <summary>

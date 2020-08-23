@@ -15,7 +15,6 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
 using System.Threading;
 
 namespace Yakka.Forms
@@ -118,6 +117,11 @@ namespace Yakka.Forms
         public event EventHandler? Quit;
 
         /// <summary>
+        /// Occurs when the user wants to display details of the calculation.
+        /// </summary>
+        public event EventHandler<WorkingHoursCalculationEventArgs>? Details;
+
+        /// <summary>
         /// Gets or sets the working hours configuration.
         /// </summary>
         /// <value>The working hours configuration.</value>
@@ -156,6 +160,7 @@ namespace Yakka.Forms
             this.view.Configure += this.ViewConfigure;
             this.view.Info += this.ViewInfo;
             this.view.Quit += this.ViewQuit;
+            this.view.Details += this.ViewDetails;
             this.view.Visible = true;
 
             this.calculationThread = new Thread(new ParameterizedThreadStart(this.CalculationUpdateThread));
@@ -185,6 +190,7 @@ namespace Yakka.Forms
             this.view.Configure -= this.ViewConfigure;
             this.view.Info -= this.ViewInfo;
             this.view.Quit -= this.ViewQuit;
+            this.view.Details -= this.ViewDetails;
 
             this.isVisible = false;
         }
@@ -249,6 +255,16 @@ namespace Yakka.Forms
         }
 
         /// <summary>
+        /// Handles the <see cref="ISystemTrayIconView.Details"/> event of the view.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="EventArgs"/> that contains the event data.</param>
+        protected virtual void ViewDetails(object? sender, EventArgs e)
+        {
+            this.OnDetails(new WorkingHoursCalculationEventArgs(this.view.WorkingHoursCalculation));
+        }
+
+        /// <summary>
         /// Handles the <see cref="ISystemTrayIconView.Quit">quit event of the view</see>.
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
@@ -303,6 +319,15 @@ namespace Yakka.Forms
         protected virtual void OnQuit(EventArgs e)
         {
             this.Quit?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Details"/> event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        protected virtual void OnDetails(WorkingHoursCalculationEventArgs e)
+        {
+            this.Details?.Invoke(this, e);
         }
 
         /// <summary>

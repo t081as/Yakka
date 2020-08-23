@@ -39,6 +39,11 @@ namespace Yakka.Forms
         event EventHandler? Quit;
 
         /// <summary>
+        /// Occurs when the user wants to display details of the calculation.
+        /// </summary>
+        event EventHandler? Details;
+
+        /// <summary>
         /// Gets or sets a value indicating whether the system tray icon is visible.
         /// </summary>
         /// <value>A <see cref="bool"/> indicating whether the system tray icon is visible.</value>
@@ -47,7 +52,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Gets or sets the working hours calculation result.
         /// </summary>
-        /// <value>The working hours  calculation result.</value>
+        /// <value>The working hours calculation result.</value>
         WorkingHoursCalculation WorkingHoursCalculation { get; set; }
 
         /// <summary>

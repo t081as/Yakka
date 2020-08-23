@@ -30,6 +30,32 @@ namespace Yakka.Tests.Forms
     public class SystemTrayIconPresenterTests
     {
         /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Details"/> event.
+        /// </summary>
+        [TestMethod]
+        public void DetailsTest()
+        {
+            var viewMock = new Mock<ISystemTrayIconView>();
+            var detailsInvoked = false;
+
+            EventHandler<WorkingHoursCalculationEventArgs> handler = (sender, e) =>
+            {
+                detailsInvoked = true;
+            };
+
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            {
+                presenter.Details += handler;
+
+                presenter.Show();
+                viewMock.Raise(m => m.Details += null, EventArgs.Empty);
+                presenter.Hide();
+            }
+
+            Assert.IsTrue(detailsInvoked);
+        }
+
+        /// <summary>
         /// Tests the <see cref="SystemTrayIconPresenter.Configure"/> event.
         /// </summary>
         [TestMethod]
