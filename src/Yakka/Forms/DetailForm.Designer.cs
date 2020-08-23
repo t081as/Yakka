@@ -219,6 +219,7 @@ namespace Yakka.Forms
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.DetailForm_Shown);
             this.Click += new System.EventHandler(this.DetailForm_Click);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DetailForm_MouseMove);
             this.Resize += new System.EventHandler(this.DetailForm_Resize);
             this.panelDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();

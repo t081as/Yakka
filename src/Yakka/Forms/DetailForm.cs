@@ -41,11 +41,17 @@ namespace Yakka.Forms
         private WorkingHoursCalculation workingHoursCalculation = new WorkingHoursCalculation();
 
         /// <summary>
+        /// The initial position of the mouse cursor.
+        /// </summary>
+        private Point cursorPosition;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DetailForm"/> class.
         /// </summary>
         public DetailForm()
         {
             this.InitializeComponent();
+            this.cursorPosition = Cursor.Position;
         }
 
         /// <inheritdoc />
@@ -93,6 +99,8 @@ namespace Yakka.Forms
             this.Top = Screen.PrimaryScreen.Bounds.Y;
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
+
+            this.cursorPosition = Cursor.Position;
         }
 
         /// <summary>
@@ -104,6 +112,22 @@ namespace Yakka.Forms
         {
             this.panelDetails.Left = (this.Width - this.panelDetails.Width) / 2;
             this.panelDetails.Top = (this.Height - this.panelDetails.Height) / 2;
+        }
+
+        /// <summary>
+        /// Handles the mouse move event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty event arguments.</param>
+        private void DetailForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            const int PositionThreshold = 100;
+
+            if (Math.Abs(this.cursorPosition.X - Cursor.Position.X) > PositionThreshold ||
+                Math.Abs(this.cursorPosition.Y - Cursor.Position.Y) > PositionThreshold)
+            {
+                this.Hide();
+            }
         }
     }
 }
