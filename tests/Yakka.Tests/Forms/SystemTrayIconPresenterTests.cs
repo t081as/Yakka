@@ -53,5 +53,57 @@ namespace Yakka.Tests.Forms
 
             Assert.IsTrue(configureInvoked);
         }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Info"/> event.
+        /// </summary>
+        [TestMethod]
+        public void InfoTest()
+        {
+            var viewMock = new Mock<ISystemTrayIconView>();
+            var infoInvoked = false;
+
+            EventHandler handler = (sender, e) =>
+            {
+                infoInvoked = true;
+            };
+
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            {
+                presenter.Info += handler;
+
+                presenter.Show();
+                viewMock.Raise(m => m.Info += null, EventArgs.Empty);
+                presenter.Hide();
+            }
+
+            Assert.IsTrue(infoInvoked);
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Quit"/> event.
+        /// </summary>
+        [TestMethod]
+        public void QuitTest()
+        {
+            var viewMock = new Mock<ISystemTrayIconView>();
+            var quitInvoked = false;
+
+            EventHandler handler = (sender, e) =>
+            {
+                quitInvoked = true;
+            };
+
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            {
+                presenter.Quit += handler;
+
+                presenter.Show();
+                viewMock.Raise(m => m.Quit += null, EventArgs.Empty);
+                presenter.Hide();
+            }
+
+            Assert.IsTrue(quitInvoked);
+        }
     }
 }
