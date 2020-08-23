@@ -15,6 +15,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Yakka.Calculation;
@@ -104,6 +105,39 @@ namespace Yakka.Tests.Forms
             }
 
             Assert.IsTrue(quitInvoked);
+        }
+
+        /// <summary>
+        /// Tests the <see cref="SystemTrayIconPresenter.Configuration"/> property.
+        /// </summary>
+        [TestMethod]
+        public void ConfigurationTest()
+        {
+            WorkingHoursCalculation? result = null;
+            var viewMock = new Mock<ISystemTrayIconView>();
+            viewMock.SetupSet(m => m.WorkingHoursCalculation = It.IsAny<WorkingHoursCalculation>()).Callback<WorkingHoursCalculation>(c => { result = c; });
+
+            var configuration = new WorkingHoursConfiguration
+            {
+                StartTime = DateTime.Now.Subtract(TimeSpan.FromHours(1)),
+                WorkingHoursCalculator = new NoBreakWorkingHoursCalculator(),
+                BreakMode = BreakMode.Manual,
+                ManualBreakTime = TimeSpan.Zero,
+            };
+
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, configuration))
+            {
+                presenter.Show();
+                presenter.Configuration = configuration;
+                Assert.AreEqual(configuration.ManualBreakTime, presenter.Configuration.ManualBreakTime);
+
+                Thread.Sleep(2000);
+
+                presenter.Hide();
+            }
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result?.CalculatedWorkingHours.Hours >= 1);
         }
     }
 }
