@@ -1,4 +1,6 @@
-![YAKKA](https://gitlab.com/tobiaskoch/Yakka/raw/master/Media/Yakka-256.png)
+<p align="center">
+  <img src="https://gitlab.com/tobiaskoch/Yakka/raw/master/assets/Yakka-256.png">
+</p>
 
 # YAKKA
 
@@ -8,43 +10,49 @@
 1. hard work
 
 ---
-Yakka is small .NET based system tray application for the windows operating system displaying your working hours.
+Yakka is a .NET based system tray application for the windows operating system displaying your working hours.
 
 ## Features
-* Written in C#
-* Using .NET Framework 4.5 (or later) preinstalled on (almost) every windows computer
-* No installation necessary (xcopy deployment)
+* No installation necessary
 * Single executable file
-* Just creates a single configuration file in the application data directory
+* No framework required to run
+* Just creates a single configuration file in the user data directory
 
 ## Installation
-After "installation" (i.e. xcopy deployment) there are no furthur steps necessary - but you might want to copy the executable or a link to the executable to your autostart folder.
+After "installation" (i.e. xcopy deployment) there are no further steps necessary - but you might want to copy the executable or a link to the executable to your autostart folder.
 
-### Option 1: Binary
-Stable versions can be downloaded [here](https://gitlab.com/tobiaskoch/Yakka/pipelines?scope=tags).
+### Option 0: Binary
+Stable versions can be downloaded here: [https://gitlab.com/tobiaskoch/Yakka/-/releases](https://gitlab.com/tobiaskoch/Yakka/-/releases).
 
-### Option 2: Source
+### Option 1: Source
 #### Requirements
-The following applications must be available and included in you *PATH* environment variable:
+The following tools must be available to build the software:
 
-* [Git](https://git-scm.com/)
-* [Nuget.exe](https://www.nuget.org/)
-* MSBuild (.NET Framework / Mono; [Visual Studio](https://www.visualstudio.com) recommended for development)
+* [.NET Core SDK 3.1](https://dotnet.microsoft.com/download)
+
+The following tools are recommended for development:
+
+* [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
+* [Visual Studio Code](https://code.visualstudio.com/)
 
 #### Source code
 Get the source code using the following command:
 
     > git clone https://gitlab.com/tobiaskoch/Yakka.git
 
-#### Build
-    > .\Build.cmd
+#### Test (debug build)
+The build script can be executed using the following command:
 
-The executable will be located in the directory *.\Build\Release* if the build succeeds.
+    > ./build
 
-#### Test
-    > .\Test.cmd
+The script will report if the unit tests succeeds, the coverage report will be located in the directory *./output/coverage*.
 
-The script will report if the unit tests succeeds, the coverage report will be placed in the directory *.\Build\Debug\Coverage*.
+#### Build (release build)
+The build script can be executed using the following command:
+
+    > ./build --configuration Release
+
+The build will produce several zip archives in the root directory or the repository if it succeeds.
 
 ## Contributing
 see [CONTRIBUTING.md](https://gitlab.com/tobiaskoch/Yakka/blob/master/CONTRIBUTING.md)
@@ -56,4 +64,4 @@ see [AUTHORS.txt](https://gitlab.com/tobiaskoch/Yakka/blob/master/AUTHORS.txt)
 Thanks for your interest in this project. You can show your appreciation and support further development by [donating](https://www.tk-software.de/donate).
 
 ## License
-**Yakka** © 2017-2018  [Tobias Koch](https://www.tk-software.de). Released under the [GPL](https://gitlab.com/tobiaskoch/Yakka/blob/master/LICENSE.md).
+**Yakka** © 2017-2020  [Tobias Koch](https://www.tk-software.de). Released under the [GPL](https://gitlab.com/tobiaskoch/Yakka/blob/master/LICENSE.md).
