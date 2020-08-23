@@ -52,7 +52,7 @@ namespace Yakka.Forms
         /// <summary>
         /// Gets or sets the working hours calculation result.
         /// </summary>
-        /// <value>The working hours  calculation result.</value>
+        /// <value>The working hours calculation result.</value>
         WorkingHoursCalculation WorkingHoursCalculation { get; set; }
 
         /// <summary>

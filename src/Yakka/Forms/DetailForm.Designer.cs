@@ -48,7 +48,7 @@ namespace Yakka.Forms
             this.panelDetails = new System.Windows.Forms.Panel();
             this.label10Time = new Mjolnir.Forms.RenderingHintLabel();
             this.label10 = new Mjolnir.Forms.RenderingHintLabel();
-            this.label8Value = new Mjolnir.Forms.RenderingHintLabel();
+            this.label8Time = new Mjolnir.Forms.RenderingHintLabel();
             this.label8 = new Mjolnir.Forms.RenderingHintLabel();
             this.label7Time = new Mjolnir.Forms.RenderingHintLabel();
             this.label7 = new Mjolnir.Forms.RenderingHintLabel();
@@ -66,7 +66,7 @@ namespace Yakka.Forms
             this.panelDetails.BackColor = System.Drawing.Color.Transparent;
             this.panelDetails.Controls.Add(this.label10Time);
             this.panelDetails.Controls.Add(this.label10);
-            this.panelDetails.Controls.Add(this.label8Value);
+            this.panelDetails.Controls.Add(this.label8Time);
             this.panelDetails.Controls.Add(this.label8);
             this.panelDetails.Controls.Add(this.label7Time);
             this.panelDetails.Controls.Add(this.label7);
@@ -77,7 +77,7 @@ namespace Yakka.Forms
             this.panelDetails.Controls.Add(this.pictureBoxLogo);
             this.panelDetails.Location = new System.Drawing.Point(221, 50);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(512, 711);
+            this.panelDetails.Size = new System.Drawing.Size(512, 750);
             this.panelDetails.TabIndex = 0;
             // 
             // label10Time
@@ -102,16 +102,16 @@ namespace Yakka.Forms
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label10.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
-            // label8Value
+            // label8Time
             // 
-            this.label8Value.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8Value.Location = new System.Drawing.Point(255, 594);
-            this.label8Value.Name = "label8Value";
-            this.label8Value.Size = new System.Drawing.Size(120, 50);
-            this.label8Value.TabIndex = 3;
-            this.label8Value.Text = "00:00";
-            this.label8Value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label8Value.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.label8Time.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8Time.Location = new System.Drawing.Point(255, 594);
+            this.label8Time.Name = "label8Time";
+            this.label8Time.Size = new System.Drawing.Size(120, 50);
+            this.label8Time.TabIndex = 3;
+            this.label8Time.Text = "00:00";
+            this.label8Time.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label8Time.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
             // label8
             // 
@@ -205,11 +205,11 @@ namespace Yakka.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(914, 783);
+            this.ClientSize = new System.Drawing.Size(914, 800);
             this.Controls.Add(this.panelDetails);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MinimumSize = new System.Drawing.Size(600, 700);
+            this.MinimumSize = new System.Drawing.Size(600, 800);
             this.Name = "DetailForm";
             this.Opacity = 0.9D;
             this.ShowIcon = false;
@@ -236,7 +236,7 @@ namespace Yakka.Forms
         private Mjolnir.Forms.RenderingHintLabel labelBreak;
         private Mjolnir.Forms.RenderingHintLabel label10Time;
         private Mjolnir.Forms.RenderingHintLabel label10;
-        private Mjolnir.Forms.RenderingHintLabel label8Value;
+        private Mjolnir.Forms.RenderingHintLabel label8Time;
         private Mjolnir.Forms.RenderingHintLabel label8;
         private Mjolnir.Forms.RenderingHintLabel label7Time;
         private Mjolnir.Forms.RenderingHintLabel label7;

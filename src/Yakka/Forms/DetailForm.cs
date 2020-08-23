@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 
@@ -27,14 +28,48 @@ namespace Yakka.Forms
     /// <summary>
     /// Represents the window that displays details of the working hours calculation.
     /// </summary>
-    public partial class DetailForm : Form
+    public partial class DetailForm : Form, IDetailView
     {
+        /// <summary>
+        /// Represents the string used to format the displayed times.
+        /// </summary>
+        public const string TimeFormat = "hh\\:mm";
+
+        /// <summary>
+        /// The currently displayed working hours calculation.
+        /// </summary>
+        private WorkingHoursCalculation workingHoursCalculation = new WorkingHoursCalculation();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DetailForm"/> class.
         /// </summary>
         public DetailForm()
         {
             this.InitializeComponent();
+        }
+
+        /// <inheritdoc />
+        public WorkingHoursCalculation WorkingHoursCalculation
+        {
+            get => this.workingHoursCalculation;
+
+            set
+            {
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
+                this.workingHoursCalculation = value;
+
+                this.labelWorkingHours.Text = this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture);
+                this.labelBreak.Text = this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture);
+
+                this.label6Time.Text = this.workingHoursCalculation.FullHoursWorked[6].ToShortTimeString();
+                this.label7Time.Text = this.workingHoursCalculation.FullHoursWorked[7].ToShortTimeString();
+                this.label8Time.Text = this.workingHoursCalculation.FullHoursWorked[8].ToShortTimeString();
+                this.label10Time.Text = this.workingHoursCalculation.FullHoursWorked[10].ToShortTimeString();
+            }
         }
 
         /// <summary>

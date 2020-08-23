@@ -49,6 +49,11 @@ namespace Yakka
         private static DetailForm? detailView;
 
         /// <summary>
+        /// The presenter of the detail view.
+        /// </summary>
+        private static DetailPresenter? detailPresenter;
+
+        /// <summary>
         /// The main entry point of the application.
         /// </summary>
         [STAThread]
@@ -73,6 +78,7 @@ namespace Yakka
             configurationPresenter.ConfigurationChanged += ConfigurationPresenterConfigurationChanged;
 
             detailView = new DetailForm();
+            detailPresenter = new DetailPresenter(detailView);
 
             Application.Run();
         }
@@ -85,6 +91,11 @@ namespace Yakka
         private static void MainPresenterDetails(object? sender, WorkingHoursCalculationEventArgs e)
         {
             detailView?.Show();
+
+            if (detailPresenter != null)
+            {
+                detailPresenter.WorkingHoursCalculation = e.Calculation;
+            }
         }
 
         /// <summary>
