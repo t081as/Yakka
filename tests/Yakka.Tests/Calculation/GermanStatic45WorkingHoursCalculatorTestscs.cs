@@ -27,6 +27,18 @@ namespace Yakka.Tests.Calculation
     public class GermanStatic45WorkingHoursCalculatorTestscs
     {
         /// <summary>
+        /// Tests the required metadata.
+        /// </summary>
+        [TestMethod]
+        public void MetadataTest()
+        {
+            var calulator = new GermanStatic45WorkingHoursCalculator();
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(calulator.Title));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(calulator.Description));
+        }
+
+        /// <summary>
         /// Checks the calculation.
         /// </summary>
         [TestMethod]

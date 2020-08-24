@@ -27,6 +27,18 @@ namespace Yakka.Tests.Calculation
     public class NoBreakWorkingHoursCalculatorTests
     {
         /// <summary>
+        /// Tests the required metadata.
+        /// </summary>
+        [TestMethod]
+        public void MetadataTest()
+        {
+            var calulator = new NoBreakWorkingHoursCalculator();
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(calulator.Title));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(calulator.Description));
+        }
+
+        /// <summary>
         /// Checks the calculation.
         /// </summary>
         [TestMethod]

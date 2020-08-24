@@ -27,6 +27,18 @@ namespace Yakka.Tests.Calculation
     public class GermanDefaultWorkingHoursCalculatorTests
     {
         /// <summary>
+        /// Tests the required metadata.
+        /// </summary>
+        [TestMethod]
+        public void MetadataTest()
+        {
+            var calulator = new GermanDefaultWorkingHoursCalculator();
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(calulator.Title));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(calulator.Description));
+        }
+
+        /// <summary>
         /// Checks the calculation.
         /// </summary>
         [TestMethod]
@@ -37,6 +49,14 @@ namespace Yakka.Tests.Calculation
             DateTime start;
             DateTime end;
             (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) result;
+
+            // 5h, 0m
+            end = DateTime.Now;
+            start = end - TimeSpan.FromHours(5);
+            result = calulator.Calculate(start, end);
+
+            Assert.AreEqual(0, result.breakTimeSpan.TotalMinutes);
+            Assert.AreEqual(5, result.workTimeSpan.TotalHours);
 
             // 6h, 0m
             end = DateTime.Now;
