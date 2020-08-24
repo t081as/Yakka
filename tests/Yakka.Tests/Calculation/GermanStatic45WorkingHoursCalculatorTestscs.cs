@@ -48,7 +48,7 @@ namespace Yakka.Tests.Calculation
 
             DateTime start;
             DateTime end;
-            (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) result;
+            (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, string? warning) result;
 
             // 6h, 0m
             end = DateTime.Now;

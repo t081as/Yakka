@@ -51,9 +51,10 @@ namespace Yakka.Calculation
         /// <list type="bullet">
         /// <item>workTimeSpan: a <see cref="TimeSpan"/> representing the calculated working hours.</item>
         /// <item>breakTimeSpan: a <see cref="TimeSpan"/> representing the calculated break.</item>
+        /// <item>warning: a warning regarding the calculated warning hours or <c>null</c> if there is no warning.</item>
         /// </list>
         /// </returns>
         /// <exception cref="ArgumentException"><c>startTime</c> is bigger than <c>endTime</c>.</exception>
-        (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime);
+        (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, string? warning) Calculate(DateTime startTime, DateTime endTime);
     }
 }

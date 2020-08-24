@@ -34,6 +34,13 @@ namespace Yakka.Calculation
         public override string Description => GermanStatic45WorkingHoursCalculatorResources.Description;
 
         /// <inheritdoc/>
+        public override (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, string? warning) Calculate(DateTime startTime, DateTime endTime)
+        {
+            (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, _) = base.Calculate(startTime, endTime);
+            return (workTimeSpan, breakTimeSpan, null);
+        }
+
+        /// <inheritdoc/>
         public override TimeSpan CalculateBreak(DateTime startTime, DateTime endTime)
         {
             TimeSpan workingHours = endTime - startTime;

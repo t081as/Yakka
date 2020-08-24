@@ -40,17 +40,20 @@ namespace Yakka
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            var result = new WorkingHoursCalculation();
+            var result = new WorkingHoursCalculation(configuration);
             result.Configuration = configuration;
 
             if (configuration.BreakMode == BreakMode.Automatic)
             {
-                (result.CalculatedWorkingHours, result.CalculatedBreak) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, currentTime);
+                (result.CalculatedWorkingHours, result.CalculatedBreak, result.Warning) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, currentTime);
             }
             else if (configuration.BreakMode == BreakMode.Manual)
             {
+                (_, _, string? warning) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, currentTime);
+
                 result.CalculatedBreak = configuration.ManualBreakTime;
                 result.CalculatedWorkingHours = currentTime - configuration.StartTime - result.CalculatedBreak;
+                result.Warning = warning;
             }
             else
             {
@@ -65,7 +68,7 @@ namespace Yakka
                 while (workedTimeSpan.TotalHours < hoursWorked)
                 {
                     specificEndOfWorkDay = specificEndOfWorkDay.AddMinutes(1);
-                    (workedTimeSpan, _) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, specificEndOfWorkDay);
+                    (workedTimeSpan, _, _) = configuration.WorkingHoursCalculator.Calculate(configuration.StartTime, specificEndOfWorkDay);
                 }
 
                 result.FullHoursWorked.Add(hoursWorked, specificEndOfWorkDay);
