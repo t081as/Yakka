@@ -31,7 +31,7 @@ namespace Yakka.Calculation
             {
                 return TenHoursWarningGeneratorResources.Error;
             }
-            else if (workTimeSpan.Hours == 9 && workTimeSpan.Minutes > 20)
+            else if (workTimeSpan.Hours == 9 && workTimeSpan.Minutes > 30)
             {
                 return TenHoursWarningGeneratorResources.Warning;
             }
