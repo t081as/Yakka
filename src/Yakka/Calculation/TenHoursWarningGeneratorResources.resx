@@ -121,6 +121,6 @@
     <value>10 hours of work exceeded</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>10 hours of work soon; time to stop working</value>
+    <value>10 hours of work soon</value>
   </data>
 </root>

@@ -70,7 +70,7 @@ namespace Yakka.Calculation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 10 hours of work soon; time to stop working.
+        ///   Looks up a localized string similar to 10 hours of work soon.
         /// </summary>
         internal static string Warning {
             get {
