@@ -28,7 +28,7 @@ namespace Yakka.Forms
         /// Represents the time in seconds the background thread sleeps before calculating or recalculating
         /// the working hours based on the current time.
         /// </summary>
-        private const int UPDATETIME = 30;
+        private const int UpdateTime = 30;
 
         /// <summary>
         /// Indicates if the system tray icon has been shown by the presenter.
@@ -256,7 +256,7 @@ namespace Yakka.Forms
 
                 lock (this.monitorLock)
                 {
-                    Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
+                    Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UpdateTime));
                 }
             }
         }
