@@ -24,6 +24,11 @@ namespace Yakka.Calculation
     /// </summary>
     public class GermanDefaultWorkingHoursCalculator : WorkingHoursCalculatorBase
     {
+        /// <summary>
+        /// The warning generator used by this class.
+        /// </summary>
+        private IWarningGenerator tenHoursWarningGenerator = new TenHoursWarningGenerator();
+
         /// <inheritdoc/>
         public override Guid Id => Guid.Parse("{4536F994-A4EB-4D11-9FB2-674A2ACA7177}");
 
@@ -37,7 +42,7 @@ namespace Yakka.Calculation
         public override (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, string? warning) Calculate(DateTime startTime, DateTime endTime)
         {
             (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, _) = base.Calculate(startTime, endTime);
-            return (workTimeSpan, breakTimeSpan, null);
+            return (workTimeSpan, breakTimeSpan, this.tenHoursWarningGenerator.GetWarning(workTimeSpan, breakTimeSpan));
         }
 
         /// <inheritdoc/>
