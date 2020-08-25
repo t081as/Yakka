@@ -237,9 +237,16 @@ namespace Yakka.Forms
                     {
                         if (this.configuration != null)
                         {
-                            this.view.WorkingHoursCalculation = WorkingHoursCalculator.Calculate(
+                            var calculation = WorkingHoursCalculator.Calculate(
                                 this.configuration,
                                 DateTime.Now);
+
+                            this.view.WorkingHoursCalculation = calculation;
+
+                            if (calculation.Warning != null)
+                            {
+                                this.view.ShowWarning(calculation.Warning);
+                            }
                         }
                     }
                 }
