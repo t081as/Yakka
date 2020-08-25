@@ -31,6 +31,11 @@ namespace Yakka.Forms
         private const int UpdateTime = 30;
 
         /// <summary>
+        /// The interval that shall be waited before displaying the same message to the user.
+        /// </summary>
+        private static readonly TimeSpan MessageTime = TimeSpan.FromMinutes(5);
+
+        /// <summary>
         /// Indicates if the system tray icon has been shown by the presenter.
         /// </summary>
         private bool isVisible = false;
@@ -64,6 +69,16 @@ namespace Yakka.Forms
         /// The source for the token used to cancel the calculation thread.
         /// </summary>
         private CancellationTokenSource calculationThreadCancellationTokenSource = new CancellationTokenSource();
+
+        /// <summary>
+        /// The most recent warning displayed to the user.
+        /// </summary>
+        private string? recentWarning;
+
+        /// <summary>
+        /// The time themost recent warning was displayed to the user.
+        /// </summary>
+        private DateTime recentWarningTime = DateTime.MinValue;
 
         /// <summary>
         /// Indicates if the class has already been disposed.
@@ -245,7 +260,20 @@ namespace Yakka.Forms
 
                             if (calculation.Warning != null)
                             {
-                                this.view.ShowWarning(calculation.Warning);
+                                if (calculation.Warning != this.recentWarning)
+                                {
+                                    this.recentWarning = calculation.Warning;
+                                    this.recentWarningTime = DateTime.Now;
+                                    this.view.ShowWarning(calculation.Warning);
+                                }
+                                else
+                                {
+                                    if (DateTime.Now - this.recentWarningTime > MessageTime)
+                                    {
+                                        this.recentWarningTime = DateTime.Now;
+                                        this.view.ShowWarning(calculation.Warning);
+                                    }
+                                }
                             }
                         }
                     }
