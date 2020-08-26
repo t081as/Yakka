@@ -22,18 +22,10 @@ namespace Yakka
     /// <summary>
     /// Contains methods to calculate the working hours and the break.
     /// </summary>
-    public static class WorkingHoursCalculator
+    public class DefaultCalculator : ICalculator
     {
-        /// <summary>
-        /// Calculates the working hours using the specified <see cref="IWorkingHoursCalculator"/> and the given
-        /// start of the work day.
-        /// </summary>
-        /// <param name="configuration">The working hours configuration.</param>
-        /// <param name="currentTime">The current time.</param>
-        /// <returns>An instance of <see cref="WorkingHoursCalculation"/> containing the information about the working hours.</returns>
-        /// <exception cref="ArgumentNullException"><c>calculator</c> is <c>null</c>.</exception>
-        /// <exception cref="InvalidOperationException">The working hours could not be calculated.</exception>
-        public static WorkingHoursCalculation Calculate(WorkingHoursConfiguration configuration, DateTime currentTime)
+        /// <inheritdoc />
+        public WorkingHoursCalculation Calculate(WorkingHoursConfiguration configuration, DateTime currentTime)
         {
             if (configuration == null)
             {

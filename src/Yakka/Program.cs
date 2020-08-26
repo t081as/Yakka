@@ -66,7 +66,7 @@ namespace Yakka
             configuration.StartTime = new StartTimeDetector().StartTime;
 
             using var mainView = new SystemTrayIconView();
-            mainPresenter = new SystemTrayIconPresenter(mainView, configuration);
+            mainPresenter = new SystemTrayIconPresenter(mainView, configuration, new DefaultCalculator());
             mainPresenter.Quit += MainPresenterQuit;
             mainPresenter.Configure += MainPresenterConfigure;
             mainPresenter.Info += MainPresenterInfo;

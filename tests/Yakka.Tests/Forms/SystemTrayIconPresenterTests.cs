@@ -43,7 +43,7 @@ namespace Yakka.Tests.Forms
                 detailsInvoked = true;
             };
 
-            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration(), new DefaultCalculator()))
             {
                 presenter.Details += handler;
 
@@ -69,7 +69,7 @@ namespace Yakka.Tests.Forms
                 configureInvoked = true;
             };
 
-            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration(), new DefaultCalculator()))
             {
                 presenter.Configure += handler;
 
@@ -95,7 +95,7 @@ namespace Yakka.Tests.Forms
                 infoInvoked = true;
             };
 
-            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration(), new DefaultCalculator()))
             {
                 presenter.Info += handler;
 
@@ -121,7 +121,7 @@ namespace Yakka.Tests.Forms
                 quitInvoked = true;
             };
 
-            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration()))
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, new WorkingHoursConfiguration(), new DefaultCalculator()))
             {
                 presenter.Quit += handler;
 
@@ -151,7 +151,7 @@ namespace Yakka.Tests.Forms
                 ManualBreakTime = TimeSpan.Zero,
             };
 
-            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, configuration))
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, configuration, new DefaultCalculator()))
             {
                 presenter.Show();
                 presenter.Configuration = configuration;
@@ -164,6 +164,87 @@ namespace Yakka.Tests.Forms
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result?.CalculatedWorkingHours.Hours >= 1);
+        }
+
+        /// <summary>
+        /// Tests if the presenter forwards warnings to the user interface.
+        /// If <c>the same</c> warning is triggered twice in a short time interval it shall not be displayed again.
+        /// </summary>
+        [TestMethod]
+        public void WarningSameTest()
+        {
+            uint messageDisplayCount = 0;
+            var viewMock = new Mock<ISystemTrayIconView>();
+            viewMock.Setup(m => m.ShowWarning(It.IsAny<string>())).Callback<string>(s =>
+            {
+                messageDisplayCount++;
+            });
+
+            var calculatorMock = new Mock<ICalculator>();
+            calculatorMock.Setup(m => m.Calculate(It.IsAny<WorkingHoursConfiguration>(), It.IsAny<DateTime>())).Returns(new WorkingHoursCalculation
+            {
+                CalculatedWorkingHours = TimeSpan.FromHours(1),
+                CalculatedBreak = TimeSpan.FromHours(1),
+                Configuration = new WorkingHoursConfiguration(),
+                Warning = "Test warning",
+            });
+
+            var configuration = new WorkingHoursConfiguration();
+
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, configuration, calculatorMock.Object))
+            {
+                Assert.AreEqual(0u, messageDisplayCount);
+                presenter.Show();
+                presenter.Configuration = configuration;
+                Thread.Sleep(1000);
+                Assert.AreEqual(1u, messageDisplayCount);
+                presenter.Configuration = configuration; // Force re-calculation and same warning
+                Thread.Sleep(1000);
+                Assert.AreEqual(1u, messageDisplayCount);
+                presenter.Hide();
+            }
+        }
+
+        /// <summary>
+        /// Tests if the presenter forwards warnings to the user interface.
+        /// If <c>a different</c> warning is triggered twice in a short time interval it shall be displayed.
+        /// </summary>
+        [TestMethod]
+        public void WarningDifferentTest()
+        {
+            int messageDisplayCount = 0;
+            var viewMock = new Mock<ISystemTrayIconView>();
+            viewMock.Setup(m => m.ShowWarning(It.IsAny<string>())).Callback<string>(s =>
+            {
+                messageDisplayCount++;
+            });
+
+            var calculatorMock = new Mock<ICalculator>();
+            calculatorMock.Setup(m => m.Calculate(It.IsAny<WorkingHoursConfiguration>(), It.IsAny<DateTime>())).Returns((WorkingHoursConfiguration w, DateTime d) =>
+            {
+                return new WorkingHoursCalculation
+                {
+                    CalculatedWorkingHours = TimeSpan.FromHours(1),
+                    CalculatedBreak = TimeSpan.FromHours(1),
+                    Configuration = new WorkingHoursConfiguration(),
+                    Warning = $"Test warning {messageDisplayCount}",
+                };
+            });
+
+            var configuration = new WorkingHoursConfiguration();
+
+            using (var presenter = new SystemTrayIconPresenter(viewMock.Object, configuration, calculatorMock.Object))
+            {
+                Assert.AreEqual(0, messageDisplayCount);
+                presenter.Show();
+                presenter.Configuration = configuration;
+                Thread.Sleep(1000);
+                Assert.AreEqual(1, messageDisplayCount);
+                presenter.Configuration = configuration; // Force re-calculation and different warning
+                Thread.Sleep(1000);
+                Assert.AreEqual(2, messageDisplayCount);
+                presenter.Hide();
+            }
         }
     }
 }
