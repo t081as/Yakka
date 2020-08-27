@@ -238,10 +238,10 @@ namespace Yakka.Tests.Forms
                 Assert.AreEqual(0, messageDisplayCount);
                 presenter.Show();
                 presenter.Configuration = configuration;
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 Assert.AreEqual(1, messageDisplayCount);
                 presenter.Configuration = configuration; // Force re-calculation and different warning
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 Assert.AreEqual(2, messageDisplayCount);
                 presenter.Hide();
             }
