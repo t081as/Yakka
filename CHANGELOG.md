@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [0.7.0] - 2020-08-27
 - Added warning infrastructure
 
 ## [0.6.0] - 2020-08-23
