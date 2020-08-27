@@ -44,6 +44,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>NoBreakWorkingHoursCalculatorResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Calculation\TenHoursWarningGeneratorResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TenHoursWarningGeneratorResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Calculation\WorkingHoursCalculatorResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -88,6 +93,10 @@
     <EmbeddedResource Update="Calculation\NoBreakWorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>NoBreakWorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Calculation\TenHoursWarningGeneratorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TenHoursWarningGeneratorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Calculation\WorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

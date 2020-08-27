@@ -33,7 +33,7 @@ namespace Yakka.Calculation
         public abstract string Description { get; }
 
         /// <inheritdoc/>
-        public (TimeSpan workTimeSpan, TimeSpan breakTimeSpan) Calculate(DateTime startTime, DateTime endTime)
+        public virtual (TimeSpan workTimeSpan, TimeSpan breakTimeSpan, string? warning) Calculate(DateTime startTime, DateTime endTime)
         {
             if (startTime > endTime)
             {
@@ -42,7 +42,7 @@ namespace Yakka.Calculation
 
             var calculatedBreak = this.CalculateBreak(startTime, endTime);
 
-            return (endTime - startTime - calculatedBreak, calculatedBreak);
+            return (endTime - startTime - calculatedBreak, calculatedBreak, null);
         }
 
         /// <summary>

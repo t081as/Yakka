@@ -36,6 +36,7 @@ namespace Yakka
         /// </summary>
         /// <param name="configuration">The <see cref="WorkingHoursConfiguration"/> that shall be used.</param>
         public WorkingHoursCalculation(WorkingHoursConfiguration configuration)
+            : this()
         {
             this.Configuration = configuration;
         }
@@ -63,5 +64,11 @@ namespace Yakka
         /// </summary>
         /// <value>A dictionary containing the <see cref="DateTime"/> of full working hours.</value>
         public IDictionary<int, DateTime> FullHoursWorked { get; } = new Dictionary<int, DateTime>();
+
+        /// <summary>
+        /// Gets or sets a warning that shall be displayed to the user.
+        /// </summary>
+        /// <value>A warning that shall be displayed to the user or <c>null</c> if there is no warning.</value>
+        public string? Warning { get; set; } = null;
     }
 }

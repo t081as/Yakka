@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Added warning infrastructure
+
 ## [0.6.0] - 2020-08-23
 - Added full screen working hours information
 

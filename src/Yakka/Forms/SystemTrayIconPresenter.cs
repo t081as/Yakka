@@ -28,7 +28,12 @@ namespace Yakka.Forms
         /// Represents the time in seconds the background thread sleeps before calculating or recalculating
         /// the working hours based on the current time.
         /// </summary>
-        private const int UPDATETIME = 30;
+        private const int UpdateTime = 30;
+
+        /// <summary>
+        /// The interval that shall be waited before displaying the same message to the user.
+        /// </summary>
+        private static readonly TimeSpan MessageTime = TimeSpan.FromMinutes(5);
 
         /// <summary>
         /// Indicates if the system tray icon has been shown by the presenter.
@@ -56,6 +61,11 @@ namespace Yakka.Forms
         private Thread? calculationThread;
 
         /// <summary>
+        /// The calculator that shall be used.
+        /// </summary>
+        private ICalculator calculator;
+
+        /// <summary>
         /// Represents the object used to lock the <see cref="Monitor"/>.
         /// </summary>
         private object monitorLock = new object();
@@ -64,6 +74,16 @@ namespace Yakka.Forms
         /// The source for the token used to cancel the calculation thread.
         /// </summary>
         private CancellationTokenSource calculationThreadCancellationTokenSource = new CancellationTokenSource();
+
+        /// <summary>
+        /// The most recent warning displayed to the user.
+        /// </summary>
+        private string? recentWarning;
+
+        /// <summary>
+        /// The time themost recent warning was displayed to the user.
+        /// </summary>
+        private DateTime recentWarningTime = DateTime.MinValue;
 
         /// <summary>
         /// Indicates if the class has already been disposed.
@@ -75,9 +95,10 @@ namespace Yakka.Forms
         /// </summary>
         /// <param name="view">The view that shall be used.</param>
         /// <param name="configuration">The reference to the configuration.</param>
+        /// <param name="calculator">The calculator that shall be used.</param>
         /// <exception cref="ArgumentNullException"><c>view</c> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
-        public SystemTrayIconPresenter(ISystemTrayIconView view, WorkingHoursConfiguration configuration)
+        public SystemTrayIconPresenter(ISystemTrayIconView view, WorkingHoursConfiguration configuration, ICalculator calculator)
         {
             if (view == null)
             {
@@ -91,6 +112,7 @@ namespace Yakka.Forms
 
             this.view = view;
             this.configuration = configuration;
+            this.calculator = calculator;
         }
 
         /// <summary>
@@ -237,9 +259,22 @@ namespace Yakka.Forms
                     {
                         if (this.configuration != null)
                         {
-                            this.view.WorkingHoursCalculation = WorkingHoursCalculator.Calculate(
+                            var calculation = this.calculator.Calculate(
                                 this.configuration,
                                 DateTime.Now);
+
+                            this.view.WorkingHoursCalculation = calculation;
+
+                            if (calculation.Warning != null)
+                            {
+                                if (calculation.Warning != this.recentWarning ||
+                                    (calculation.Warning != null && DateTime.Now - this.recentWarningTime > MessageTime))
+                                {
+                                    this.recentWarning = calculation.Warning;
+                                    this.recentWarningTime = DateTime.Now;
+                                    this.view.ShowWarning(calculation.Warning);
+                                }
+                            }
                         }
                     }
                 }
@@ -249,7 +284,7 @@ namespace Yakka.Forms
 
                 lock (this.monitorLock)
                 {
-                    Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UPDATETIME));
+                    Monitor.Wait(this.monitorLock, TimeSpan.FromSeconds(UpdateTime));
                 }
             }
         }

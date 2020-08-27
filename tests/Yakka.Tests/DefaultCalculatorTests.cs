@@ -21,19 +21,20 @@ using Yakka.Calculation;
 namespace Yakka.Tests
 {
     /// <summary>
-    /// Contains unit tests of the <see cref="WorkingHoursCalculator"/> class.
+    /// Contains unit tests of the <see cref="DefaultCalculator"/> class.
     /// </summary>
     [TestClass]
-    public class WorkingHoursCalculatorTests
+    public class DefaultCalculatorTests
     {
         /// <summary>
-        /// Tests the <see cref="WorkingHoursCalculator.Calculate(WorkingHoursConfiguration, DateTime)"/> method.
+        /// Tests the <see cref="DefaultCalculator.Calculate(WorkingHoursConfiguration, DateTime)"/> method.
         /// </summary>
         [TestMethod]
         public void CalculateTest()
         {
             var startTime = new DateTime(2020, 8, 22, 8, 0, 0);
             var nowTime = new DateTime(2020, 8, 22, 15, 0, 0);
+            var calculator = new DefaultCalculator();
 
             var configuration1 = new WorkingHoursConfiguration
             {
@@ -43,7 +44,7 @@ namespace Yakka.Tests
                 ManualBreakTime = TimeSpan.Zero,
             };
 
-            var calculation1 = WorkingHoursCalculator.Calculate(configuration1, nowTime);
+            var calculation1 = calculator.Calculate(configuration1, nowTime);
             Assert.AreEqual(7, calculation1.CalculatedWorkingHours.Hours);
 
             var configuration2 = new WorkingHoursConfiguration
@@ -54,7 +55,7 @@ namespace Yakka.Tests
                 ManualBreakTime = TimeSpan.FromMinutes(15),
             };
 
-            var calculation2 = WorkingHoursCalculator.Calculate(configuration2, nowTime);
+            var calculation2 = calculator.Calculate(configuration2, nowTime);
             Assert.AreEqual(6, calculation2.CalculatedWorkingHours.Hours);
             Assert.AreEqual(45, calculation2.CalculatedWorkingHours.Minutes);
             Assert.AreEqual(15, calculation2.CalculatedBreak.Minutes);
