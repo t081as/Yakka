@@ -54,6 +54,11 @@ namespace Yakka
         private static DetailPresenter? detailPresenter;
 
         /// <summary>
+        /// The about view.
+        /// </summary>
+        private static AboutForm? aboutView;
+
+        /// <summary>
         /// The main entry point of the application.
         /// </summary>
         [STAThread]
@@ -79,6 +84,8 @@ namespace Yakka
 
             detailView = new DetailForm();
             detailPresenter = new DetailPresenter(detailView);
+
+            aboutView = new AboutForm();
 
             Application.Run();
         }
@@ -119,7 +126,7 @@ namespace Yakka
         /// <param name="e">An empty <see cref="EventArgs"/>.</param>
         private static void MainPresenterInfo(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            aboutView?.Show();
         }
 
         /// <summary>

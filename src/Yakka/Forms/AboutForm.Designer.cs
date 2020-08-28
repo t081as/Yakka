@@ -1,4 +1,20 @@
-﻿namespace Yakka.Forms
+﻿// Yakka - A system tray application calculating and displaying your working hours
+// Copyright (C) 2017-2020  Tobias Koch
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+namespace Yakka.Forms
 {
     partial class AboutForm
     {
@@ -28,12 +44,143 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPageInformation = new System.Windows.Forms.TabPage();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.tabPageAuthors = new System.Windows.Forms.TabPage();
+            this.tabPageLicense = new System.Windows.Forms.TabPage();
+            this.textBoxLicense = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.tabPageInformation.SuspendLayout();
+            this.tabPageLicense.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tableLayoutPanel
+            // 
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.Controls.Add(this.pictureBoxLogo, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.tabControl, 0, 1);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 276F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(584, 561);
+            this.tableLayoutPanel.TabIndex = 0;
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.BackgroundImage")));
+            this.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBoxLogo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(578, 270);
+            this.pictureBoxLogo.TabIndex = 0;
+            this.pictureBoxLogo.TabStop = false;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPageInformation);
+            this.tabControl.Controls.Add(this.tabPageAuthors);
+            this.tabControl.Controls.Add(this.tabPageLicense);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(3, 279);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(578, 279);
+            this.tabControl.TabIndex = 1;
+            // 
+            // tabPageInformation
+            // 
+            this.tabPageInformation.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageInformation.Controls.Add(this.buttonClose);
+            this.tabPageInformation.Location = new System.Drawing.Point(4, 24);
+            this.tabPageInformation.Name = "tabPageInformation";
+            this.tabPageInformation.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageInformation.Size = new System.Drawing.Size(570, 251);
+            this.tabPageInformation.TabIndex = 0;
+            this.tabPageInformation.Text = "INFORMATION";
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.Location = new System.Drawing.Point(492, 223);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 0;
+            this.buttonClose.Text = "CLOSE";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            // 
+            // tabPageAuthors
+            // 
+            this.tabPageAuthors.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageAuthors.Location = new System.Drawing.Point(4, 24);
+            this.tabPageAuthors.Name = "tabPageAuthors";
+            this.tabPageAuthors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAuthors.Size = new System.Drawing.Size(570, 251);
+            this.tabPageAuthors.TabIndex = 1;
+            this.tabPageAuthors.Text = "AUTHORS";
+            // 
+            // tabPageLicense
+            // 
+            this.tabPageLicense.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageLicense.Controls.Add(this.textBoxLicense);
+            this.tabPageLicense.Location = new System.Drawing.Point(4, 24);
+            this.tabPageLicense.Name = "tabPageLicense";
+            this.tabPageLicense.Size = new System.Drawing.Size(570, 251);
+            this.tabPageLicense.TabIndex = 2;
+            this.tabPageLicense.Text = "LICENSE";
+            // 
+            // textBoxLicense
+            // 
+            this.textBoxLicense.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBoxLicense.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxLicense.Location = new System.Drawing.Point(0, 0);
+            this.textBoxLicense.Multiline = true;
+            this.textBoxLicense.Name = "textBoxLicense";
+            this.textBoxLicense.ReadOnly = true;
+            this.textBoxLicense.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxLicense.Size = new System.Drawing.Size(570, 251);
+            this.textBoxLicense.TabIndex = 0;
+            // 
+            // AboutForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "AboutForm";
+            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.Controls.Add(this.tableLayoutPanel);
+            this.MinimumSize = new System.Drawing.Size(600, 600);
+            this.Name = "AboutForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ABOUT";
+            this.tableLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.tabControl.ResumeLayout(false);
+            this.tabPageInformation.ResumeLayout(false);
+            this.tabPageLicense.ResumeLayout(false);
+            this.tabPageLicense.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPageInformation;
+        private System.Windows.Forms.TabPage tabPageAuthors;
+        private System.Windows.Forms.TabPage tabPageLicense;
+        private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.TextBox textBoxLicense;
     }
 }
