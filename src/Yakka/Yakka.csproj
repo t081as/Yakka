@@ -136,4 +136,7 @@
     </None>
   </ItemGroup>
 
+  <Import Project=".\AssemblyInfo.props" />
+  <Import Project=".\Version.props" />
+
 </Project>
