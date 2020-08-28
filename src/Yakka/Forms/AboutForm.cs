@@ -22,22 +22,75 @@ using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using Mjolnir.IO;
 
 namespace Yakka.Forms
 {
     /// <summary>
     /// Represents the window that shows application information.
     /// </summary>
-    public partial class AboutForm : Form
+    public partial class AboutForm : Form, IAboutView
     {
+        /// <summary>
+        /// The list of the software authors.
+        /// </summary>
+        private IEnumerable<Author> authors;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AboutForm"/> class.
         /// </summary>
         public AboutForm()
         {
+            this.authors = new List<Author>();
+
             this.InitializeComponent();
 
             this.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+        }
+
+        /// <inheritdoc />
+        public string ApplicationName
+        {
+            get => this.labelName.Text;
+            set => this.labelName.Text = value;
+        }
+
+        /// <inheritdoc />
+        public string ApplicationVersion
+        {
+            get => this.labelVersion.Text;
+            set => this.labelVersion.Text = value;
+        }
+
+        /// <inheritdoc />
+        public string ApplicationDescription
+        {
+            get => this.labelDescription.Text;
+            set => this.labelDescription.Text = value;
+        }
+
+        /// <inheritdoc />
+        public string ApplicatioCopyright
+        {
+            get => this.labelCopyright.Text;
+            set => this.labelCopyright.Text = value;
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Author> Authors
+        {
+            get => this.authors;
+            set
+            {
+                this.authors = value;
+            }
+        }
+
+        /// <inheritdoc />
+        public string LicenseText
+        {
+            get => this.textBoxLicense.Text;
+            set => this.labelCopyright.Text = value;
         }
     }
 }
