@@ -54,6 +54,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WorkingHoursCalculatorResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Forms\AboutFormResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AboutFormResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Forms\ConfigurationFormResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -101,6 +106,10 @@
     <EmbeddedResource Update="Calculation\WorkingHoursCalculatorResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\AboutFormResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AboutFormResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\ConfigurationFormResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

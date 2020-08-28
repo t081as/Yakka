@@ -54,16 +54,21 @@ namespace Yakka.Forms
             this.labelVersion = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
+            this.labelCopyright = new System.Windows.Forms.Label();
             this.tabPageAuthors = new System.Windows.Forms.TabPage();
             this.tabPageLicense = new System.Windows.Forms.TabPage();
             this.textBoxLicense = new System.Windows.Forms.TextBox();
-            this.labelCopyright = new System.Windows.Forms.Label();
+            this.panelAuthors = new System.Windows.Forms.Panel();
+            this.pictureBoxAuthors = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageInformation.SuspendLayout();
             this.tableLayoutPanelInformation.SuspendLayout();
+            this.tabPageAuthors.SuspendLayout();
             this.tabPageLicense.SuspendLayout();
+            this.panelAuthors.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthors)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -180,9 +185,20 @@ namespace Yakka.Forms
             this.labelName.Text = "NAME";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // labelCopyright
+            // 
+            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelCopyright.Location = new System.Drawing.Point(3, 147);
+            this.labelCopyright.Name = "labelCopyright";
+            this.labelCopyright.Size = new System.Drawing.Size(558, 49);
+            this.labelCopyright.TabIndex = 2;
+            this.labelCopyright.Text = "COPYRIGHT";
+            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tabPageAuthors
             // 
             this.tabPageAuthors.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tabPageAuthors.Controls.Add(this.panelAuthors);
             this.tabPageAuthors.Location = new System.Drawing.Point(4, 24);
             this.tabPageAuthors.Name = "tabPageAuthors";
             this.tabPageAuthors.Padding = new System.Windows.Forms.Padding(3);
@@ -212,15 +228,26 @@ namespace Yakka.Forms
             this.textBoxLicense.Size = new System.Drawing.Size(570, 251);
             this.textBoxLicense.TabIndex = 0;
             // 
-            // labelCopyright
+            // panelAuthors
             // 
-            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(3, 147);
-            this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(558, 49);
-            this.labelCopyright.TabIndex = 2;
-            this.labelCopyright.Text = "COPYRIGHT";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panelAuthors.AutoScroll = true;
+            this.panelAuthors.Controls.Add(this.pictureBoxAuthors);
+            this.panelAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAuthors.Location = new System.Drawing.Point(3, 3);
+            this.panelAuthors.Name = "panelAuthors";
+            this.panelAuthors.Size = new System.Drawing.Size(564, 245);
+            this.panelAuthors.TabIndex = 0;
+            // 
+            // pictureBoxAuthors
+            // 
+            this.pictureBoxAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxAuthors.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxAuthors.Name = "pictureBoxAuthors";
+            this.pictureBoxAuthors.Size = new System.Drawing.Size(564, 245);
+            this.pictureBoxAuthors.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxAuthors.TabIndex = 0;
+            this.pictureBoxAuthors.TabStop = false;
+            this.pictureBoxAuthors.Resize += new System.EventHandler(this.PictureBoxAuthorsResize);
             // 
             // AboutForm
             // 
@@ -237,8 +264,12 @@ namespace Yakka.Forms
             this.tabControl.ResumeLayout(false);
             this.tabPageInformation.ResumeLayout(false);
             this.tableLayoutPanelInformation.ResumeLayout(false);
+            this.tabPageAuthors.ResumeLayout(false);
             this.tabPageLicense.ResumeLayout(false);
             this.tabPageLicense.PerformLayout();
+            this.panelAuthors.ResumeLayout(false);
+            this.panelAuthors.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthors)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -258,5 +289,7 @@ namespace Yakka.Forms
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelCopyright;
+        private System.Windows.Forms.Panel panelAuthors;
+        private System.Windows.Forms.PictureBox pictureBoxAuthors;
     }
 }

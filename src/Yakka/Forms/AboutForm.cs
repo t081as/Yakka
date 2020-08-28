@@ -16,9 +16,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -35,6 +34,11 @@ namespace Yakka.Forms
         /// The list of the software authors.
         /// </summary>
         private IEnumerable<Author> authors;
+
+        /// <summary>
+        /// The lock object for synchronized access to the <see cref="authors"/> member.
+        /// </summary>
+        private object authorsLock = new object();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AboutForm"/> class.
@@ -79,10 +83,20 @@ namespace Yakka.Forms
         /// <inheritdoc />
         public IEnumerable<Author> Authors
         {
-            get => this.authors;
+            get
+            {
+                lock (this.authorsLock)
+                {
+                    return this.authors;
+                }
+            }
+
             set
             {
-                this.authors = value;
+                lock (this.authorsLock)
+                {
+                    this.authors = value;
+                }
             }
         }
 
@@ -91,6 +105,39 @@ namespace Yakka.Forms
         {
             get => this.textBoxLicense.Text;
             set => this.labelCopyright.Text = value;
+        }
+
+        /// <summary>
+        /// Handles the resize event of the <see cref="pictureBoxAuthors"/>.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty <see cref="EventArgs"/>.</param>
+        private void PictureBoxAuthorsResize(object sender, EventArgs e)
+        {
+            var authorsBuilder = new StringBuilder();
+
+            lock (this.authorsLock)
+            {
+                if (!this.authors.Any())
+                {
+                    return;
+                }
+
+                foreach (var author in this.authors)
+                {
+                    authorsBuilder.AppendLine($"{author.Name} <{author.EMailAddress}>");
+                }
+            }
+
+            using var font = new Font("Arial", 12f);
+            var requiredSize = TextRenderer.MeasureText(authorsBuilder.ToString(), font);
+
+            Image image = new Bitmap(this.pictureBoxAuthors.Width, requiredSize.Height);
+
+            using Graphics graphics = Graphics.FromImage(image);
+            TextRenderer.DrawText(graphics, authorsBuilder.ToString(), font, Point.Empty, Color.Black);
+
+            this.pictureBoxAuthors.Image = image;
         }
     }
 }
