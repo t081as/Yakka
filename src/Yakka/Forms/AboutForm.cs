@@ -97,6 +97,8 @@ namespace Yakka.Forms
                 {
                     this.authors = value;
                 }
+
+                this.UpdateAuthors();
             }
         }
 
@@ -108,11 +110,9 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Handles the resize event of the <see cref="pictureBoxAuthors"/>.
+        /// Updates the displayed authors list.
         /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The empty <see cref="EventArgs"/>.</param>
-        private void PictureBoxAuthorsResize(object sender, EventArgs e)
+        protected virtual void UpdateAuthors()
         {
             var authorsBuilder = new StringBuilder();
 
@@ -138,6 +138,16 @@ namespace Yakka.Forms
             TextRenderer.DrawText(graphics, authorsBuilder.ToString(), font, Point.Empty, Color.Black);
 
             this.pictureBoxAuthors.Image = image;
+        }
+
+        /// <summary>
+        /// Handles the resize event of the <see cref="pictureBoxAuthors"/>.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty <see cref="EventArgs"/>.</param>
+        private void PictureBoxAuthorsResize(object sender, EventArgs e)
+        {
+            this.UpdateAuthors();
         }
     }
 }

@@ -1,0 +1,75 @@
+﻿// Yakka - A system tray application calculating and displaying your working hours
+// Copyright (C) 2017-2020  Tobias Koch
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+using System;
+using System.Reflection;
+using Mjolnir.IO;
+
+namespace Yakka.Forms
+{
+    /// <summary>
+    /// Represents the presenter managing an <see cref="IAboutView"/>.
+    /// </summary>
+    public class AboutPresenter
+    {
+        /// <summary>
+        /// The reference to the view.
+        /// </summary>
+        private IAboutView view;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AboutPresenter"/> class.
+        /// </summary>
+        /// <param name="view">The reference to the view that shall be managed.</param>
+        public AboutPresenter(IAboutView view)
+        {
+            this.view = view ?? throw new ArgumentNullException(nameof(view));
+
+            this.LoadApplicationInformation();
+            this.LoadAuthorList();
+            this.LoadLicenseInformation();
+        }
+
+        /// <summary>
+        /// Loads application information and updates the view.
+        /// </summary>
+        private void LoadApplicationInformation()
+        {
+            var assembly = Assembly.GetEntryAssembly();
+
+            this.view.ApplicationName = assembly?.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? string.Empty;
+            this.view.ApplicationVersion = assembly?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version ?? string.Empty;
+            this.view.ApplicationDescription = assembly?.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description ?? string.Empty;
+            this.view.ApplicatioCopyright = assembly?.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Loads the author list and updates the view.
+        /// </summary>
+        private void LoadAuthorList()
+        {
+            this.view.Authors = new Author[] { new Author("Tony Test", "tony@test.de") };
+        }
+
+        /// <summary>
+        /// Loads license information and updates the view.
+        /// </summary>
+        private void LoadLicenseInformation()
+        {
+            this.view.LicenseText = string.Empty;
+        }
+    }
+}

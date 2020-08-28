@@ -19,7 +19,7 @@ using System;
 namespace Yakka.Forms
 {
     /// <summary>
-    /// Represents the presenter managing a <see cref="IConfigurationView"/>.
+    /// Represents the presenter managing an <see cref="IConfigurationView"/>.
     /// </summary>
     public class ConfigurationPresenter
     {

@@ -59,6 +59,11 @@ namespace Yakka
         private static AboutForm? aboutView;
 
         /// <summary>
+        /// The presenter of the about view.
+        /// </summary>
+        private static AboutPresenter? aboutPresenter;
+
+        /// <summary>
         /// The main entry point of the application.
         /// </summary>
         [STAThread]
@@ -86,6 +91,7 @@ namespace Yakka
             detailPresenter = new DetailPresenter(detailView);
 
             aboutView = new AboutForm();
+            aboutPresenter = new AboutPresenter(aboutView);
 
             Application.Run();
         }
