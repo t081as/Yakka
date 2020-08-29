@@ -12,6 +12,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\AUTHORS.txt" Link="AUTHORS.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\LICENSE.txt" Link="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 

@@ -106,7 +106,7 @@ namespace Yakka.Forms
         public string LicenseText
         {
             get => this.textBoxLicense.Text;
-            set => this.labelCopyright.Text = value;
+            set => this.textBoxLicense.Text = value;
         }
 
         /// <summary>
