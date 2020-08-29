@@ -97,6 +97,15 @@ namespace Yakka.Forms {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authors ordered by first contribution:.
+        /// </summary>
+        internal static string OrderText {
+            get {
+                return ResourceManager.GetString("OrderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About {0}.
         /// </summary>
         internal static string TitleText {

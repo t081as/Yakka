@@ -56,8 +56,9 @@ namespace Yakka.Forms
             this.labelName = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
             this.tabPageAuthors = new System.Windows.Forms.TabPage();
-            this.panelAuthors = new System.Windows.Forms.Panel();
-            this.pictureBoxAuthors = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanelAuthors = new System.Windows.Forms.TableLayoutPanel();
+            this.labelAuthorOrder = new System.Windows.Forms.Label();
+            this.listBoxAuthors = new System.Windows.Forms.ListBox();
             this.tabPageLicense = new System.Windows.Forms.TabPage();
             this.textBoxLicense = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel.SuspendLayout();
@@ -66,8 +67,7 @@ namespace Yakka.Forms
             this.tabPageInformation.SuspendLayout();
             this.tableLayoutPanelInformation.SuspendLayout();
             this.tabPageAuthors.SuspendLayout();
-            this.panelAuthors.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthors)).BeginInit();
+            this.tableLayoutPanelAuthors.SuspendLayout();
             this.tabPageLicense.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -199,7 +199,7 @@ namespace Yakka.Forms
             // tabPageAuthors
             // 
             this.tabPageAuthors.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tabPageAuthors.Controls.Add(this.panelAuthors);
+            this.tabPageAuthors.Controls.Add(this.tableLayoutPanelAuthors);
             this.tabPageAuthors.Location = new System.Drawing.Point(4, 24);
             this.tabPageAuthors.Name = "tabPageAuthors";
             this.tabPageAuthors.Padding = new System.Windows.Forms.Padding(3);
@@ -207,26 +207,43 @@ namespace Yakka.Forms
             this.tabPageAuthors.TabIndex = 1;
             this.tabPageAuthors.Text = "AUTHORS";
             // 
-            // panelAuthors
+            // tableLayoutPanelAuthors
             // 
-            this.panelAuthors.AutoScroll = true;
-            this.panelAuthors.Controls.Add(this.pictureBoxAuthors);
-            this.panelAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAuthors.Location = new System.Drawing.Point(3, 3);
-            this.panelAuthors.Name = "panelAuthors";
-            this.panelAuthors.Size = new System.Drawing.Size(564, 245);
-            this.panelAuthors.TabIndex = 0;
+            this.tableLayoutPanelAuthors.ColumnCount = 1;
+            this.tableLayoutPanelAuthors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelAuthors.Controls.Add(this.labelAuthorOrder, 0, 0);
+            this.tableLayoutPanelAuthors.Controls.Add(this.listBoxAuthors, 0, 1);
+            this.tableLayoutPanelAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelAuthors.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelAuthors.Name = "tableLayoutPanelAuthors";
+            this.tableLayoutPanelAuthors.RowCount = 2;
+            this.tableLayoutPanelAuthors.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanelAuthors.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelAuthors.Size = new System.Drawing.Size(564, 245);
+            this.tableLayoutPanelAuthors.TabIndex = 0;
             // 
-            // pictureBoxAuthors
+            // labelAuthorOrder
             // 
-            this.pictureBoxAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxAuthors.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxAuthors.Name = "pictureBoxAuthors";
-            this.pictureBoxAuthors.Size = new System.Drawing.Size(564, 245);
-            this.pictureBoxAuthors.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBoxAuthors.TabIndex = 0;
-            this.pictureBoxAuthors.TabStop = false;
-            this.pictureBoxAuthors.Resize += new System.EventHandler(this.PictureBoxAuthorsResize);
+            this.labelAuthorOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelAuthorOrder.Location = new System.Drawing.Point(3, 0);
+            this.labelAuthorOrder.Name = "labelAuthorOrder";
+            this.labelAuthorOrder.Size = new System.Drawing.Size(558, 30);
+            this.labelAuthorOrder.TabIndex = 0;
+            this.labelAuthorOrder.Text = "ORDER";
+            this.labelAuthorOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // listBoxAuthors
+            // 
+            this.listBoxAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxAuthors.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.listBoxAuthors.FormattingEnabled = true;
+            this.listBoxAuthors.ItemHeight = 15;
+            this.listBoxAuthors.Location = new System.Drawing.Point(3, 33);
+            this.listBoxAuthors.Name = "listBoxAuthors";
+            this.listBoxAuthors.ScrollAlwaysVisible = true;
+            this.listBoxAuthors.Size = new System.Drawing.Size(558, 209);
+            this.listBoxAuthors.TabIndex = 1;
+            this.listBoxAuthors.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBoxAuthorsDrawItem);
             // 
             // tabPageLicense
             // 
@@ -266,9 +283,7 @@ namespace Yakka.Forms
             this.tabPageInformation.ResumeLayout(false);
             this.tableLayoutPanelInformation.ResumeLayout(false);
             this.tabPageAuthors.ResumeLayout(false);
-            this.panelAuthors.ResumeLayout(false);
-            this.panelAuthors.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAuthors)).EndInit();
+            this.tableLayoutPanelAuthors.ResumeLayout(false);
             this.tabPageLicense.ResumeLayout(false);
             this.tabPageLicense.PerformLayout();
             this.ResumeLayout(false);
@@ -290,7 +305,8 @@ namespace Yakka.Forms
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Panel panelAuthors;
-        private System.Windows.Forms.PictureBox pictureBoxAuthors;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelAuthors;
+        private System.Windows.Forms.Label labelAuthorOrder;
+        private System.Windows.Forms.ListBox listBoxAuthors;
     }
 }

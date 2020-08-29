@@ -38,6 +38,11 @@ namespace Yakka.Forms
         public const string ThirdPartyLicenseTextFile = "NOTICE.txt";
 
         /// <summary>
+        /// The name of the author text file.
+        /// </summary>
+        public const string AuthorTextFile = "AUTHORS.txt";
+
+        /// <summary>
         /// The reference to the view.
         /// </summary>
         private IAboutView view;
@@ -76,7 +81,14 @@ namespace Yakka.Forms
         /// </summary>
         private void LoadAuthorList()
         {
-            this.view.Authors = new Author[] { new Author("Tony Test", "tony@test.de"), new Author("Tom Test", "tom@test.de") };
+            var applicationPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+            var authorsFile = Path.Combine(applicationPath, AuthorTextFile);
+
+            if (File.Exists(authorsFile))
+            {
+                using var authorsStream = File.OpenRead(authorsFile);
+                this.view.Authors = Author.From(authorsStream);
+            }
         }
 
         /// <summary>

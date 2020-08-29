@@ -37,7 +37,7 @@ namespace Yakka.Forms
         private IEnumerable<Author> authors;
 
         /// <summary>
-        /// The lock object for synchronized access to the <see cref="authors"/> member.
+        /// Serves as lock object for the synchronized access to the <see cref="authors"/> member.
         /// </summary>
         private object authorsLock = new object();
 
@@ -50,12 +50,15 @@ namespace Yakka.Forms
 
             this.InitializeComponent();
 
+            this.listBoxAuthors.ItemHeight = 40;
+
             this.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
             this.Text = string.Format(CultureInfo.CurrentCulture, AboutFormResources.TitleText, string.Empty).Trim();
             this.tabPageInformation.Text = AboutFormResources.InformationText;
             this.tabPageAuthors.Text = AboutFormResources.AuthorsText;
             this.tabPageLicense.Text = AboutFormResources.LicenseText;
             this.buttonClose.Text = AboutFormResources.CloseText;
+            this.labelAuthorOrder.Text = AboutFormResources.OrderText;
         }
 
         /// <inheritdoc />
@@ -105,10 +108,14 @@ namespace Yakka.Forms
             {
                 lock (this.authorsLock)
                 {
-                    this.authors = value;
+                    this.authors = value ?? throw new ArgumentNullException(nameof(value));
                 }
 
-                this.UpdateAuthors();
+                this.listBoxAuthors.Items.Clear();
+                foreach (var author in value)
+                {
+                    this.listBoxAuthors.Items.Add(author);
+                }
             }
         }
 
@@ -120,49 +127,6 @@ namespace Yakka.Forms
         }
 
         /// <summary>
-        /// Updates the displayed authors list.
-        /// </summary>
-        protected virtual void UpdateAuthors()
-        {
-            var authorsBuilder = new StringBuilder();
-
-            lock (this.authorsLock)
-            {
-                if (!this.authors.Any())
-                {
-                    return;
-                }
-
-                foreach (var author in this.authors)
-                {
-                    authorsBuilder.AppendLine($"{author.Name} <{author.EMailAddress}>");
-                }
-            }
-
-            using var font = new Font("Arial", 12f);
-            var requiredSize = TextRenderer.MeasureText(authorsBuilder.ToString(), font);
-
-            Image image = new Bitmap(this.pictureBoxAuthors.Width, requiredSize.Height);
-
-            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.WordBreak;
-
-            using Graphics graphics = Graphics.FromImage(image);
-            TextRenderer.DrawText(graphics, authorsBuilder.ToString(), font, Point.Empty, Color.Black, flags);
-
-            this.pictureBoxAuthors.Image = image;
-        }
-
-        /// <summary>
-        /// Handles the resize event of the <see cref="pictureBoxAuthors"/>.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The empty <see cref="EventArgs"/>.</param>
-        private void PictureBoxAuthorsResize(object sender, EventArgs e)
-        {
-            this.UpdateAuthors();
-        }
-
-        /// <summary>
         /// Handles the click event of the <see cref="buttonClose"/>.
         /// </summary>
         /// <param name="sender">The event sender.</param>
@@ -170,6 +134,22 @@ namespace Yakka.Forms
         private void ButtonCloseClick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ListBoxAuthorsDrawItem(object sender, DrawItemEventArgs e)
+        {
+            Author item;
+
+            lock (this.authorsLock)
+            {
+                item = this.authors.ElementAt(e.Index);
+            }
+
+            using var foregroundBrush = new SolidBrush(this.listBoxAuthors.ForeColor);
+            using var backgroundBrush = new SolidBrush(this.listBoxAuthors.BackColor);
+
+            e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+            e.Graphics.DrawString($"{item.Name}\n{item.EMailAddress}", e.Font, foregroundBrush, new PointF(e.Bounds.X + 5, e.Bounds.Y));
         }
     }
 }
