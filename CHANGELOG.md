@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [1.0.0] - 2020-08-29
 - Added german translation (#7)
 
 ## [0.8.0] - 2020-08-29
