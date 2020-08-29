@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [0.8.0] - 2020-08-29
 - Added "About" dialog
 
 ## [0.7.0] - 2020-08-27
