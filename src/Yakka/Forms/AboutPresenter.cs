@@ -62,8 +62,11 @@ namespace Yakka.Forms
         {
             var assembly = Assembly.GetEntryAssembly();
 
+            var assemblyVersion = assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? string.Empty;
+            var assemblyFileVersion = assembly?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version ?? string.Empty;
+
             this.view.ApplicationName = assembly?.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? string.Empty;
-            this.view.ApplicationVersion = assembly?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version ?? string.Empty;
+            this.view.ApplicationVersion = $"{assemblyVersion} ({assemblyFileVersion})";
             this.view.ApplicationDescription = assembly?.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description ?? string.Empty;
             this.view.ApplicatioCopyright = assembly?.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? string.Empty;
         }
