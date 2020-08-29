@@ -134,8 +134,10 @@ namespace Yakka.Forms
 
             Image image = new Bitmap(this.pictureBoxAuthors.Width, requiredSize.Height);
 
+            TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.WordBreak;
+
             using Graphics graphics = Graphics.FromImage(image);
-            TextRenderer.DrawText(graphics, authorsBuilder.ToString(), font, Point.Empty, Color.Black);
+            TextRenderer.DrawText(graphics, authorsBuilder.ToString(), font, Point.Empty, Color.Black, flags);
 
             this.pictureBoxAuthors.Image = image;
         }

@@ -15,7 +15,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using System.Reflection;
+using System.Text;
 using Mjolnir.IO;
 
 namespace Yakka.Forms
@@ -25,6 +27,16 @@ namespace Yakka.Forms
     /// </summary>
     public class AboutPresenter
     {
+        /// <summary>
+        /// The name of the license text file.
+        /// </summary>
+        public const string LicenseTextFile = "LICENSE.txt";
+
+        /// <summary>
+        /// The name of the text file containing the licenses of third party components.
+        /// </summary>
+        public const string ThirdPartyLicenseTextFile = "THIRD-PARTY-LICENSES.txt";
+
         /// <summary>
         /// The reference to the view.
         /// </summary>
@@ -61,7 +73,7 @@ namespace Yakka.Forms
         /// </summary>
         private void LoadAuthorList()
         {
-            this.view.Authors = new Author[] { new Author("Tony Test", "tony@test.de") };
+            this.view.Authors = new Author[] { new Author("Tony Test", "tony@test.de"), new Author("Tom Test", "tom@test.de") };
         }
 
         /// <summary>
@@ -69,7 +81,24 @@ namespace Yakka.Forms
         /// </summary>
         private void LoadLicenseInformation()
         {
-            this.view.LicenseText = string.Empty;
+            var applicationPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+            var licenseFile = Path.Combine(applicationPath, LicenseTextFile);
+            var thirdPartyFile = Path.Combine(applicationPath, ThirdPartyLicenseTextFile);
+
+            var licenseInformationBuilder = new StringBuilder();
+
+            if (File.Exists(licenseFile))
+            {
+                licenseInformationBuilder.AppendLine(File.ReadAllText(licenseFile));
+                licenseInformationBuilder.AppendLine();
+            }
+
+            if (File.Exists(thirdPartyFile))
+            {
+                licenseInformationBuilder.AppendLine(File.ReadAllText(thirdPartyFile));
+            }
+
+            this.view.LicenseText = licenseInformationBuilder.ToString();
         }
     }
 }
