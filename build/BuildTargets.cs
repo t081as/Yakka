@@ -107,6 +107,10 @@ class BuildTargets : NukeBuild
                     .SetAssemblyVersion(version)
                     .SetFileVersion(version)
                     .EnableNoRestore());
+
+                BuildDirectory.GlobFiles("*.dev.*").ForEach(DeleteFile);
+                BuildDirectory.GlobFiles("*.deps.json").ForEach(DeleteFile); // dependencies will be shipped
+                DeleteFile(BuildDirectory / "Yakka.xml"); // source code documentation xml
             }
             else
             {
@@ -164,6 +168,11 @@ class BuildTargets : NukeBuild
                 .SetFileVersion(version)
                 .SetRuntime("win-x64"));
 
+            CopyFile(RootDirectory / "AUTHORS.txt", PublishDirectory / "win-x64" / "AUTHORS.txt");
+            CopyFile(RootDirectory / "CHANGELOG.md", PublishDirectory / "win-x64" / "CHANGELOG.txt");
+            CopyFile(RootDirectory / "LICENSE.txt", PublishDirectory / "win-x64" / "LICENSE.txt");
+            CopyFile(RootDirectory / "NOTICE.txt", PublishDirectory / "win-x64" / "NOTICE.txt");
+
             DotNetPublish(_ => _
                 .SetConfiguration(Configuration)
                 .AddProperty("DebugType", "None")
@@ -177,6 +186,11 @@ class BuildTargets : NukeBuild
                 .SetAssemblyVersion(version)
                 .SetFileVersion(version)
                 .SetRuntime("win-x86"));
+
+            CopyFile(RootDirectory / "AUTHORS.txt", PublishDirectory / "win-x86" / "AUTHORS.txt");
+            CopyFile(RootDirectory / "CHANGELOG.md", PublishDirectory / "win-x86" / "CHANGELOG.txt");
+            CopyFile(RootDirectory / "LICENSE.txt", PublishDirectory / "win-x86" / "LICENSE.txt");
+            CopyFile(RootDirectory / "NOTICE.txt", PublishDirectory / "win-x86" / "NOTICE.txt");
 
             string versionLabel = semanticVersion.Contains(DevMarker) switch
             {
