@@ -72,7 +72,7 @@ namespace Yakka.Forms
 
             this.view.ApplicationName = assembly?.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? string.Empty;
             this.view.ApplicationVersion = $"{assemblyVersion} ({assemblyFileVersion})";
-            this.view.ApplicationDescription = assembly?.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description ?? string.Empty;
+            this.view.ApplicationDescription = GlobalResources.Description;
             this.view.ApplicatioCopyright = assembly?.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? string.Empty;
         }
 

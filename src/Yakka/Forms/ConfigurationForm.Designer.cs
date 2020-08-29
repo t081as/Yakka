@@ -116,9 +116,9 @@ namespace Yakka.Forms
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(373, 99);
+            this.buttonCancel.Location = new System.Drawing.Point(363, 99);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(85, 23);
             this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "CANCEL";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -126,9 +126,9 @@ namespace Yakka.Forms
             // 
             // buttonApply
             // 
-            this.buttonApply.Location = new System.Drawing.Point(292, 99);
+            this.buttonApply.Location = new System.Drawing.Point(272, 99);
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(75, 23);
+            this.buttonApply.Size = new System.Drawing.Size(85, 23);
             this.buttonApply.TabIndex = 5;
             this.buttonApply.Text = "APPLY";
             this.buttonApply.UseVisualStyleBackColor = true;
@@ -136,9 +136,9 @@ namespace Yakka.Forms
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Location = new System.Drawing.Point(211, 99);
+            this.buttonConfirm.Location = new System.Drawing.Point(181, 99);
             this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
+            this.buttonConfirm.Size = new System.Drawing.Size(85, 23);
             this.buttonConfirm.TabIndex = 5;
             this.buttonConfirm.Text = "OK";
             this.buttonConfirm.UseVisualStyleBackColor = true;
