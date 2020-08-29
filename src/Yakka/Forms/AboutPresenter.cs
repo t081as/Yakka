@@ -35,7 +35,7 @@ namespace Yakka.Forms
         /// <summary>
         /// The name of the text file containing the licenses of third party components.
         /// </summary>
-        public const string ThirdPartyLicenseTextFile = "THIRD-PARTY-LICENSES.txt";
+        public const string ThirdPartyLicenseTextFile = "NOTICE.txt";
 
         /// <summary>
         /// The reference to the view.

@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -50,13 +51,22 @@ namespace Yakka.Forms
             this.InitializeComponent();
 
             this.Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            this.Text = string.Format(CultureInfo.CurrentCulture, AboutFormResources.TitleText, string.Empty).Trim();
+            this.tabPageInformation.Text = AboutFormResources.InformationText;
+            this.tabPageAuthors.Text = AboutFormResources.AuthorsText;
+            this.tabPageLicense.Text = AboutFormResources.LicenseText;
+            this.buttonClose.Text = AboutFormResources.CloseText;
         }
 
         /// <inheritdoc />
         public string ApplicationName
         {
             get => this.labelName.Text;
-            set => this.labelName.Text = value;
+            set
+            {
+                this.labelName.Text = value;
+                this.Text = string.Format(CultureInfo.CurrentCulture, AboutFormResources.TitleText, value).Trim();
+            }
         }
 
         /// <inheritdoc />
@@ -150,6 +160,16 @@ namespace Yakka.Forms
         private void PictureBoxAuthorsResize(object sender, EventArgs e)
         {
             this.UpdateAuthors();
+        }
+
+        /// <summary>
+        /// Handles the click event of the <see cref="buttonClose"/>.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The empty <see cref="EventArgs"/>.</param>
+        private void ButtonCloseClick(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
