@@ -35,16 +35,11 @@ namespace Yakka.Forms
         /// <param name="configuration">The working hours configuration.</param>
         public ConfigurationPresenter(IConfigurationView view, WorkingHoursConfiguration configuration)
         {
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
             this.view = view ?? throw new ArgumentNullException(nameof(view));
 
             this.view.Changed += this.View_Changed;
 
-            this.view.StartTime = configuration.StartTime;
+            this.view.StartTime = configuration?.StartTime ?? throw new ArgumentNullException(nameof(configuration));
             this.view.WorkingHoursCalculator = configuration.WorkingHoursCalculator;
             this.view.BreakMode = configuration.BreakMode;
             this.view.ManualBreakTime = configuration.ManualBreakTime;
