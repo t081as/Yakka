@@ -89,10 +89,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SystemTrayIconViewResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Global.Designer.cs">
+    <Compile Update="GlobalResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Global.resx</DependentUpon>
+      <DependentUpon>GlobalResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -143,9 +143,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SystemTrayIconViewResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Global.resx">
+    <EmbeddedResource Update="GlobalResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Global.Designer.cs</LastGenOutput>
+      <LastGenOutput>GlobalResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
