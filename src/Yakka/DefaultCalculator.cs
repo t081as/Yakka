@@ -27,12 +27,7 @@ namespace Yakka
         /// <inheritdoc />
         public WorkingHoursCalculation Calculate(WorkingHoursConfiguration configuration, DateTime currentTime)
         {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            var result = new WorkingHoursCalculation(configuration);
+            var result = new WorkingHoursCalculation(configuration ?? throw new ArgumentNullException(nameof(configuration)));
             result.Configuration = configuration;
 
             if (configuration.BreakMode == BreakMode.Automatic)

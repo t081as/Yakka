@@ -119,7 +119,10 @@ namespace Yakka
         /// <param name="e">An empty <see cref="EventArgs"/>.</param>
         private static void MainPresenterInfo(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            using var aboutView = new AboutForm();
+            var aboutPresenter = new AboutPresenter(aboutView);
+
+            aboutView.ShowDialog();
         }
 
         /// <summary>

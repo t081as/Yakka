@@ -12,6 +12,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\NOTICE.txt" Link="NOTICE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\AUTHORS.txt" Link="AUTHORS.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\LICENSE.txt" Link="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
@@ -53,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>WorkingHoursCalculatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\AboutFormResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AboutFormResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Forms\ConfigurationFormResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -102,6 +122,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkingHoursCalculatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Forms\AboutFormResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AboutFormResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Forms\ConfigurationFormResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ConfigurationFormResources.Designer.cs</LastGenOutput>
@@ -126,5 +150,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+
+  <Import Project=".\AssemblyInfo.props" />
+  <Import Project=".\Version.props" />
 
 </Project>

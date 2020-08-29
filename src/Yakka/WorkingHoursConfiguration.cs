@@ -63,12 +63,7 @@ namespace Yakka
         /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
         public static void Save(WorkingHoursConfiguration configuration)
         {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            Properties.Settings.Default.StartTime = configuration.StartTime;
+            Properties.Settings.Default.StartTime = configuration?.StartTime ?? throw new ArgumentNullException(nameof(configuration));
             Properties.Settings.Default.WorkingHoursCalculator = configuration.WorkingHoursCalculator?.Id ?? Guid.Empty;
             Properties.Settings.Default.BreakMode = (byte)configuration.BreakMode;
             Properties.Settings.Default.ManualBreakTime = configuration.ManualBreakTime;

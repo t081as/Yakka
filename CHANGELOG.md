@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Added "About" dialog
+
 ## [0.7.0] - 2020-08-27
 - Added warning infrastructure
 

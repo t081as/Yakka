@@ -1,0 +1,15 @@
+<Project>
+
+  <PropertyGroup>
+    <PackageId>Yakka</PackageId>
+    <Authors>Tobias Koch</Authors>
+    <Company>Tobias Koch</Company>
+    <Product>Yakka</Product>
+    <Description>A system tray application calculating and displaying your working hours</Description>
+    <Copyright>Copyright © 2017-2020 Tobias Koch</Copyright>
+    <RepositoryUrl>https://gitlab.com/tobiaskoch/Yakka.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+  
+</Project>

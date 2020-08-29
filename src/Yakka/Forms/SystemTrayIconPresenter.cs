@@ -100,18 +100,8 @@ namespace Yakka.Forms
         /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
         public SystemTrayIconPresenter(ISystemTrayIconView view, WorkingHoursConfiguration configuration, ICalculator calculator)
         {
-            if (view == null)
-            {
-                throw new ArgumentNullException(nameof(view));
-            }
-
-            if (configuration == null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            this.view = view;
-            this.configuration = configuration;
+            this.view = view ?? throw new ArgumentNullException(nameof(view));
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             this.calculator = calculator;
         }
 
