@@ -65,7 +65,7 @@ namespace Yakka.Forms
         /// </summary>
         private void LoadApplicationInformation()
         {
-            var assembly = Assembly.GetEntryAssembly();
+            var assembly = Assembly.GetExecutingAssembly();
 
             var assemblyVersion = assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? string.Empty;
             var assemblyFileVersion = assembly?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version ?? string.Empty;
