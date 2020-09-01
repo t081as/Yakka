@@ -126,4 +126,13 @@
   <data name="QuitText" xml:space="preserve">
     <value>Beenden</value>
   </data>
+  <data name="TooltipBreak" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="TooltipStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="TooltipWorkingHours" xml:space="preserve">
+    <value>Arbeitszeit</value>
+  </data>
 </root>
