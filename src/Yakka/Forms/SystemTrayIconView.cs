@@ -259,7 +259,7 @@ namespace Yakka.Forms
         {
             this.contextMenuControl.CalculatedWorkingHours = this.workingHoursCalculation.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHoursCalculation.CalculatedBreak;
-            this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHoursCalculation.Configuration.StartTime.ToShortTimeString()} (Start)\n{this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture)} (Working hours)\n{this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture)} (Break)";
+            this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHoursCalculation.Configuration.StartTime.ToShortTimeString()} ({SystemTrayIconViewResources.TooltipStart})\n{this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture)} ({SystemTrayIconViewResources.TooltipWorkingHours})\n{this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture)} ({SystemTrayIconViewResources.TooltipBreak})";
         }
 
         /// <summary>
