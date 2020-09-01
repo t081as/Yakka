@@ -257,9 +257,19 @@ namespace Yakka.Forms
         /// </summary>
         protected virtual void Update()
         {
+            const int MaxTooltipLength = 63;
+
             this.contextMenuControl.CalculatedWorkingHours = this.workingHoursCalculation.CalculatedWorkingHours;
             this.contextMenuControl.CalculatedBreak = this.workingHoursCalculation.CalculatedBreak;
-            this.systemTrayIcon.Text = $"{Application.ProductName}\n\n{this.workingHoursCalculation.Configuration.StartTime.ToShortTimeString()} ({SystemTrayIconViewResources.TooltipStart})\n{this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture)} ({SystemTrayIconViewResources.TooltipWorkingHours})\n{this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture)} ({SystemTrayIconViewResources.TooltipBreak})";
+
+            var tooltip = $"{Application.ProductName}\n\n{this.workingHoursCalculation.Configuration.StartTime.ToShortTimeString()} ({SystemTrayIconViewResources.TooltipStart})\n{this.workingHoursCalculation.CalculatedWorkingHours.ToString(TimeFormat, CultureInfo.CurrentCulture)} ({SystemTrayIconViewResources.TooltipWorkingHours})\n{this.workingHoursCalculation.CalculatedBreak.ToString(TimeFormat, CultureInfo.CurrentCulture)} ({SystemTrayIconViewResources.TooltipBreak})";
+
+            if (tooltip.Length >= MaxTooltipLength)
+            {
+                tooltip = $"{tooltip.Substring(0, MaxTooltipLength - 3)}...";
+            }
+
+            this.systemTrayIcon.Text = tooltip;
         }
 
         /// <summary>
