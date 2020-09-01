@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Fixed missing german translation (#18)
+
 ## [1.0.0] - 2020-08-29
 - Added german translation (#7)
 

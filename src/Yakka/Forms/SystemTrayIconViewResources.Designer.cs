@@ -86,5 +86,32 @@ namespace Yakka.Forms {
                 return ResourceManager.GetString("QuitText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Break.
+        /// </summary>
+        internal static string TooltipBreak {
+            get {
+                return ResourceManager.GetString("TooltipBreak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string TooltipStart {
+            get {
+                return ResourceManager.GetString("TooltipStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working hours.
+        /// </summary>
+        internal static string TooltipWorkingHours {
+            get {
+                return ResourceManager.GetString("TooltipWorkingHours", resourceCulture);
+            }
+        }
     }
 }
