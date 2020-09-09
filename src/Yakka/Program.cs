@@ -54,6 +54,11 @@ namespace Yakka
         private static DetailPresenter? detailPresenter;
 
         /// <summary>
+        /// The working hours configuration.
+        /// </summary>
+        private static WorkingHoursConfiguration? configuration;
+
+        /// <summary>
         /// The main entry point of the application.
         /// </summary>
         [STAThread]
@@ -62,7 +67,7 @@ namespace Yakka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var configuration = WorkingHoursConfiguration.Load();
+            configuration = WorkingHoursConfiguration.Load();
             configuration.StartTime = new StartTimeDetector().StartTime;
 
             using var mainView = new SystemTrayIconView();
@@ -74,7 +79,7 @@ namespace Yakka
             mainPresenter.Show();
 
             configurationView = new ConfigurationForm(WorkingHoursCalculators.All);
-            configurationPresenter = new ConfigurationPresenter(configurationView, configuration);
+            configurationPresenter = new ConfigurationPresenter(configurationView);
             configurationPresenter.ConfigurationChanged += ConfigurationPresenterConfigurationChanged;
 
             detailView = new DetailForm();
@@ -108,6 +113,7 @@ namespace Yakka
             if (mainPresenter != null)
             {
                 WorkingHoursConfiguration.Save(e.Configuration);
+                configuration = e.Configuration;
                 mainPresenter.Configuration = e.Configuration;
             }
         }
@@ -132,6 +138,7 @@ namespace Yakka
         /// <param name="e">An empty <see cref="EventArgs"/>.</param>
         private static void MainPresenterConfigure(object? sender, EventArgs e)
         {
+            configurationPresenter?.UpdateView(configuration ?? new WorkingHoursConfiguration());
             configurationView?.Show();
         }
 
