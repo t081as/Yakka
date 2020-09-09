@@ -32,23 +32,31 @@ namespace Yakka.Forms
         /// Initializes a new instance of the <see cref="ConfigurationPresenter"/> class.
         /// </summary>
         /// <param name="view">The reference to the view that shall be managed.</param>
-        /// <param name="configuration">The working hours configuration.</param>
-        public ConfigurationPresenter(IConfigurationView view, WorkingHoursConfiguration configuration)
+        /// <exception cref="ArgumentNullException"><c>view</c> is <c>null</c>.</exception>
+        public ConfigurationPresenter(IConfigurationView view)
         {
             this.view = view ?? throw new ArgumentNullException(nameof(view));
 
             this.view.Changed += this.View_Changed;
-
-            this.view.StartTime = configuration?.StartTime ?? throw new ArgumentNullException(nameof(configuration));
-            this.view.WorkingHoursCalculator = configuration.WorkingHoursCalculator;
-            this.view.BreakMode = configuration.BreakMode;
-            this.view.ManualBreakTime = configuration.ManualBreakTime;
         }
 
         /// <summary>
         /// Occurs when the configuration has been changed.
         /// </summary>
         public event EventHandler<WorkingHoursConfigurationEventArgs>? ConfigurationChanged;
+
+        /// <summary>
+        /// Updates the attached view using the specified <paramref name="configuration"/>.
+        /// </summary>
+        /// <param name="configuration">The configuration that shall be used to update the attached view.</param>
+        /// <exception cref="ArgumentNullException"><c>configuration</c> is <c>null</c>.</exception>
+        public void UpdateView(WorkingHoursConfiguration configuration)
+        {
+            this.view.StartTime = configuration?.StartTime ?? throw new ArgumentNullException(nameof(configuration));
+            this.view.WorkingHoursCalculator = configuration.WorkingHoursCalculator;
+            this.view.BreakMode = configuration.BreakMode;
+            this.view.ManualBreakTime = configuration.ManualBreakTime;
+        }
 
         /// <summary>
         /// Triggers the <see cref="ConfigurationChanged"/> event.

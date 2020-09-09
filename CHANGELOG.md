@@ -3,6 +3,7 @@
 ## Unreleased
 - Fixed missing german translation (#18)
 - Fixed an unhandled exception when opening the configuration dialog (#19)
+- Fixed the cancel button in the configuration dialog (#20)
 
 ## [1.0.0] - 2020-08-29
 - Added german translation (#7)

@@ -55,7 +55,8 @@ namespace Yakka.Tests.Forms
                 receivedConfiguration = args.Configuration;
             };
 
-            var presenter = new ConfigurationPresenter(viewMock.Object, testConfiguration);
+            var presenter = new ConfigurationPresenter(viewMock.Object);
+            presenter.UpdateView(testConfiguration);
             presenter.ConfigurationChanged += handler;
 
             viewMock.Raise(m => m.Changed += null, EventArgs.Empty);
