@@ -189,5 +189,19 @@ namespace Yakka.Forms
                 this.toolTip.SetToolTip(this.comboBoxCalculator, string.Empty);
             }
         }
+
+        /// <summary>
+        /// Handles the <see cref="Form.FormClosing"/> event.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">A <see cref="FormClosingEventArgs"/> containing event parameters.</param>
+        private void ConfigurationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+        }
     }
 }
