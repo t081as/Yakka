@@ -163,6 +163,7 @@ namespace Yakka.Forms
             this.Name = "ConfigurationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YAKKA CONFIGURATION";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
