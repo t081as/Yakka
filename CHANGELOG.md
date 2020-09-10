@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [1.0.1] - 2020-09-10
 - Fixed missing german translation (#18)
 - Fixed an unhandled exception when opening the configuration dialog (#19)
 - Fixed the cancel button in the configuration dialog (#20)
